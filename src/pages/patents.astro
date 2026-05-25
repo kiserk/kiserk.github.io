@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OceanBackground from '../components/OceanBackground.astro';
+---
+
+<BaseLayout title="Patents — Karl Kiser" description="Patent publications by Karl Kiser in biomaterials and mycelium technology.">
+  <OceanBackground />
+
+  <main
+    class="relative z-10 min-h-screen px-6 py-20 md:py-28"
+    style={`color: var(--text-color, rgba(245, 240, 235, 0.92))`}
+  >
+    <div class="mx-auto max-w-[700px] opacity-0 translate-y-4 animate-fade-in">
+
+      <a
+        href="/"
+        class="inline-flex items-center gap-1.5 text-xs tracking-[0.15em] uppercase opacity-50 hover:opacity-100 transition-opacity duration-300 mb-16"
+        style="color: inherit; text-decoration: none;"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        Back
+      </a>
+
+      <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.12em] uppercase mb-4">
+        Patents
+      </h1>
+
+      <div class="w-8 h-px opacity-30 mb-14" style="background: currentColor;"></div>
+
+      <article class="rounded-xl bg-black/30 backdrop-blur-sm p-8 md:p-10">
+        <h2 class="font-[family-name:var(--font-heading)] text-lg md:text-xl font-normal leading-snug mb-8">
+          Growth Media Compositions and Growth Environmental Conditions for Improved Aerial Mycelium
+        </h2>
+
+        <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-sm mb-8">
+          <dt class="opacity-50 whitespace-nowrap">Application</dt>
+          <dd class="m-0">US 2024/0352398 A1</dd>
+
+          <dt class="opacity-50 whitespace-nowrap">Filed</dt>
+          <dd class="m-0">April 22, 2024</dd>
+
+          <dt class="opacity-50 whitespace-nowrap">Published</dt>
+          <dd class="m-0">October 24, 2024</dd>
+
+          <dt class="opacity-50 whitespace-nowrap">Inventors</dt>
+          <dd class="m-0">
+            Jacob Michael Winiski, <span class="font-semibold opacity-100">Karl John Kiser</span>
+          </dd>
+
+          <dt class="opacity-50 whitespace-nowrap">Assignee</dt>
+          <dd class="m-0">Ecovative Design LLC, Green Island, NY</dd>
+        </dl>
+
+        <div class="w-full h-px opacity-10 mb-8" style="background: currentColor;"></div>
+
+        <p class="text-sm leading-relaxed opacity-80 mb-8">
+          Claims center on preparing mycelium growth media with defined nutrition profiles and cultivating aerial mycelium under controlled temperature, CO₂, airflow, mist rate, mist composition, and related parameters. The application covers both pre-colonization and aerial-growth phase optimization. This patent addresses the core challenge of making aerial mycelium production more controllable, reproducible, and scalable.
+        </p>
+
+        <a
+          href="https://patents.google.com/patent/US20240352398A1"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-xs tracking-[0.1em] uppercase opacity-50 hover:opacity-100 transition-opacity duration-300"
+          style="color: inherit; text-decoration: none;"
+        >
+          View on Google Patents
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </a>
+      </article>
+
+      <p class="text-xs tracking-wide opacity-35 mt-14 text-center">
+        Additional patents may be pending or in preparation.
+      </p>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out 0.3s forwards;
+  }
+</style>

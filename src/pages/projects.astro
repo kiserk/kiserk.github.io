@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OceanBackground from '../components/OceanBackground.astro';
+
+const projects = [
+  {
+    title: 'Aerial Mycelium Process Development',
+    institution: 'Ecovative Design',
+    dates: '2023–2026',
+    description:
+      'Developed and optimized cultivation processes for aerial mycelium production, resulting in co-inventorship on a patent covering growth media compositions and environmental conditions. Work encompassed media design, environmental programming (temperature, CO₂, airflow, mist rate), pre-colonization optimization, and aerial growth phase control. Contributed to a platform tracking 25 environmental conditions in real time, with AI-model-informed decision-making across 26,000+ growth records.',
+    tags: [
+      'Mycelium Cultivation',
+      'Process Development',
+      'Media Optimization',
+      'Environmental Programming',
+      'Patent',
+      'Scale-up',
+    ],
+  },
+  {
+    title: 'Quantitative MRI for Tumor Treatment Response',
+    institution: 'Weill Cornell Medical College / NYU',
+    dates: '2020–2023',
+    description:
+      'Developed and validated novel MRI methods for measuring cellular water exchange and treatment response in glioma models. First-author work published in Scientific Reports demonstrated that a two-flip-angle DCE-MRI approach can quantify intracellular water lifetime (τᵢ), providing a metabolic biomarker that correlates negatively with FDG-PET uptake. This work bridges imaging physics, computational modeling, and translational cancer biology.',
+    tags: [
+      'DCE-MRI',
+      'Pharmacokinetic Modeling',
+      'Cancer Biology',
+      'Quantitative Imaging',
+      'Scientific Reports',
+    ],
+  },
+  {
+    title: 'Image Texture Analysis & Reproducibility in Preclinical MRI',
+    institution: 'Weill Cornell Medical College',
+    dates: '2021–2023',
+    description:
+      'Investigated how image resolution affects the reliability of texture features derived from pharmacokinetic parameter maps. First-author publication in Tomography demonstrated that 3D isotropic resolution is critical for reproducible radiomics analysis. This work has implications for standardizing preclinical imaging protocols and making quantitative biomarkers more robust across studies.',
+    tags: [
+      'Radiomics',
+      'Image Analysis',
+      'Reproducibility',
+      '7T MRI',
+      'Preclinical Imaging',
+      'Tomography',
+    ],
+  },
+  {
+    title: 'Active Contrast Encoding (ACE) MRI Development',
+    institution: 'NYU / Weill Cornell',
+    dates: '2020–2022',
+    description:
+      'Contributed to the development and validation of ACE-MRI, a method for simultaneous estimation of contrast agent kinetics and tissue relaxation parameters. This technique enables more efficient characterization of tumor microenvironment compared to conventional DCE-MRI. Research presented at multiple ISMRM annual meetings and published as a collaborative journal article.',
+    tags: [
+      'ACE-MRI',
+      'Method Development',
+      'Tumor Microenvironment',
+      'ISMRM',
+      'Collaboration',
+    ],
+  },
+];
+---
+
+<BaseLayout title="Karl Kiser — Projects">
+  <OceanBackground />
+
+  <main
+    class="relative z-10 min-h-screen px-5 py-20 md:py-28"
+    style={`color: var(--text-color, rgba(245, 240, 235, 0.92))`}
+  >
+    <a
+      href="/"
+      class="fixed top-6 left-6 z-20 flex items-center gap-1.5 text-xs tracking-wide opacity-50 hover:opacity-100 transition-opacity duration-300"
+      style="color: inherit; text-decoration: none;"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+      Back
+    </a>
+
+    <div class="mx-auto max-w-[700px]">
+      <div class="bg-black/30 backdrop-blur-sm rounded-2xl px-7 py-10 md:px-12 md:py-14 opacity-0 translate-y-4 animate-fade-in">
+
+        <header class="mb-12">
+          <h1 class="font-[family-name:var(--font-heading)] text-[1.75rem] md:text-[2.25rem] font-light tracking-[0.15em] uppercase">
+            Projects
+          </h1>
+          <div class="w-8 h-px mt-4 mb-4 opacity-40" style="background: currentColor;"></div>
+          <p class="text-xs tracking-[0.25em] uppercase opacity-50">
+            Selected Work
+          </p>
+        </header>
+
+        <div class="space-y-10">
+          {projects.map((project, i) => (
+            <article
+              class="project-card opacity-0 translate-y-4"
+              style={`animation: fade-in 0.8s ease-out ${0.4 + i * 0.15}s forwards;`}
+            >
+              {i > 0 && (
+                <div class="w-full h-px mb-10 opacity-10" style="background: currentColor;"></div>
+              )}
+
+              <h2 class="font-[family-name:var(--font-heading)] text-base md:text-lg font-medium tracking-wide">
+                {project.title}
+              </h2>
+
+              <p class="text-sm opacity-60 mt-1">
+                {project.institution}
+              </p>
+              <p class="text-xs opacity-40 mt-1 tracking-wider">
+                {project.dates}
+              </p>
+
+              <p class="text-sm md:text-[0.9375rem] leading-relaxed opacity-75 mt-4">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mt-5">
+                {project.tags.map(tag => (
+                  <span class="inline-block px-3 py-1 text-xs rounded-full border border-current/15 bg-white/5 opacity-70">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out 0.3s forwards;
+  }
+</style>
