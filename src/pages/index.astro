@@ -1,14 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import OceanBackground from '../components/OceanBackground.astro';
 ---
 
 <BaseLayout>
   <OceanBackground />
-
-  <Header />
 
   <main
     class="relative z-10 flex items-center justify-center min-h-screen px-6"
@@ -53,8 +49,6 @@ import OceanBackground from '../components/OceanBackground.astro';
       </div>
     </div>
   </main>
-
-  <Footer />
 </BaseLayout>
 
 <style>
