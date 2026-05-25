@@ -69,14 +69,41 @@ interface FetchedData {
 let selector: HTMLSelectElement;
 let camContainer: HTMLElement;
 let camLink: HTMLAnchorElement;
+let camSnapshot: HTMLImageElement;
+let camOffline: HTMLElement;
+let camLiveBadge: HTMLElement;
 let spotNameEl: HTMLElement;
 let dateEl: HTMLElement;
 let conditionsGrid: HTMLElement;
 let hourlyTable: HTMLTableElement;
 let forecastTable: HTMLTableElement;
+let camRefreshInterval: ReturnType<typeof setInterval> | null = null;
 
 function $(id: string): HTMLElement {
   return document.getElementById(id)!;
+}
+
+function loadSnapshot(url: string): void {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+      camSnapshot.src = img.src;
+      camSnapshot.style.opacity = '1';
+      camOffline.classList.add('hidden');
+      camLiveBadge.classList.remove('hidden');
+    } else {
+      camSnapshot.style.opacity = '0';
+      camOffline.classList.remove('hidden');
+      camLiveBadge.classList.add('hidden');
+    }
+  };
+  img.onerror = () => {
+    camSnapshot.style.opacity = '0';
+    camOffline.classList.remove('hidden');
+    camLiveBadge.classList.add('hidden');
+  };
+  img.src = url + '?t=' + Date.now();
 }
 
 function populateSelector(): void {
@@ -353,12 +380,26 @@ async function loadSpot(spot: SurfSpot): Promise<void> {
     weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
   });
 
-  if (spot.camUrl) {
+  if (camRefreshInterval) {
+    clearInterval(camRefreshInterval);
+    camRefreshInterval = null;
+  }
+
+  if (spot.camSnapshot || spot.camUrl) {
     camContainer.classList.remove('hidden');
-    camLink.href = spot.camUrl;
+    camLink.href = spot.camUrl || '#';
+    camLink.style.display = spot.camUrl ? '' : 'none';
+
+    if (spot.camSnapshot) {
+      loadSnapshot(spot.camSnapshot);
+      camRefreshInterval = setInterval(() => loadSnapshot(spot.camSnapshot!), 15_000);
+    } else {
+      camSnapshot.style.opacity = '0';
+      camOffline.classList.remove('hidden');
+      camLiveBadge.classList.add('hidden');
+    }
   } else {
     camContainer.classList.add('hidden');
-    camLink.href = '#';
   }
 
   showLoading();
@@ -380,6 +421,9 @@ async function loadSpot(spot: SurfSpot): Promise<void> {
 export function initSurfPage(): void {
   camContainer = $('cam-container');
   camLink = $('cam-link') as HTMLAnchorElement;
+  camSnapshot = $('cam-snapshot') as HTMLImageElement;
+  camOffline = $('cam-offline');
+  camLiveBadge = $('cam-live-badge');
   spotNameEl = $('spot-name');
   dateEl = $('current-date');
   conditionsGrid = $('conditions-grid');
