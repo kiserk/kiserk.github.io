@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OceanBackground from '../components/OceanBackground.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout title="Surf — Karl Kiser">
+  <OceanBackground />
+  <Header />
+
+  <main
+    class="relative z-10 min-h-screen px-5 pt-24 pb-20 md:pt-32 md:pb-28"
+    style={`color: var(--text-color, rgba(245, 240, 235, 0.92))`}
+  >
+    <div class="mx-auto max-w-[800px]">
+
+      <div class="mb-6 opacity-0 translate-y-4 animate-fade-in">
+        <select
+          id="spot-selector"
+          class="w-full bg-black/40 border border-white/15 rounded-xl px-5 py-3.5 text-sm tracking-wide appearance-none cursor-pointer focus:outline-none focus:border-white/30 transition-colors duration-300"
+          style="color: var(--text-color, rgba(245, 240, 235, 0.92)); background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(245,240,235,0.5)%22 stroke-width=%222%22><polyline points=%226 9 12 15 18 9%22/></svg>'); background-repeat: no-repeat; background-position: right 16px center;"
+        >
+          <option>Loading spots...</option>
+        </select>
+      </div>
+
+      <div
+        id="cam-container"
+        class="mb-6 opacity-0 translate-y-4 animate-fade-in hidden"
+        style="animation-delay: 0.1s;"
+      >
+        <iframe
+          id="cam-iframe"
+          class="w-full rounded-2xl border border-white/10"
+          style="aspect-ratio: 16 / 9; background: rgba(0,0,0,0.3);"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div
+        class="bg-black/30 backdrop-blur-sm rounded-2xl px-7 py-8 md:px-10 md:py-10 mb-6 opacity-0 translate-y-4 animate-fade-in"
+        style="animation-delay: 0.15s;"
+      >
+        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-6">
+          <h2 class="font-[family-name:var(--font-heading)] text-lg md:text-xl font-light tracking-wide">
+            <span id="spot-name">Loading...</span>
+          </h2>
+          <span id="current-date" class="text-xs opacity-40 tracking-wider"></span>
+        </div>
+        <div id="conditions-grid" class="space-y-3">
+          <p class="text-sm opacity-40 animate-pulse">Loading conditions...</p>
+        </div>
+      </div>
+
+      <div
+        id="hourly-section"
+        class="bg-black/30 backdrop-blur-sm rounded-2xl px-7 py-8 md:px-10 md:py-10 mb-6 opacity-0 translate-y-4 animate-fade-in"
+        style="animation-delay: 0.25s;"
+      >
+        <h2 class="font-[family-name:var(--font-heading)] text-base md:text-lg font-light tracking-wide mb-5">
+          Hourly Breakdown
+          <span class="text-xs opacity-40 font-normal tracking-wider ml-1">Dawn to Noon</span>
+        </h2>
+        <div class="overflow-x-auto -mx-2">
+          <table id="hourly-table" class="w-full text-sm">
+            <tbody>
+              <tr><td class="py-3 text-sm opacity-40 animate-pulse">Loading hourly data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div
+        id="forecast-section"
+        class="bg-black/30 backdrop-blur-sm rounded-2xl px-7 py-8 md:px-10 md:py-10 mb-6 opacity-0 translate-y-4 animate-fade-in"
+        style="animation-delay: 0.35s;"
+      >
+        <h2 class="font-[family-name:var(--font-heading)] text-base md:text-lg font-light tracking-wide mb-5">
+          7-Day Look-Ahead
+        </h2>
+        <div class="overflow-x-auto -mx-2">
+          <table id="forecast-table" class="w-full text-sm">
+            <tbody>
+              <tr><td class="py-3 text-sm opacity-40 animate-pulse">Loading forecast...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs opacity-30 mt-4">★ = Best days this week</p>
+      </div>
+
+      <div
+        class="opacity-0 translate-y-4 animate-fade-in px-2"
+        style="animation-delay: 0.45s;"
+      >
+        <p class="text-[11px] leading-relaxed opacity-25 mb-2">
+          Heights are significant wave height (Hs) from the GFS Wave model — the average of the tallest third of open-ocean waves. Surfline reports face height adjusted for local bathymetry, which typically reads 20–35% lower for beachbreaks.
+        </p>
+        <p class="text-[11px] opacity-20">
+          Data: Open-Meteo Marine · NOAA Tides
+        </p>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { initSurfPage } from '../scripts/surf-page';
+  initSurfPage();
+</script>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out 0.3s forwards;
+  }
+</style>

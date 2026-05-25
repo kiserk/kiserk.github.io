@@ -388,8 +388,9 @@ ${divider}
 <!-- Footer -->
 ${errorNote}
 <tr><td style="padding:16px 0 0 0;">
-  <p style="margin:0;font-size:12px;color:${dimText};">Data: Open-Meteo Marine · NOAA Tides</p>
+  <p style="margin:0;font-size:12px;color:${dimText};">Data: Open-Meteo Marine (GFS Wave) · NOAA Tides</p>
   <p style="margin:4px 0 0 0;font-size:12px;color:${dimText};">Spot: Rockaway Beach, NY (40.58°N, 73.82°W)</p>
+  <p style="margin:8px 0 0 0;font-size:11px;color:#6b7f96;line-height:1.5;">Note: Heights are significant wave height (Hs) — the average of the tallest third of open-ocean waves. Surfline reports face height adjusted for local bathymetry, which typically reads 20-35% lower for beachbreaks.</p>
 </td></tr>
 
 </table>
