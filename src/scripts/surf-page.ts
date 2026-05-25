@@ -68,7 +68,7 @@ interface FetchedData {
 
 let selector: HTMLSelectElement;
 let camContainer: HTMLElement;
-let camIframe: HTMLIFrameElement;
+let camLink: HTMLAnchorElement;
 let spotNameEl: HTMLElement;
 let dateEl: HTMLElement;
 let conditionsGrid: HTMLElement;
@@ -355,10 +355,10 @@ async function loadSpot(spot: SurfSpot): Promise<void> {
 
   if (spot.camUrl) {
     camContainer.classList.remove('hidden');
-    camIframe.src = spot.camUrl;
+    camLink.href = spot.camUrl;
   } else {
     camContainer.classList.add('hidden');
-    camIframe.removeAttribute('src');
+    camLink.href = '#';
   }
 
   showLoading();
@@ -379,7 +379,7 @@ async function loadSpot(spot: SurfSpot): Promise<void> {
 
 export function initSurfPage(): void {
   camContainer = $('cam-container');
-  camIframe = $('cam-iframe') as HTMLIFrameElement;
+  camLink = $('cam-link') as HTMLAnchorElement;
   spotNameEl = $('spot-name');
   dateEl = $('current-date');
   conditionsGrid = $('conditions-grid');

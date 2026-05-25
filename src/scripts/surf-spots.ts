@@ -147,7 +147,7 @@ export const SPOTS: SurfSpot[] = [
     beachFacing: 180,
     tidesStation: '8531680',
     region: 'New York',
-    camUrl: 'https://ccn.live/frame/?id=rockaway-beach',
+    camUrl: 'https://nybeachcams.com/long-island/rockaway-beach-surf-cam/',
   },
 
   // Southeast
