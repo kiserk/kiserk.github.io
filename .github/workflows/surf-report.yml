@@ -1,0 +1,25 @@
+name: Daily Surf Report
+
+on:
+  schedule:
+    # 9:00 UTC = 5:00 AM EDT (summer) / 4:00 AM EST (winter)
+    # Using 9 UTC to target 5am during EDT. Adjust to 10 UTC for EST if needed.
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual trigger for testing
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Send surf report
+        run: node scripts/surf-report.mjs
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
