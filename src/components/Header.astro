@@ -1,0 +1,34 @@
+---
+const navItems = [
+  { label: 'CV', href: '#' },
+  { label: 'Publications', href: '#' },
+  { label: 'Patents', href: '#' },
+  { label: 'Projects', href: '#' },
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 px-6 py-5 md:px-10"
+  style={`color: var(--text-color, rgba(245, 240, 235, 0.92))`}
+>
+  <div class="flex items-center justify-between max-w-7xl mx-auto">
+    <a
+      href="/"
+      class="font-[family-name:var(--font-heading)] text-sm font-light tracking-widest uppercase opacity-70 hover:opacity-100 transition-opacity duration-300"
+      style="color: inherit;"
+    >
+      Karl Kiser
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => (
+        <span
+          class="text-xs font-light tracking-wider uppercase opacity-30 cursor-default select-none"
+          style="color: inherit;"
+        >
+          {item.label}
+        </span>
+      ))}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,59 @@
+---
+
+---
+
+<canvas id="ocean-canvas" class="fixed inset-0 -z-10 w-screen h-screen"></canvas>
+
+<script>
+  import { getOceanData } from '../scripts/ocean-data';
+  import { computeVisuals } from '../scripts/ocean-palette';
+  import { OceanRenderer } from '../scripts/ocean-renderer';
+
+  const DATA_REFRESH_INTERVAL = 30 * 60 * 1000;
+
+  function applyTextStyles(visuals: { textColor: string; textShadow: string }) {
+    document.documentElement.style.setProperty('--text-color', visuals.textColor);
+    document.documentElement.style.setProperty('--text-shadow', visuals.textShadow);
+  }
+
+  async function init() {
+    const canvas = document.getElementById('ocean-canvas') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const renderer = new OceanRenderer(canvas);
+
+    const initialVisuals = computeVisuals(null);
+    renderer.updateVisuals(initialVisuals);
+    applyTextStyles(initialVisuals);
+    renderer.start();
+
+    async function refresh() {
+      try {
+        const data = await getOceanData();
+        const visuals = computeVisuals(data);
+        renderer.updateVisuals(visuals);
+        applyTextStyles(visuals);
+      } catch {
+        // data fetch failed; renderer continues with last known visuals
+      }
+    }
+
+    refresh();
+    const intervalId = setInterval(refresh, DATA_REFRESH_INTERVAL);
+
+    const onResize = () => renderer.resize();
+    window.addEventListener('resize', onResize);
+
+    window.addEventListener('unload', () => {
+      clearInterval(intervalId);
+      window.removeEventListener('resize', onResize);
+      renderer.destroy();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
