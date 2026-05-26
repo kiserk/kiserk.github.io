@@ -7,7 +7,6 @@ export interface SurfSpot {
   tidesStation: string;
   region: string;
   camUrl?: string;
-  camSnapshot?: string;
 }
 
 export function getWindType(
@@ -149,7 +148,6 @@ export const SPOTS: SurfSpot[] = [
     tidesStation: '8531680',
     region: 'New York',
     camUrl: 'https://nybeachcams.com/long-island/rockaway-beach-surf-cam/',
-    camSnapshot: 'https://ccn-media.coastalcameranetwork.com/New_York/rockawaybeachoverview2.stream/latest.jpg',
   },
 
   // Southeast

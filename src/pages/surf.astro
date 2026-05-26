@@ -25,37 +25,30 @@ import Header from '../components/Header.astro';
       </div>
 
       <div
-        id="cam-container"
-        class="mb-6 opacity-0 translate-y-4 animate-fade-in hidden"
+        id="windy-container"
+        class="mb-6 opacity-0 translate-y-4 animate-fade-in"
         style="animation-delay: 0.1s;"
       >
         <div class="bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10">
-          <div id="cam-image-container" class="relative w-full" style="aspect-ratio: 16 / 9; background: rgba(0,0,0,0.5);">
-            <img
-              id="cam-snapshot"
-              alt="Live surf cam"
-              class="w-full h-full object-cover transition-opacity duration-700"
-              style="opacity: 0;"
-            />
-            <div id="cam-offline" class="absolute inset-0 flex items-center justify-center text-sm opacity-40 hidden">
-              Cam offline — check back during daylight hours
-            </div>
-            <div id="cam-live-badge" class="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1 text-[11px] tracking-wider hidden">
-              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              LIVE
-            </div>
+          <iframe
+            id="windy-map"
+            class="w-full"
+            style="aspect-ratio: 16 / 9; border: none;"
+            loading="lazy"
+          ></iframe>
+          <div class="flex items-center justify-between px-5 py-3 border-t border-white/5">
+            <span class="text-[11px] opacity-30">Live wave & wind conditions via Windy.com</span>
+            <a
+              id="cam-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs opacity-50 hover:opacity-80 transition-opacity no-underline hidden"
+              style="color: var(--text-color, rgba(245, 240, 235, 0.92));"
+            >
+              Watch surf cam ↗
+            </a>
           </div>
-          <a
-            id="cam-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center justify-between px-5 py-3 text-xs opacity-50 hover:opacity-80 transition-opacity no-underline border-t border-white/5"
-            style="color: var(--text-color, rgba(245, 240, 235, 0.92));"
-          >
-            <span>Watch full live stream</span>
-            <span>↗</span>
-          </a>
         </div>
       </div>
 
