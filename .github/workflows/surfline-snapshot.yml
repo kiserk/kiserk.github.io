@@ -1,0 +1,75 @@
+name: Surfline Snapshot
+
+on:
+  schedule:
+    # 08:30 UTC lands just before the 09:00 UTC daily surf-report email, plus
+    # afternoon/evening refreshes for site visitors.
+    - cron: '30 8 * * *'
+    - cron: '0 14 * * *'
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+# A commit made with the default GITHUB_TOKEN does not trigger the deploy
+# workflow, so this job refreshes the data AND redeploys Pages itself.
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  snapshot-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Snapshot Surfline
+        # Cloudflare may block datacenter IPs; don't fail the run if so — the
+        # site falls back to Open-Meteo until a snapshot succeeds.
+        run: node scripts/surfline-snapshot.mjs || echo "Snapshot skipped (likely Cloudflare block)"
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/surfline
+          if git diff --staged --quiet; then
+            echo "No snapshot changes to commit."
+          else
+            git commit -m "chore: refresh Surfline snapshot"
+            git push
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

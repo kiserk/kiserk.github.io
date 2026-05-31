@@ -64,6 +64,39 @@ interface FetchedData {
   weatherDaily?: any;
   weatherHourly?: any;
   tides?: any;
+  surfline?: any;
+}
+
+const SURFLINE_MAX_AGE_MS = 12 * 60 * 60 * 1000;
+const NY_TZ = 'America/New_York';
+
+// Surfline snapshots are bathymetry-adjusted face height; prefer them when fresh.
+function freshSurfline(data: FetchedData): any | null {
+  const s = data.surfline;
+  if (!s || !s.current || !s.fetchedAt) return null;
+  if (Date.now() - new Date(s.fetchedAt).getTime() > SURFLINE_MAX_AGE_MS) return null;
+  return s;
+}
+
+function relativeTime(iso: string): string {
+  const diffMin = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (diffMin < 60) return `${Math.max(1, diffMin)}m ago`;
+  return `${Math.round(diffMin / 60)}h ago`;
+}
+
+function formatTodayTides(data: FetchedData): string {
+  const tides = data.tides?.predictions;
+  if (!tides || tides.length === 0) return '—';
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayTides = tides.filter((t: any) => t.t.startsWith(todayStr));
+  if (todayTides.length === 0) return '—';
+  return todayTides
+    .map((t: any) => `${t.type === 'H' ? 'High' : 'Low'} ${formatTideTime(t.t)}`)
+    .join(' · ');
+}
+
+function sourceNote(label: string): string {
+  return `<div style="margin-top:12px;font-size:12px;color:var(--ink-faint);">${label}</div>`;
 }
 
 let selector: HTMLSelectElement;
@@ -131,6 +164,11 @@ async function fetchSpotData(spot: SurfSpot): Promise<FetchedData> {
     tides: `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?station=${tidesStation}&product=predictions&begin_date=${today}&end_date=${tomorrow}&datum=MLLW&time_zone=lst_ldt&units=english&interval=hilo&application=KarlKiserSurf&format=json`,
   };
 
+  // Static Surfline snapshot (face height) — same-origin, no CORS/Cloudflare for visitors.
+  if (spot.surflineSpotId) {
+    urls.surfline = `${import.meta.env.BASE_URL}data/surfline/${spot.surflineSpotId}.json`;
+  }
+
   const entries = Object.entries(urls);
   const results = await Promise.allSettled(
     entries.map(async ([key, url]) => {
@@ -150,10 +188,50 @@ async function fetchSpotData(spot: SurfSpot): Promise<FetchedData> {
   return data;
 }
 
+const condRow = (label: string, value: string) =>
+  `<div style="display:flex;gap:16px;align-items:baseline;padding:5px 0;">
+      <span style="min-width:90px;color:var(--ink-faint);font-size:15px;flex-shrink:0;font-weight:400;text-transform:uppercase;letter-spacing:0.06em;">${label}</span>
+      <span style="font-size:16px;line-height:1.5;color:var(--ink);">${value}</span>
+    </div>`;
+
 function renderConditions(spot: SurfSpot, data: FetchedData): void {
+  const sl = freshSurfline(data);
+  if (sl) {
+    const c = sl.current;
+    const swellCompass = degreesToCompass(c.swell?.direction ?? null);
+    const wt = c.windType as ReturnType<typeof getWindType> | null;
+    const wtColor = wt ? WIND_COLORS[wt] : 'inherit';
+    const wtCheck = wt === 'Offshore' ? ' ✓' : '';
+    const windStr =
+      c.windSpeed != null
+        ? `${degreesToCompass(c.windDirection)} ${Math.round(c.windSpeed)} mph${
+            wt ? ` — <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>` : ''
+          }`
+        : '—';
+    const swellStr = c.swell
+      ? `${swellCompass} @ ${c.swell.period}s${c.swell.height != null ? ` · ${c.swell.height} ft` : ''}`
+      : '—';
+
+    conditionsGrid.innerHTML =
+      [
+        condRow(
+          'Surf',
+          `<strong style="font-size:18px;">${c.surfMin}–${c.surfMax} ft</strong>${
+            c.humanRelation
+              ? ` <span style="color:var(--ink-muted);font-size:15px;margin-left:4px;">${c.humanRelation}</span>`
+              : ''
+          }`,
+        ),
+        condRow('Swell', swellStr),
+        condRow('Wind', windStr),
+        condRow('Tide', formatTodayTides(data)),
+        condRow('Rating', c.rating ? `<em style="color:var(--ink-muted);">${c.rating}</em>` : '—'),
+      ].join('') + sourceNote(`via Surfline · face height · updated ${relativeTime(sl.fetchedAt)}`);
+    return;
+  }
+
   const md = data.marineDaily?.daily;
   const wd = data.weatherDaily?.daily;
-  const tides = data.tides?.predictions;
 
   if (!md) {
     conditionsGrid.innerHTML = '<p style="color:var(--ink-muted);" class="text-base">Marine data unavailable.</p>';
@@ -174,37 +252,97 @@ function renderConditions(spot: SurfSpot, data: FetchedData): void {
   const wt = windDir != null ? getWindType(windDir, spot.beachFacing) : null;
   const verdict = surfVerdict(waveH, windDir, period, spot.beachFacing);
 
-  let tideStr = '—';
-  if (tides && tides.length > 0) {
-    const todayStr = new Date().toISOString().slice(0, 10);
-    const todayTides = tides.filter((t: any) => t.t.startsWith(todayStr));
-    if (todayTides.length > 0) {
-      tideStr = todayTides
-        .map((t: any) => `${t.type === 'H' ? 'High' : 'Low'} ${formatTideTime(t.t)}`)
-        .join(' · ');
-    }
-  }
-
   const wtColor = wt ? WIND_COLORS[wt] : 'inherit';
   const wtCheck = wt === 'Offshore' ? ' ✓' : '';
 
-  const row = (label: string, value: string) =>
-    `<div style="display:flex;gap:16px;align-items:baseline;padding:5px 0;">
-      <span style="min-width:90px;color:var(--ink-faint);font-size:15px;flex-shrink:0;font-weight:400;text-transform:uppercase;letter-spacing:0.06em;">${label}</span>
-      <span style="font-size:16px;line-height:1.5;color:var(--ink);">${value}</span>
-    </div>`;
+  conditionsGrid.innerHTML =
+    [
+      condRow('Surf', `<strong style="font-size:18px;">${heightLo}–${heightHi} ft</strong> <span style="color:var(--ink-muted);font-size:15px;margin-left:4px;">${swellCompass} swell @ ${Math.round(period)}s</span>`),
+      condRow('Wind', wt
+        ? `${windCompass} ${Math.round(windSpeed!)} mph — <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>`
+        : '—'),
+      condRow('Tide', formatTodayTides(data)),
+      condRow('Conditions', `<em style="color:var(--ink-muted);">${verdict.summary}</em>`),
+    ].join('') + sourceNote('GFS significant wave height (Hs) · open-ocean estimate');
+}
 
-  conditionsGrid.innerHTML = [
-    row('Surf', `<strong style="font-size:18px;">${heightLo}–${heightHi} ft</strong> <span style="color:var(--ink-muted);font-size:15px;margin-left:4px;">${swellCompass} swell @ ${Math.round(period)}s</span>`),
-    row('Wind', wt
-      ? `${windCompass} ${Math.round(windSpeed!)} mph — <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>`
-      : '—'),
-    row('Tide', tideStr),
-    row('Conditions', `<em style="color:var(--ink-muted);">${verdict.summary}</em>`),
-  ].join('');
+const HOURLY_HEADER_STYLE = 'padding:6px 12px;color:var(--ink-faint);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;text-align:left;white-space:nowrap;font-weight:500;';
+const HOURLY_CELL_STYLE = 'padding:10px 12px;font-size:15px;white-space:nowrap;color:var(--ink);';
+
+// Surfline hourly (face height) for today's dawn-to-noon window. Returns false
+// if the snapshot has no rows for today, so the caller can fall back.
+function renderHourlySurfline(sl: any): boolean {
+  interface SLRow {
+    hour: number;
+    surfMin: number;
+    surfMax: number;
+    windMph: number | null;
+    windDir: string;
+    windType: ReturnType<typeof getWindType> | null;
+    score: number;
+  }
+
+  const todayNY = new Date().toLocaleDateString('en-US', { timeZone: NY_TZ });
+  const rows: SLRow[] = [];
+  for (const e of sl.hourly ?? []) {
+    const d = new Date(e.timestamp * 1000);
+    if (d.toLocaleDateString('en-US', { timeZone: NY_TZ }) !== todayNY) continue;
+    const hour = parseInt(d.toLocaleString('en-US', { timeZone: NY_TZ, hour: 'numeric', hour12: false }), 10);
+    if (hour < 5 || hour > 11) continue;
+    const wt = (e.windType ?? null) as ReturnType<typeof getWindType> | null;
+    rows.push({
+      hour,
+      surfMin: e.surfMin,
+      surfMax: e.surfMax,
+      windMph: e.windSpeed,
+      windDir: degreesToCompass(e.windDirection),
+      windType: wt,
+      score: (e.surfMax ?? 0) * (wt === 'Offshore' ? 1.5 : wt === 'Onshore' ? 0.7 : 1.0),
+    });
+  }
+  if (rows.length === 0) return false;
+
+  let bestIdx = 0;
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i].score > rows[bestIdx].score) bestIdx = i;
+  }
+
+  let html = `<thead><tr>
+    <th style="${HOURLY_HEADER_STYLE}">Time</th>
+    <th style="${HOURLY_HEADER_STYLE}">Height</th>
+    <th style="${HOURLY_HEADER_STYLE}">Wind</th>
+    <th style="${HOURLY_HEADER_STYLE}">Type</th>
+  </tr></thead><tbody>`;
+
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i];
+    const isBest = i === bestIdx;
+    const bg = isBest ? 'background:rgba(255,255,255,0.08);border-radius:8px;' : '';
+    const timeStr = `${r.hour > 12 ? r.hour - 12 : r.hour} ${r.hour >= 12 ? 'PM' : 'AM'}`;
+    const typeColor = r.windType ? WIND_COLORS[r.windType] : 'inherit';
+    const marker = isBest ? '<span style="color:var(--ink-faint);margin-left:8px;font-size:12px;">← best</span>' : '';
+    const windCell = r.windMph != null ? `${r.windDir} ${Math.round(r.windMph)} mph` : '—';
+    const typeCell = r.windType
+      ? `<span style="color:${typeColor};font-weight:600;">${r.windType}</span>`
+      : '—';
+
+    html += `<tr style="${bg}">
+      <td style="${HOURLY_CELL_STYLE}color:var(--ink-muted);">${timeStr}</td>
+      <td style="${HOURLY_CELL_STYLE}font-weight:600;">${r.surfMin}–${r.surfMax} ft</td>
+      <td style="${HOURLY_CELL_STYLE}color:var(--ink-muted);">${windCell}</td>
+      <td style="${HOURLY_CELL_STYLE}">${typeCell}${marker}</td>
+    </tr>`;
+  }
+
+  html += '</tbody>';
+  hourlyTable.innerHTML = html;
+  return true;
 }
 
 function renderHourly(spot: SurfSpot, data: FetchedData): void {
+  const sl = freshSurfline(data);
+  if (sl && renderHourlySurfline(sl)) return;
+
   const mh = data.marineHourly?.hourly;
   const wh = data.weatherHourly?.hourly;
 

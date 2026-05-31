@@ -7,6 +7,10 @@ export interface SurfSpot {
   tidesStation: string;
   region: string;
   camUrl?: string;
+  // Surfline spot ID (the trailing segment of a surfline.com/surf-report/<slug>/<id> URL).
+  // When set, a snapshot of Surfline's bathymetry-adjusted face height is used.
+  // Find new IDs with: npm run surfline:discover -- "<spot name>"
+  surflineSpotId?: string;
 }
 
 export function getWindType(
@@ -148,6 +152,7 @@ export const SPOTS: SurfSpot[] = [
     tidesStation: '8531680',
     region: 'New York',
     camUrl: 'https://nybeachcams.com/long-island/rockaway-beach-surf-cam/',
+    surflineSpotId: '5842041f4e65fad6a7708852',
   },
 
   // Southeast

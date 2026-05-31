@@ -25,6 +25,8 @@ This file exists to give **context continuity between chats / sessions**. If you
 | Background render | HTML5 Canvas 2D | Custom engine, no WebGL/libraries |
 | Email | [Resend](https://resend.com) free tier | Surf report only; needs `RESEND_API_KEY` secret |
 | Data APIs | Open-Meteo (Marine + Weather), NOAA CO-OPS Tides | All free, no API key required |
+| Surf face height | Surfline (free forecast JSON, snapshotted) | Via Playwright; see "Surfline snapshots" below |
+| Headless browser | Playwright (Chromium) | Dev dependency; only used by the snapshot script/CI |
 | Fonts | Space Grotesk (headings), DM Sans (body) | Variable fonts via Fontsource CDN |
 
 **Node:** requires `>=22.12.0` (see `package.json` `engines`).
@@ -41,6 +43,11 @@ npm run preview    # preview the built site
 
 # Preview the surf report email locally (prints HTML/text to stdout if no API key):
 node scripts/surf-report.mjs
+
+# Snapshot Surfline face-height data into public/data/surfline/ (needs Chromium):
+npx playwright install chromium   # one-time
+npm run surfline:snapshot
+npm run surfline:discover -- "rockaway"   # find a spot's Surfline ID
 ```
 
 Deployment is automatic: **push to `main`** and the GitHub Action builds and publishes to Pages. Do not hand-edit `dist/` (gitignored, build artifact).
@@ -73,15 +80,19 @@ personal_website/
 │   │   ├── ocean-data.ts        # fetch+cache marine/weather/tide → OceanData
 │   │   ├── ocean-palette.ts     # OceanData → OceanVisuals (colors, motion)
 │   │   ├── ocean-renderer.ts    # Canvas 2D engine, animation loop
-│   │   ├── surf-spots.ts        # 16 surf spot defs + offshore-wind logic
-│   │   └── surf-page.ts         # /surf client island: fetch + render
+│   │   ├── surf-spots.ts        # 16 surf spot defs + offshore-wind logic (+ surflineSpotId)
+│   │   └── surf-page.ts         # /surf client island: fetch + render (Surfline-preferred)
 │   └── styles/
 │       └── global.css           # Tailwind import, @font-face, theme tokens
+├── public/
+│   └── data/surfline/<id>.json  # committed Surfline snapshots (face height)
 ├── scripts/
-│   └── surf-report.mjs          # standalone Node script → Resend email
+│   ├── surf-report.mjs          # standalone Node script → Resend email
+│   └── surfline-snapshot.mjs    # Playwright snapshot of Surfline → public/data/surfline/
 ├── .github/workflows/
 │   ├── deploy.yml               # build + deploy to Pages on push to main
-│   └── surf-report.yml          # daily cron (09:00 UTC) → runs surf-report.mjs
+│   ├── surf-report.yml          # daily cron (09:00 UTC) → runs surf-report.mjs
+│   └── surfline-snapshot.yml    # cron → snapshot Surfline, commit, rebuild Pages
 ├── Career/                      # PRIVATE source docs (gitignored) — see below
 └── scraper_reference/           # UNRELATED local project, untracked (see below)
 ```
@@ -144,8 +155,31 @@ If you want to add a real cam later, look for a provider with an **embeddable pl
 - **Recipient / sender:** `to: karl.j.kiser@gmail.com`, `from: Rockaway Report <onboarding@resend.dev>`.
 - **Secret:** requires `RESEND_API_KEY` in GitHub repo secrets. Without it, running locally just prints the email to stdout (handy for previewing).
 
-### Wave height annotation (important context)
-The user noticed reported heights run higher than Surfline. Decision: **annotate, don't "correct."** Both the email footer and the `/surf` footnote explain that values are **significant wave height (Hs)** from the GFS Wave model (average of the tallest third of open-ocean waves), which typically reads ~20–35% higher than Surfline's bathymetry-adjusted *face height* for beachbreaks. Do not silently apply a correction factor.
+### Wave height: Surfline face height (primary) → GFS Hs (fallback)
+The user noticed Open-Meteo heights run higher than Surfline. Open-Meteo reports **significant wave height (Hs)** from the GFS Wave model (average of the tallest third of open-ocean waves), which reads ~20–35% higher than Surfline's bathymetry-adjusted **face height** for beachbreaks.
+
+The fix is **Surfline-preferred with graceful fallback** (see "Surfline snapshots" below):
+- When a fresh Surfline snapshot exists (`< 12 h` old), today's/near-term surf shows Surfline's breaking **face height** + plain-English `humanRelation` ("Thigh to waist") + AM/PM rating. This is closer to the real experience at the break.
+- When no snapshot is available, it falls back to GFS Hs with the existing annotation.
+- The **7-day look-ahead always uses GFS** (Surfline's free horizon is only ~3 days).
+
+Both the email footer and the `/surf` footnote state which source is in use. Do not silently apply a correction factor to GFS — prefer the real Surfline number or label it honestly.
+
+## Surfline snapshots
+
+`scripts/surfline-snapshot.mjs` captures Surfline's **free** forecast data (face height, swells, wind, tides, weather, AM/PM rating) into `public/data/surfline/<spotId>.json`, which the `/surf` page and email read as a same-origin static asset.
+
+**Why a snapshot (not a live fetch):** Surfline's API sits behind **Cloudflare bot protection** and serves **no cross-origin CORS headers**. So the browser can't fetch it from `/surf`, and even a server-side `fetch()` / hand-crafted request to `services.surfline.com` is WAF-blocked (HTTP 403) *even with a `cf_clearance` cookie*. The reliable path: drive a real **Chromium (Playwright)** to a public surf-report page and **intercept the forecast XHRs the Surfline app itself makes** (those are legitimate, first-party, and succeed). The script normalizes those payloads.
+
+- **Spot IDs** live in `src/scripts/surf-spots.ts` as `surflineSpotId` (the single source of truth, shared with the browser). The ID is the trailing segment of any `surfline.com/surf-report/<slug>/<id>` URL — the slug is cosmetic, only the ID matters. Rockaway (NY) is `5842041f4e65fad6a7708852`. Find others with `npm run surfline:discover -- "<name>"`.
+- **Units:** Surfline returns face height in FT and wind in **knots**; the script converts wind to MPH and collapses Surfline's verbose `directionType` to Offshore/Onshore/Cross.
+- **Schedule:** `.github/workflows/surfline-snapshot.yml` (08:30 / 14:00 / 20:00 UTC). Because a commit made with the default `GITHUB_TOKEN` does **not** trigger the deploy workflow, this workflow is **self-contained**: it snapshots, commits the JSON, then builds and deploys Pages itself (shares the `pages` concurrency group with `deploy.yml`).
+- **Cloudflare caveat / local fallback:** GitHub Actions runs on datacenter IPs that Cloudflare *may* challenge. The snapshot step is non-fatal (the site falls back to Open-Meteo if it fails). The most reliable path — and the one the user's other scrapers use — is to run it **locally on a residential connection** and push:
+  ```bash
+  npm run surfline:snapshot && git add public/data/surfline && git commit -m "refresh surfline" && git push
+  ```
+  Use `HEADED=1 npm run surfline:snapshot` to watch the browser while debugging.
+- **ToS note:** scraping Surfline is against their terms; keep volume low (a few spots, a few times/day) for personal use.
 
 ---
 
@@ -156,7 +190,7 @@ The user noticed reported heights run higher than Surfline. Decision: **annotate
 - **Tailwind v4** uses the Vite plugin + `@import "tailwindcss"` in `global.css` and a `@theme { ... }` block for tokens — not a `tailwind.config.js`.
 - **Text legibility over the canvas** relies on the `--text-color` / `--text-shadow` vars set by `OceanBackground.astro`. New pages placed over the background should use `var(--text-color, ...)`.
 - **Don't commit `Career/` or `scraper_reference/`.** The former is gitignored; the latter is not — watch out.
-- **Two surf data paths exist:** `src/scripts/ocean-data.ts` (browser, for the background) and `scripts/surf-report.mjs` (Node, for email). They overlap conceptually but are intentionally separate runtimes — keep changes in sync if you alter the data model.
+- **Surf data paths:** `src/scripts/ocean-data.ts` (browser, ambient background) and `scripts/surf-report.mjs` (Node, email) both read live Open-Meteo/NOAA. A third path — `scripts/surfline-snapshot.mjs` (Playwright, CI/local) — writes static Surfline JSON that both `surf-page.ts` and `surf-report.mjs` *prefer* when fresh. Keep the snapshot's normalized schema in sync with the consumers if you change it.
 - **No comments that just narrate code** — keep them for intent/trade-offs only (existing house style).
 
 ---

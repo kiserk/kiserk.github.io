@@ -1,10 +1,31 @@
 #!/usr/bin/env node
 
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
 const LAT = 40.58;
 const LON = -73.82;
 const NOAA_STATION = '8531680';
+const ROCKAWAY_SURFLINE_ID = '5842041f4e65fad6a7708852';
+const SURFLINE_MAX_AGE_MS = 12 * 60 * 60 * 1000;
 const M_TO_FT = 3.281;
 const KMH_TO_MPH = 1 / 1.609;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Read the static Surfline snapshot written by surfline-snapshot.mjs, if fresh.
+function loadSurflineSnapshot() {
+  try {
+    const path = join(__dirname, '..', 'public', 'data', 'surfline', `${ROCKAWAY_SURFLINE_ID}.json`);
+    const snap = JSON.parse(readFileSync(path, 'utf8'));
+    if (snap?.current?.surfMin == null || !snap.fetchedAt) return null;
+    if (Date.now() - new Date(snap.fetchedAt).getTime() > SURFLINE_MAX_AGE_MS) return null;
+    return snap;
+  } catch {
+    return null;
+  }
+}
 
 const COMPASS_POINTS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 
@@ -92,6 +113,29 @@ async function fetchJSON(url) {
   return res.json();
 }
 
+// Today's dawn-to-noon rows from a Surfline snapshot (face height + wind type).
+function buildSurflineHourly(snap) {
+  const tz = 'America/New_York';
+  const todayNY = new Date().toLocaleDateString('en-US', { timeZone: tz });
+  const rows = [];
+  for (const e of snap.hourly || []) {
+    const d = new Date(e.timestamp * 1000);
+    if (d.toLocaleDateString('en-US', { timeZone: tz }) !== todayNY) continue;
+    const hour = parseInt(d.toLocaleString('en-US', { timeZone: tz, hour: 'numeric', hour12: false }), 10);
+    if (hour < 5 || hour > 11) continue;
+    const wType = e.windType || 'Cross';
+    rows.push({
+      hour,
+      heightStr: `${e.surfMin}-${e.surfMax}ft`,
+      windMph: e.windSpeed ?? 0,
+      windDir: degreesToCompass(e.windDirection),
+      windType: wType,
+      score: (e.surfMax ?? 0) * (wType === 'Offshore' ? 1.5 : wType === 'Onshore' ? 0.7 : 1.0),
+    });
+  }
+  return rows;
+}
+
 async function main() {
   const today = yyyymmdd(0);
   const tomorrow = yyyymmdd(1);
@@ -140,13 +184,37 @@ async function main() {
 
   const heightFt = metersToFeet(todayWaveHeight);
   const verdict = surfVerdict(todayWaveHeight, todayWindDir, todayPeriod);
-  const swellCompass = degreesToCompass(todaySwellDir);
+  let swellCompass = degreesToCompass(todaySwellDir);
   const windCompass = degreesToCompass(todayWindDir);
   const wt = windType(todayWindDir);
   const wtSymbol = wt === 'Offshore' ? ' ✓' : '';
 
-  const heightLo = Math.max(1, Math.floor(heightFt));
-  const heightHi = Math.max(1, Math.ceil(heightFt + 0.3));
+  let heightLo = Math.max(1, Math.floor(heightFt));
+  let heightHi = Math.max(1, Math.ceil(heightFt + 0.3));
+  let displayPeriod = Math.round(todayPeriod);
+  let headlineLabel = verdict.label;
+  let humanRelation = null;
+  let surfSource = 'Open-Meteo Marine (GFS Wave) · NOAA Tides';
+  let usingSurfline = false;
+
+  // Prefer Surfline's bathymetry-adjusted face height for the headline when fresh.
+  const surfline = loadSurflineSnapshot();
+  if (surfline) {
+    const c = surfline.current;
+    usingSurfline = true;
+    heightLo = c.surfMin;
+    heightHi = c.surfMax;
+    humanRelation = c.humanRelation;
+    if (c.rating) headlineLabel = c.rating;
+    if (c.swell) {
+      swellCompass = degreesToCompass(c.swell.direction);
+      displayPeriod = c.swell.period;
+    }
+    const stamp = new Date(surfline.fetchedAt).toLocaleString('en-US', {
+      timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+    });
+    surfSource = `Surfline face height (snapshot ${stamp} ET) · NOAA Tides`;
+  }
 
   // Tides formatting
   let tideStr = '—';
@@ -158,9 +226,12 @@ async function main() {
       .join(' · ') || '—';
   }
 
-  // Hourly breakdown (5 AM to noon)
+  // Hourly breakdown (5 AM to noon) — prefer Surfline face height when fresh.
   let hourlyRows = [];
-  if (mh && wh) {
+  if (usingSurfline) {
+    hourlyRows = buildSurflineHourly(surfline);
+  }
+  if (hourlyRows.length === 0 && mh && wh) {
     for (let h = 5; h <= 11; h++) {
       const idx = h;
       const waveH = metersToFeet(mh.wave_height[idx]);
@@ -169,7 +240,7 @@ async function main() {
       const wType = windType(windD);
       hourlyRows.push({
         hour: h,
-        waveFt: waveH,
+        heightStr: `${waveH.toFixed(1)}ft`,
         windMph: windS,
         windDir: degreesToCompass(windD),
         windType: wType,
@@ -215,14 +286,14 @@ async function main() {
   const bestDays = new Set(sortedScores.slice(0, 2).filter(d => d.score > 3).map(d => d.date));
 
   // Build subject line
-  const subject = `🌊 Rockaway ${verdict.label} — ${heightLo}-${heightHi}ft ${swellCompass} @ ${Math.round(todayPeriod)}s`;
+  const subject = `🌊 Rockaway ${headlineLabel} — ${heightLo}-${heightHi}ft ${swellCompass} @ ${displayPeriod}s`;
 
   // Build HTML email
   const html = buildEmail({
     date: formatDate(md.time[0]),
-    heightLo, heightHi, swellCompass, todayPeriod,
+    heightLo, heightHi, swellCompass, displayPeriod,
     windCompass, todayWindSpeed, wt, wtSymbol,
-    tideStr, verdict,
+    tideStr, verdict, humanRelation, surfSource, usingSurfline,
     hourlyRows, bestIdx,
     forecastDays, bestDays,
     errors,
@@ -259,12 +330,12 @@ async function main() {
   const result = await res.json();
   console.log(`✓ Surf report sent. ID: ${result.id}`);
   console.log(`  Subject: ${subject}`);
-  console.log(`  Wave: ${heightLo}-${heightHi}ft ${swellCompass} @ ${Math.round(todayPeriod)}s`);
+  console.log(`  Wave: ${heightLo}-${heightHi}ft ${swellCompass} @ ${displayPeriod}s (${usingSurfline ? 'Surfline face height' : 'GFS Hs'})`);
   console.log(`  Wind: ${windCompass} ${Math.round(todayWindSpeed)}mph (${wt})`);
   if (errors.length) console.log(`  ⚠ Partial data — errors: ${errors.join('; ')}`);
 }
 
-function buildEmail({ date, heightLo, heightHi, swellCompass, todayPeriod, windCompass, todayWindSpeed, wt, wtSymbol, tideStr, verdict, hourlyRows, bestIdx, forecastDays, bestDays, errors }) {
+function buildEmail({ date, heightLo, heightHi, swellCompass, displayPeriod, windCompass, todayWindSpeed, wt, wtSymbol, tideStr, verdict, humanRelation, surfSource, usingSurfline, hourlyRows, bestIdx, forecastDays, bestDays, errors }) {
   const bg = '#0d1b2a';
   const text = '#e8e4df';
   const accent = '#5ba3d9';
@@ -282,7 +353,7 @@ function buildEmail({ date, heightLo, heightHi, swellCompass, todayPeriod, windC
     const typeColor = r.windType === 'Offshore' ? '#4ade80' : r.windType === 'Onshore' ? '#f87171' : dimText;
     return `<tr style="background:${rowBg};">
       <td style="padding:6px 12px;color:${dimText};font-size:14px;white-space:nowrap;">${timeStr}</td>
-      <td style="padding:6px 12px;color:${text};font-size:14px;font-weight:600;">${r.waveFt.toFixed(1)}ft</td>
+      <td style="padding:6px 12px;color:${text};font-size:14px;font-weight:600;">${r.heightStr}</td>
       <td style="padding:6px 12px;color:${dimText};font-size:14px;">${r.windDir} ${Math.round(r.windMph)}mph</td>
       <td style="padding:6px 12px;font-size:14px;"><span style="color:${typeColor};">${r.windType}</span>${marker}</td>
     </tr>`;
@@ -333,7 +404,7 @@ ${divider}
   <table cellpadding="0" cellspacing="0" style="width:100%;">
     <tr>
       <td style="padding:6px 0;color:${dimText};font-size:14px;width:100px;vertical-align:top;">Surf</td>
-      <td style="padding:6px 0;color:${text};font-size:14px;font-weight:600;">${heightLo}-${heightHi} ft <span style="color:${dimText};font-weight:400;">(${swellCompass} swell @ ${Math.round(todayPeriod)}s)</span></td>
+      <td style="padding:6px 0;color:${text};font-size:14px;font-weight:600;">${heightLo}-${heightHi} ft ${humanRelation ? `<span style="color:${dimText};font-weight:400;">${humanRelation}</span> ` : ''}<span style="color:${dimText};font-weight:400;">(${swellCompass} swell @ ${displayPeriod}s)</span></td>
     </tr>
     <tr>
       <td style="padding:6px 0;color:${dimText};font-size:14px;vertical-align:top;">Wind</td>
@@ -388,9 +459,11 @@ ${divider}
 <!-- Footer -->
 ${errorNote}
 <tr><td style="padding:16px 0 0 0;">
-  <p style="margin:0;font-size:12px;color:${dimText};">Data: Open-Meteo Marine (GFS Wave) · NOAA Tides</p>
+  <p style="margin:0;font-size:12px;color:${dimText};">Data: ${surfSource}</p>
   <p style="margin:4px 0 0 0;font-size:12px;color:${dimText};">Spot: Rockaway Beach, NY (40.58°N, 73.82°W)</p>
-  <p style="margin:8px 0 0 0;font-size:11px;color:#6b7f96;line-height:1.5;">Note: Heights are significant wave height (Hs) — the average of the tallest third of open-ocean waves. Surfline reports face height adjusted for local bathymetry, which typically reads 20-35% lower for beachbreaks.</p>
+  <p style="margin:8px 0 0 0;font-size:11px;color:#6b7f96;line-height:1.5;">${usingSurfline
+    ? 'Note: Today\'s surf is Surfline\'s breaking face height, adjusted for local bathymetry — closer to the real experience at the break. The 7-day look-ahead uses GFS significant wave height (Hs), which reads ~20-35% higher for beachbreaks.'
+    : 'Note: Heights are significant wave height (Hs) — the average of the tallest third of open-ocean waves. Surfline reports face height adjusted for local bathymetry, which typically reads 20-35% lower for beachbreaks.'}</p>
 </td></tr>
 
 </table>
