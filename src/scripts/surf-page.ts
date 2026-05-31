@@ -107,13 +107,13 @@ function populateSelector(): void {
 }
 
 function showLoading(): void {
-  conditionsGrid.innerHTML = '<p style="opacity:0.5;" class="animate-pulse text-base">Loading conditions...</p>';
-  hourlyTable.innerHTML = '<tbody><tr><td style="opacity:0.5;padding:12px 0;" class="animate-pulse text-base">Loading hourly data...</td></tr></tbody>';
-  forecastTable.innerHTML = '<tbody><tr><td style="opacity:0.5;padding:12px 0;" class="animate-pulse text-base">Loading forecast...</td></tr></tbody>';
+  conditionsGrid.innerHTML = '<p style="color:var(--ink-faint);" class="animate-pulse text-base">Loading conditions...</p>';
+  hourlyTable.innerHTML = '<tbody><tr><td style="color:var(--ink-faint);padding:12px 0;" class="animate-pulse text-base">Loading hourly data...</td></tr></tbody>';
+  forecastTable.innerHTML = '<tbody><tr><td style="color:var(--ink-faint);padding:12px 0;" class="animate-pulse text-base">Loading forecast...</td></tr></tbody>';
 }
 
 function showError(msg: string): void {
-  conditionsGrid.innerHTML = `<p style="opacity:0.6;" class="text-base">${msg}</p>`;
+  conditionsGrid.innerHTML = `<p style="color:var(--ink-muted);" class="text-base">${msg}</p>`;
   hourlyTable.innerHTML = '';
   forecastTable.innerHTML = '';
 }
@@ -156,7 +156,7 @@ function renderConditions(spot: SurfSpot, data: FetchedData): void {
   const tides = data.tides?.predictions;
 
   if (!md) {
-    conditionsGrid.innerHTML = '<p style="opacity:0.5;" class="text-sm">Marine data unavailable.</p>';
+    conditionsGrid.innerHTML = '<p style="color:var(--ink-muted);" class="text-base">Marine data unavailable.</p>';
     return;
   }
 
@@ -189,18 +189,18 @@ function renderConditions(spot: SurfSpot, data: FetchedData): void {
   const wtCheck = wt === 'Offshore' ? ' ✓' : '';
 
   const row = (label: string, value: string) =>
-    `<div style="display:flex;gap:16px;align-items:baseline;padding:4px 0;">
-      <span style="min-width:90px;opacity:0.55;font-size:15px;flex-shrink:0;font-weight:400;">${label}</span>
-      <span style="font-size:16px;line-height:1.5;">${value}</span>
+    `<div style="display:flex;gap:16px;align-items:baseline;padding:5px 0;">
+      <span style="min-width:90px;color:var(--ink-faint);font-size:15px;flex-shrink:0;font-weight:400;text-transform:uppercase;letter-spacing:0.06em;">${label}</span>
+      <span style="font-size:16px;line-height:1.5;color:var(--ink);">${value}</span>
     </div>`;
 
   conditionsGrid.innerHTML = [
-    row('Surf', `<strong style="font-size:18px;">${heightLo}–${heightHi} ft</strong> <span style="opacity:0.55;font-size:15px;margin-left:4px;">${swellCompass} swell @ ${Math.round(period)}s</span>`),
+    row('Surf', `<strong style="font-size:18px;">${heightLo}–${heightHi} ft</strong> <span style="color:var(--ink-muted);font-size:15px;margin-left:4px;">${swellCompass} swell @ ${Math.round(period)}s</span>`),
     row('Wind', wt
-      ? `${windCompass} ${Math.round(windSpeed!)} mph — <span style="color:${wtColor};font-weight:500;">${wt}${wtCheck}</span>`
+      ? `${windCompass} ${Math.round(windSpeed!)} mph — <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>`
       : '—'),
     row('Tide', tideStr),
-    row('Conditions', `<em style="opacity:0.85;">${verdict.summary}</em>`),
+    row('Conditions', `<em style="color:var(--ink-muted);">${verdict.summary}</em>`),
   ].join('');
 }
 
@@ -209,7 +209,7 @@ function renderHourly(spot: SurfSpot, data: FetchedData): void {
   const wh = data.weatherHourly?.hourly;
 
   if (!mh || !wh) {
-    hourlyTable.innerHTML = '<tbody><tr><td style="opacity:0.5;padding:12px 0;" class="text-base">Hourly data unavailable.</td></tr></tbody>';
+    hourlyTable.innerHTML = '<tbody><tr><td style="color:var(--ink-faint);padding:12px 0;" class="text-base">Hourly data unavailable.</td></tr></tbody>';
     return;
   }
 
@@ -243,8 +243,8 @@ function renderHourly(spot: SurfSpot, data: FetchedData): void {
     if (rows[i].score > rows[bestIdx].score) bestIdx = i;
   }
 
-  const headerStyle = 'padding:6px 12px;opacity:0.45;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;text-align:left;white-space:nowrap;font-weight:500;';
-  const cellStyle = 'padding:10px 12px;font-size:15px;white-space:nowrap;';
+  const headerStyle = 'padding:6px 12px;color:var(--ink-faint);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;text-align:left;white-space:nowrap;font-weight:500;';
+  const cellStyle = 'padding:10px 12px;font-size:15px;white-space:nowrap;color:var(--ink);';
 
   let html = `<thead><tr>
     <th style="${headerStyle}">Time</th>
@@ -259,13 +259,13 @@ function renderHourly(spot: SurfSpot, data: FetchedData): void {
     const bg = isBest ? 'background:rgba(255,255,255,0.08);border-radius:8px;' : '';
     const timeStr = `${r.hour > 12 ? r.hour - 12 : r.hour} ${r.hour >= 12 ? 'PM' : 'AM'}`;
     const typeColor = WIND_COLORS[r.windType];
-    const marker = isBest ? '<span style="opacity:0.5;margin-left:8px;font-size:12px;">← best</span>' : '';
+    const marker = isBest ? '<span style="color:var(--ink-faint);margin-left:8px;font-size:12px;">← best</span>' : '';
 
     html += `<tr style="${bg}">
-      <td style="${cellStyle}opacity:0.6;">${timeStr}</td>
+      <td style="${cellStyle}color:var(--ink-muted);">${timeStr}</td>
       <td style="${cellStyle}font-weight:600;">${r.waveFt.toFixed(1)} ft</td>
-      <td style="${cellStyle}opacity:0.6;">${r.windDir} ${Math.round(r.windMph)} mph</td>
-      <td style="${cellStyle}"><span style="color:${typeColor};font-weight:500;">${r.windType}</span>${marker}</td>
+      <td style="${cellStyle}color:var(--ink-muted);">${r.windDir} ${Math.round(r.windMph)} mph</td>
+      <td style="${cellStyle}"><span style="color:${typeColor};font-weight:600;">${r.windType}</span>${marker}</td>
     </tr>`;
   }
 
@@ -278,7 +278,7 @@ function renderForecast(spot: SurfSpot, data: FetchedData): void {
   const wd = data.weatherDaily?.daily;
 
   if (!md) {
-    forecastTable.innerHTML = '<tbody><tr><td style="opacity:0.5;padding:12px 0;" class="text-base">Forecast data unavailable.</td></tr></tbody>';
+    forecastTable.innerHTML = '<tbody><tr><td style="color:var(--ink-faint);padding:12px 0;" class="text-base">Forecast data unavailable.</td></tr></tbody>';
     return;
   }
 
@@ -319,8 +319,8 @@ function renderForecast(spot: SurfSpot, data: FetchedData): void {
   const sorted = [...days].sort((a, b) => b.score - a.score);
   const bestDates = new Set(sorted.slice(0, 2).filter(d => d.score > 3).map(d => d.date));
 
-  const fHeaderStyle = 'padding:6px 12px;opacity:0.45;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;text-align:left;white-space:nowrap;font-weight:500;';
-  const fCellStyle = 'padding:10px 12px;font-size:15px;white-space:nowrap;';
+  const fHeaderStyle = 'padding:6px 12px;color:var(--ink-faint);font-size:12px;text-transform:uppercase;letter-spacing:0.08em;text-align:left;white-space:nowrap;font-weight:500;';
+  const fCellStyle = 'padding:10px 12px;font-size:15px;white-space:nowrap;color:var(--ink);';
 
   let html = `<thead><tr>
     <th style="${fHeaderStyle}">Day</th>
@@ -340,10 +340,10 @@ function renderForecast(spot: SurfSpot, data: FetchedData): void {
     html += `<tr style="${bg}">
       <td style="${fCellStyle}">${shortDay(d.date)}${star}</td>
       <td style="${fCellStyle}font-weight:600;">${d.lo}–${d.hi} ft</td>
-      <td style="${fCellStyle}opacity:0.6;">${d.swellDir}</td>
-      <td style="${fCellStyle}opacity:0.6;">${d.period}s</td>
-      <td style="${fCellStyle}opacity:0.6;">${d.windDir} ${d.windMph != null ? d.windMph + ' mph' : '—'}</td>
-      <td style="${fCellStyle}"><span style="color:${typeColor};font-weight:500;">${d.windType}</span></td>
+      <td style="${fCellStyle}color:var(--ink-muted);">${d.swellDir}</td>
+      <td style="${fCellStyle}color:var(--ink-muted);">${d.period}s</td>
+      <td style="${fCellStyle}color:var(--ink-muted);">${d.windDir} ${d.windMph != null ? d.windMph + ' mph' : '—'}</td>
+      <td style="${fCellStyle}"><span style="color:${typeColor};font-weight:600;">${d.windType}</span></td>
     </tr>`;
   }
 

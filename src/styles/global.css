@@ -21,7 +21,25 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
 }
 
+:root {
+  /* content text -- always light (cards are dark glass) */
+  --ink: rgba(246, 244, 240, 0.96);
+  --ink-muted: rgba(236, 240, 246, 0.80);
+  --ink-faint: rgba(228, 236, 245, 0.56);
+
+  /* tuned-translucent glass surface (darker than before, ocean still shows) */
+  --surface: rgba(9, 15, 26, 0.6);
+  --surface-inset: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
+
+  /* text sitting directly on the ocean (hero/header/footer) */
+  --text-color: rgba(246, 244, 240, 0.96);
+  --text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+
 html {
+  font-size: 16px;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,4 +55,23 @@ body {
 ::selection {
   background: rgba(255, 255, 255, 0.2);
   color: inherit;
+}
+
+@layer components {
+  .surface {
+    background: var(--surface);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--surface-shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .project-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

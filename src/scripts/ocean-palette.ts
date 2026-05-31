@@ -235,15 +235,11 @@ export function computeVisuals(data: OceanData | null, now?: Date): OceanVisuals
     palette = applyCloudCover(palette, data.sky.cloudCover);
   }
 
-  const avgLuminance = (palette.sky.l + palette.horizon.l + palette.water.l) / 3;
-
-  const textColor = avgLuminance > 0.5
-    ? 'rgba(15, 15, 35, 0.9)'
-    : 'rgba(245, 240, 235, 0.92)';
-
-  const textShadow = avgLuminance > 0.5
-    ? '0 1px 3px rgba(255,255,255,0.3)'
-    : '0 1px 8px rgba(0,0,0,0.5)';
+  // Text over the ocean is always light, with a consistent soft shadow.
+  // A global scrim layer guarantees contrast even under a bright midday sky,
+  // so we no longer flip to dark text (which broke legibility inside dark cards).
+  const textColor = 'rgba(246, 244, 240, 0.96)';
+  const textShadow = '0 1px 14px rgba(0, 0, 0, 0.55)';
 
   return {
     skyColor: hslToCSS(palette.sky),

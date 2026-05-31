@@ -8,7 +8,7 @@ const journalArticles = [
     title: 'Evaluation of cellular water exchange in a mouse glioma model using dynamic contrast-enhanced MRI with two flip angles',
     authors: ['Karl Kiser', 'Jin Zhang', 'Ayesha Bharadwaj Das', 'James A. Tranos', 'Youssef Zaim Wadghiri', 'Sungheon Gene Kim'],
     journal: 'Scientific Reports',
-    volume: '13, 3007',
+    volume: '13(1), 3007',
     year: 2023,
     doi: 'https://doi.org/10.1038/s41598-023-29991-1',
     firstAuthor: true,
@@ -23,12 +23,21 @@ const journalArticles = [
     firstAuthor: true,
   },
   {
+    title: 'Simultaneous estimation of the cellular water exchange rate, intracellular volume fraction, and longitudinal relaxation rate in cancer cells',
+    authors: ['Karl Kiser', 'Jin Zhang', 'Sawwal Qayyum', 'W. C. Bracken', 'Sungheon Gene Kim'],
+    journal: 'NMR in Biomedicine',
+    volume: '36(7), e4914',
+    year: 2023,
+    doi: 'https://doi.org/10.1002/nbm.4914',
+    firstAuthor: true,
+  },
+  {
     title: 'Assessment of tumor treatment response using active contrast encoding (ACE)-MRI: Comparison with conventional DCE-MRI',
     authors: ['Jin Zhang', 'Kerryanne Winters', 'Karl Kiser', 'Mehran Baboli', 'Sungheon Gene Kim'],
-    journal: null,
-    volume: null,
+    journal: 'PLoS ONE',
+    volume: '15(6), e0234520',
     year: 2020,
-    doi: null,
+    doi: 'https://doi.org/10.1371/journal.pone.0234520',
     firstAuthor: false,
   },
 ];
@@ -44,12 +53,6 @@ const conferenceAbstracts = [
     title: 'Significance of 3D Isotropic Resolution for Image Texture Analysis of Pharmacokinetic Model Parametric Maps',
     authors: ['Karl Kiser', 'Jin Zhang', 'S. Gene Kim'],
     year: 2021,
-    firstAuthor: true,
-  },
-  {
-    title: 'Estimation of cellular water exchange rate, intracellular volume fraction and longitudinal relaxation time in cancer cells',
-    authors: ['Karl Kiser', 'Jin Zhang', 'Gene Kim'],
-    year: 2022,
     firstAuthor: true,
   },
   {
@@ -93,7 +96,7 @@ const conferenceAbstracts = [
 function formatAuthors(authors: string[]) {
   return authors.map(name =>
     name === 'Karl Kiser'
-      ? `<strong class="text-white/95 font-semibold">${name}</strong>`
+      ? `<strong style="color: var(--ink); font-weight: 600;">${name}</strong>`
       : name
   ).join(', ');
 }
@@ -105,34 +108,44 @@ function formatAuthors(authors: string[]) {
 
   <main
     class="relative z-10 min-h-screen px-5 pt-24 pb-16 md:pt-32 md:pb-24"
-    style={`color: var(--text-color, rgba(245, 240, 235, 0.92))`}
+    style={`color: var(--ink)`}
   >
-    <div class="max-w-[700px] mx-auto">
+    <div class="max-w-[720px] mx-auto">
       <div class="opacity-0 translate-y-4 animate-fade-in">
         <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.1em] uppercase mb-16">
           Publications
         </h1>
 
         <section class="mb-14">
-          <h2 class="font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase opacity-60 mb-8">
+          <h2 class="font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase mb-8" style="color: var(--ink-muted);">
             Journal Articles
           </h2>
 
           <div class="space-y-6">
             {journalArticles.map((pub) => (
-              <article class="bg-black/30 backdrop-blur-sm rounded-lg p-5 border border-white/[0.06]">
+              <article class="surface rounded-xl p-6">
                 <div class="flex items-start justify-between gap-3">
-                  <h3 class="font-[family-name:var(--font-body)] text-[0.95rem] leading-snug font-medium">
-                    {pub.title}
+                  <h3 class="font-[family-name:var(--font-body)] text-base md:text-[1.0625rem] leading-snug font-medium">
+                    {pub.doi ? (
+                      <a
+                        href={pub.doi}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
+                        style="color: inherit;"
+                      >
+                        {pub.title}
+                      </a>
+                    ) : pub.title}
                   </h3>
                   {pub.firstAuthor && (
-                    <span class="shrink-0 text-[0.6rem] tracking-[0.15em] uppercase opacity-50 border border-white/20 rounded px-1.5 py-0.5 mt-0.5">
+                    <span class="shrink-0 text-[0.65rem] tracking-[0.15em] uppercase border border-white/25 rounded px-2 py-0.5 mt-0.5" style="color: var(--ink-muted);">
                       1st Author
                     </span>
                   )}
                 </div>
-                <p class="text-xs opacity-70 mt-2.5 leading-relaxed" set:html={formatAuthors(pub.authors)} />
-                <div class="flex items-center gap-3 mt-3 text-xs opacity-50">
+                <p class="text-[0.875rem] mt-3 leading-relaxed" style="color: var(--ink-muted);" set:html={formatAuthors(pub.authors)} />
+                <div class="flex items-center gap-3 mt-3 text-[0.85rem]" style="color: var(--ink-faint);">
                   {pub.journal && (
                     <span class="italic">{pub.journal}{pub.volume ? `, ${pub.volume}` : ''}</span>
                   )}
@@ -143,7 +156,7 @@ function formatAuthors(authors: string[]) {
                     href={pub.doi}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-block mt-3 text-[0.7rem] tracking-wide opacity-40 hover:opacity-80 transition-opacity duration-300"
+                    class="inline-block mt-3 text-[0.8rem] tracking-wide opacity-70 hover:opacity-100 transition-opacity duration-300"
                     style="color: inherit; text-decoration: none;"
                   >
                     DOI ↗
@@ -155,26 +168,26 @@ function formatAuthors(authors: string[]) {
         </section>
 
         <section>
-          <h2 class="font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase opacity-60 mb-8">
+          <h2 class="font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase mb-8" style="color: var(--ink-muted);">
             Conference Abstracts
-            <span class="opacity-60 normal-case tracking-normal ml-1.5">— ISMRM</span>
+            <span class="normal-case tracking-normal ml-1.5" style="color: var(--ink-faint);">— ISMRM</span>
           </h2>
 
           <div class="space-y-5">
             {conferenceAbstracts.map((pub) => (
-              <article class="bg-black/30 backdrop-blur-sm rounded-lg p-5 border border-white/[0.06]">
+              <article class="surface rounded-xl p-6">
                 <div class="flex items-start justify-between gap-3">
-                  <h3 class="font-[family-name:var(--font-body)] text-[0.9rem] leading-snug font-medium">
+                  <h3 class="font-[family-name:var(--font-body)] text-[0.95rem] md:text-base leading-snug font-medium">
                     {pub.title}
                   </h3>
                   {pub.firstAuthor && (
-                    <span class="shrink-0 text-[0.6rem] tracking-[0.15em] uppercase opacity-50 border border-white/20 rounded px-1.5 py-0.5 mt-0.5">
+                    <span class="shrink-0 text-[0.65rem] tracking-[0.15em] uppercase border border-white/25 rounded px-2 py-0.5 mt-0.5" style="color: var(--ink-muted);">
                       1st Author
                     </span>
                   )}
                 </div>
-                <p class="text-xs opacity-70 mt-2.5 leading-relaxed" set:html={formatAuthors(pub.authors)} />
-                <div class="text-xs opacity-50 mt-2.5">
+                <p class="text-[0.875rem] mt-3 leading-relaxed" style="color: var(--ink-muted);" set:html={formatAuthors(pub.authors)} />
+                <div class="text-[0.85rem] mt-3" style="color: var(--ink-faint);">
                   <span>{pub.year}</span>
                 </div>
               </article>
