@@ -126,14 +126,14 @@ function formatAuthors(authors: string[]) {
           <div class="space-y-6">
             {journalArticles.map((pub) => (
               <article class="surface rounded-xl p-6">
-                <div class="flex items-start gap-4">
+                <div class="flex items-stretch gap-4">
                   {pub.thumbnail && (
                     <img
                       src={pub.thumbnail}
                       alt={pub.thumbnailAlt}
                       loading="lazy"
                       decoding="async"
-                      class="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg border border-white/10 bg-black/30 object-cover"
+                      class="shrink-0 w-24 md:w-28 self-stretch rounded-lg border border-white/10 bg-black/30 object-cover"
                     />
                   )}
                   <div class="min-w-0 flex-1">
