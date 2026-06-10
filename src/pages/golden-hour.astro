@@ -44,15 +44,20 @@ import Header from '../components/Header.astro';
     <div class="cam-caption opacity-0 animate-fade-in" style="animation-delay: 0.1s;">
       <p id="cam-name" class="cam-name">Finding the light…</p>
       <p id="cam-location" class="cam-location"></p>
-      <a
-        id="cam-watch"
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="cam-credit"
-      >
-        <span id="cam-credit-label">Live cam</span> ↗
-      </a>
+      <div class="cam-actions">
+        <a
+          id="cam-watch"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cam-credit"
+        >
+          <span id="cam-credit-label">Live cam</span> ↗
+        </a>
+        <button id="next-cam" type="button" class="next-cam-btn" title="Cam not loading? Try the next nearest one">
+          Next cam ›
+        </button>
+      </div>
     </div>
   </main>
 </BaseLayout>
@@ -66,6 +71,7 @@ import Header from '../components/Header.astro';
   const locationEl = document.getElementById('cam-location');
   const watchEl = document.getElementById('cam-watch') as HTMLAnchorElement | null;
   const creditEl = document.getElementById('cam-credit-label');
+  const nextBtn = document.getElementById('next-cam') as HTMLButtonElement | null;
   const buttons = Array.from(
     document.querySelectorAll<HTMLButtonElement>('.mode-btn'),
   );
@@ -75,32 +81,56 @@ import Header from '../components/Header.astro';
     (localStorage.getItem(STORAGE_KEY) as GoldenHourMode) === 'sunrise'
       ? 'sunrise'
       : 'sunset';
-  let currentId: string | null = null;
 
-  function bestCam(now: Date): SunsetCam {
-    let best = CAMS[0];
-    let bestScore = Infinity;
-    for (const cam of CAMS) {
-      const pos = solarPosition(cam.lat, cam.lon, now);
-      const score = scoreCam(pos, mode);
-      if (score < bestScore) {
-        bestScore = score;
-        best = cam;
-      }
-    }
-    return best;
+  // Id of the cam currently shown (avoids needless iframe reloads).
+  let currentId: string | null = null;
+  // Id of the current best cam, i.e. the golden-hour "region" anchor. When this
+  // changes the Earth has rotated enough to move to a new place, so any manual
+  // "next cam" choice is reset back to the best one.
+  let anchorId: string | null = null;
+  // Manual fallback offset into the score-ranked list. 0 = the best cam; the
+  // "Next cam" button steps to the next-nearest candidate (same golden hour),
+  // for when the auto-picked cam happens to be offline.
+  let offset = 0;
+
+  // All cams ranked by how close they are to the requested golden hour, best
+  // first. Adjacent entries are the nearest regional alternatives.
+  function rankCams(now: Date): SunsetCam[] {
+    return CAMS.map((cam) => ({
+      cam,
+      score: scoreCam(solarPosition(cam.lat, cam.lon, now), mode),
+    }))
+      .sort((a, b) => a.score - b.score)
+      .map((entry) => entry.cam);
   }
 
-  function render(force = false) {
-    const cam = bestCam(new Date());
-    if (!force && cam.id === currentId) return;
+  function show(cam: SunsetCam) {
+    if (cam.id === currentId) return;
     currentId = cam.id;
-
     if (frame) frame.src = embedUrl(cam);
     if (nameEl) nameEl.textContent = cam.name;
     if (locationEl) locationEl.textContent = cam.location;
     if (watchEl) watchEl.href = watchUrl(cam);
     if (creditEl) creditEl.textContent = `Live · ${cam.credit}`;
+  }
+
+  // Auto selection: follow the globe. Only reset a manual "next" choice once the
+  // best (anchor) cam actually changes region.
+  function autoRender() {
+    const ranked = rankCams(new Date());
+    if (ranked[0].id !== anchorId) {
+      anchorId = ranked[0].id;
+      offset = 0;
+    }
+    show(ranked[offset % ranked.length]);
+  }
+
+  // Manual fallback: advance to the next-nearest cam without leaving the region.
+  function nextCam() {
+    const ranked = rankCams(new Date());
+    anchorId = ranked[0].id; // stay in sync so autoRender won't yank us back
+    offset = (offset + 1) % ranked.length;
+    show(ranked[offset]);
   }
 
   function setMode(next: GoldenHourMode) {
@@ -109,18 +139,22 @@ import Header from '../components/Header.astro';
     for (const btn of buttons) {
       btn.classList.toggle('is-active', btn.dataset.mode === mode);
     }
-    render(true);
+    offset = 0;
+    anchorId = null;
+    currentId = null;
+    autoRender();
   }
 
   for (const btn of buttons) {
     btn.addEventListener('click', () => setMode(btn.dataset.mode as GoldenHourMode));
   }
+  nextBtn?.addEventListener('click', nextCam);
 
   setMode(mode);
 
   // The Earth keeps turning: re-evaluate every 5 minutes and swap cams only
   // when a better golden-hour location is available (avoids needless reloads).
-  setInterval(() => render(false), 5 * 60 * 1000);
+  setInterval(autoRender, 5 * 60 * 1000);
 </script>
 
 <style>
@@ -220,9 +254,16 @@ import Header from '../components/Header.astro';
     margin: 0.35rem 0 0;
   }
 
+  .cam-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 0.7rem;
+  }
+
   .cam-credit {
     display: inline-block;
-    margin-top: 0.6rem;
     font-size: 0.75rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -235,6 +276,29 @@ import Header from '../components/Header.astro';
 
   .cam-credit:hover {
     opacity: 1;
+  }
+
+  .next-cam-btn {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(0, 0, 0, 0.25);
+    color: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+    font: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.95rem;
+    border-radius: 9999px;
+    opacity: 0.78;
+    transition: opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .next-cam-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.55);
   }
 
   @media (max-width: 640px) {
