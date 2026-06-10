@@ -30,7 +30,7 @@ import Header from '../components/Header.astro';
             Summary
           </h2>
           <p class="text-[0.95rem] md:text-base leading-relaxed" style="color: var(--ink-muted);">
-            Applied biomaterials scientist and research engineer with experience spanning quantitative experimentation, controlled-environment biological systems, data-driven process optimization, and mycelium platform development. Co-inventor on aerial-mycelium cultivation IP. First-author scientific publications. Strong translator between lab experimentation, model-based analysis, and manufacturable process improvement.
+            Applied biomaterials scientist and research engineer with experience spanning quantitative experimentation, controlled-environment biological systems, custom sensor and control-system development, data-driven process optimization, and mycelium platform development. Co-inventor on aerial-mycelium cultivation IP. First-author scientific publications. Strong translator between lab experimentation, model-based analysis, and manufacturable process improvement.
           </p>
         </section>
 
@@ -57,6 +57,9 @@ import Header from '../components/Header.astro';
                   Process development for aerial mycelium production including media optimization, environmental programming, and growth condition tuning
                 </li>
                 <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1 before:h-1 before:rounded-full before:bg-current before:opacity-40">
+                  Designed and built novel sensors for closed-loop system control — programming microcontrollers, wiring custom hardware, and integrating real-time sensing into the cultivation environment
+                </li>
+                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1 before:h-1 before:rounded-full before:bg-current before:opacity-40">
                   Contributed to cultivation platform supporting 25 real-time environmental conditions and AI-model-informed process decisions
                 </li>
                 <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1 before:h-1 before:rounded-full before:bg-current before:opacity-40">
@@ -71,9 +74,9 @@ import Header from '../components/Header.astro';
                 Research Associate
               </h3>
               <p class="text-[0.95rem] mt-0.5" style="color: var(--ink-muted);">
-                Department of Radiology, Weill Cornell Medical College — New York, NY
+                Department of Radiology, NYU Langone Health & Weill Cornell Medical College — New York, NY
               </p>
-              <p class="text-[0.8rem] mt-1 tracking-wider" style="color: var(--ink-faint);">2020 – 2023</p>
+              <p class="text-[0.8rem] mt-1 tracking-wider" style="color: var(--ink-faint);">2019 – 2023</p>
               <ul class="mt-4 space-y-2.5 text-[0.95rem] md:text-base leading-relaxed" style="color: var(--ink-muted);">
                 <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1 before:h-1 before:rounded-full before:bg-current before:opacity-40">
                   First-author publications in Scientific Reports and Tomography on dynamic contrast-enhanced MRI methods
@@ -141,6 +144,26 @@ import Header from '../components/Header.astro';
 
             <div>
               <h3 class="font-[family-name:var(--font-heading)] text-[0.8rem] tracking-[0.15em] uppercase mb-2.5" style="color: var(--ink-faint);">
+                Instrumentation & Controls
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {[
+                  'Sensor development',
+                  'Microcontroller programming',
+                  'Hardware integration',
+                  'Closed-loop control',
+                  'Embedded systems',
+                  'Real-time data acquisition',
+                ].map(skill => (
+                  <span class="inline-block px-3 py-1.5 text-[0.8rem] rounded-full border border-white/20 bg-white/10" style="color: var(--ink-muted);">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-[family-name:var(--font-heading)] text-[0.8rem] tracking-[0.15em] uppercase mb-2.5" style="color: var(--ink-faint);">
                 Research & Communication
               </h3>
               <div class="flex flex-wrap gap-2">
@@ -167,12 +190,12 @@ import Header from '../components/Header.astro';
           </h2>
           <div>
             <h3 class="font-[family-name:var(--font-heading)] text-base font-medium tracking-wide">
-              Weill Cornell Medical College / NYU
+              Pitzer College — Claremont, CA
             </h3>
             <p class="text-[0.95rem] mt-1" style="color: var(--ink-muted);">
-              Research training in quantitative imaging and MRI methods
+              B.A. in Biophysics
             </p>
-            <p class="text-[0.8rem] mt-1 tracking-wider" style="color: var(--ink-faint);">2020 – 2023</p>
+            <p class="text-[0.8rem] mt-1 tracking-wider" style="color: var(--ink-faint);">2016</p>
           </div>
         </section>
 
