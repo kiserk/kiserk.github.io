@@ -113,7 +113,7 @@ function $(id: string): HTMLElement {
 }
 
 function buildWindyUrl(lat: number, lon: number): string {
-  return `https://embed.windy.com/embed.html?type=map&location=coordinates&metricWind=mph&metricTemp=%C2%B0F&zoom=10&overlay=waves&product=ecmwf&level=surface&lat=${lat}&lon=${lon}&marker=true&calendar=now&message=true&pressure=false`;
+  return `https://embed.windy.com/embed.html?type=map&location=coordinates&metricWind=mph&metricTemp=%C2%B0F&zoom=10&overlay=wind&product=ecmwf&level=surface&lat=${lat}&lon=${lon}&marker=true&calendar=now&message=true&pressure=false`;
 }
 
 function populateSelector(): void {

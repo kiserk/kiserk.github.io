@@ -81,7 +81,7 @@ personal_website/
 │   │   ├── ocean-palette.ts     # OceanData → OceanVisuals (colors, motion)
 │   │   ├── ocean-renderer.ts    # Canvas 2D engine, animation loop
 │   │   ├── surf-spots.ts        # 16 surf spot defs + offshore-wind logic (+ surflineSpotId)
-│   │   └── surf-page.ts         # /surf client island: fetch + render (Surfline-preferred)
+│   │   └── surf-page.ts         # /swell client island: fetch + render (Surfline-preferred)
 │   └── styles/
 │       └── global.css           # Tailwind import, @font-face, theme tokens
 ├── public/
@@ -126,7 +126,7 @@ flowchart LR
 
 ---
 
-## The `/surf` page
+## The `/swell` page
 
 Interactive surf conditions for any of **16 spots** (NY, NJ, New England, Southeast, California, Hawaii). Pure client-side island — no server.
 
@@ -163,13 +163,13 @@ The fix is **Surfline-preferred with graceful fallback** (see "Surfline snapshot
 - When no snapshot is available, it falls back to GFS Hs with the existing annotation.
 - The **7-day look-ahead always uses GFS** (Surfline's free horizon is only ~3 days).
 
-Both the email footer and the `/surf` footnote state which source is in use. Do not silently apply a correction factor to GFS — prefer the real Surfline number or label it honestly.
+Both the email footer and the `/swell` footnote state which source is in use. Do not silently apply a correction factor to GFS — prefer the real Surfline number or label it honestly.
 
 ## Surfline snapshots
 
-`scripts/surfline-snapshot.mjs` captures Surfline's **free** forecast data (face height, swells, wind, tides, weather, AM/PM rating) into `public/data/surfline/<spotId>.json`, which the `/surf` page and email read as a same-origin static asset.
+`scripts/surfline-snapshot.mjs` captures Surfline's **free** forecast data (face height, swells, wind, tides, weather, AM/PM rating) into `public/data/surfline/<spotId>.json`, which the `/swell` page and email read as a same-origin static asset.
 
-**Why a snapshot (not a live fetch):** Surfline's API sits behind **Cloudflare bot protection** and serves **no cross-origin CORS headers**. So the browser can't fetch it from `/surf`, and even a server-side `fetch()` / hand-crafted request to `services.surfline.com` is WAF-blocked (HTTP 403) *even with a `cf_clearance` cookie*. The reliable path: drive a real **Chromium (Playwright)** to a public surf-report page and **intercept the forecast XHRs the Surfline app itself makes** (those are legitimate, first-party, and succeed). The script normalizes those payloads.
+**Why a snapshot (not a live fetch):** Surfline's API sits behind **Cloudflare bot protection** and serves **no cross-origin CORS headers**. So the browser can't fetch it from `/swell`, and even a server-side `fetch()` / hand-crafted request to `services.surfline.com` is WAF-blocked (HTTP 403) *even with a `cf_clearance` cookie*. The reliable path: drive a real **Chromium (Playwright)** to a public surf-report page and **intercept the forecast XHRs the Surfline app itself makes** (those are legitimate, first-party, and succeed). The script normalizes those payloads.
 
 - **Spot IDs** live in `src/scripts/surf-spots.ts` as `surflineSpotId` (the single source of truth, shared with the browser). The ID is the trailing segment of any `surfline.com/surf-report/<slug>/<id>` URL — the slug is cosmetic, only the ID matters. Rockaway (NY) is `5842041f4e65fad6a7708852`. Find others with `npm run surfline:discover -- "<name>"`.
 - **Units:** Surfline returns face height in FT and wind in **knots**; the script converts wind to MPH and collapses Surfline's verbose `directionType` to Offshore/Onshore/Cross.
