@@ -21,6 +21,9 @@ const journalArticles = [
     year: 2023,
     doi: 'https://doi.org/10.3390/tomography9020058',
     firstAuthor: true,
+    image: '/images/tomography-textural-features.png',
+    imageAlt: 'Volumetric DCE-MRI parameter maps (ve, vp, Fp, PS, tau_i, Ktrans) of a mouse glioma at 3D isotropic resolution',
+    imageCaption: 'Fig. 2 — Volumetric pharmacokinetic parameter maps at 3D isotropic resolution. Kiser et al., Tomography 2023 (CC BY).',
   },
   {
     title: 'Simultaneous estimation of the cellular water exchange rate, intracellular volume fraction, and longitudinal relaxation rate in cancer cells',
@@ -161,6 +164,22 @@ function formatAuthors(authors: string[]) {
                   >
                     DOI ↗
                   </a>
+                )}
+                {pub.image && (
+                  <figure class="mt-5">
+                    <img
+                      src={pub.image}
+                      alt={pub.imageAlt}
+                      loading="lazy"
+                      decoding="async"
+                      class="w-full h-auto rounded-lg border border-white/10 bg-black/30"
+                    />
+                    {pub.imageCaption && (
+                      <figcaption class="mt-2 text-[0.78rem] italic leading-relaxed" style="color: var(--ink-faint);">
+                        {pub.imageCaption}
+                      </figcaption>
+                    )}
+                  </figure>
                 )}
               </article>
             ))}
