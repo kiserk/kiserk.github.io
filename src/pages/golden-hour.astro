@@ -51,7 +51,7 @@ import Header from '../components/Header.astro';
         rel="noopener noreferrer"
         class="cam-credit"
       >
-        Live on YouTube ↗
+        <span id="cam-credit-label">Live cam</span> ↗
       </a>
     </div>
   </main>
@@ -65,6 +65,7 @@ import Header from '../components/Header.astro';
   const nameEl = document.getElementById('cam-name');
   const locationEl = document.getElementById('cam-location');
   const watchEl = document.getElementById('cam-watch') as HTMLAnchorElement | null;
+  const creditEl = document.getElementById('cam-credit-label');
   const buttons = Array.from(
     document.querySelectorAll<HTMLButtonElement>('.mode-btn'),
   );
@@ -99,6 +100,7 @@ import Header from '../components/Header.astro';
     if (nameEl) nameEl.textContent = cam.name;
     if (locationEl) locationEl.textContent = cam.location;
     if (watchEl) watchEl.href = watchUrl(cam);
+    if (creditEl) creditEl.textContent = `Live · ${cam.credit}`;
   }
 
   function setMode(next: GoldenHourMode) {

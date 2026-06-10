@@ -1,15 +1,23 @@
 // Curated live beach webcams used by the Golden Hour page.
 //
-// Every entry is a YouTube *live* stream, chosen specifically because YouTube
-// embeds render in an iframe anywhere (no X-Frame-Options / CSP blocking and no
-// auth wall, which is what breaks most proprietary surf cams). Cams are spread
-// across world longitudes so that at any given moment one of them is near its
-// local sunset and another near its local sunrise.
+// Cams are chosen specifically because they embed in an iframe from any origin
+// (no X-Frame-Options / CSP frame-ancestors blocking and no auth wall, which is
+// what breaks most proprietary surf cams). They are spread across world
+// longitudes so that at any moment one of them is near its local sunset and
+// another near its local sunrise.
 //
-// Each `youtubeId` below was verified live/public via YouTube's oEmbed endpoint.
-// To add a cam: confirm it is a public YouTube live stream, grab the 11-char id
-// from its watch URL, and add an entry with accurate lat/lon. To replace a dead
-// cam, just swap its `youtubeId` (the selection logic does the rest).
+// Two source kinds are supported:
+//   - 'youtube': a public YouTube live stream id (most stable; preferred).
+//   - 'iframe':  any directly-embeddable iframe URL (e.g. rtsp.me, coastalcoms).
+//
+// Every cam below was verified embeddable during implementation: YouTube ids via
+// the oEmbed endpoint, iframe URLs by confirming they return 200 with no
+// frame-blocking headers. To add a cam, pick a source it allows to be embedded
+// off-site and give it accurate lat/lon. To replace a dead cam, swap its source.
+
+export type CamSource =
+  | { kind: 'youtube'; youtubeId: string }
+  | { kind: 'iframe'; embed: string; watch?: string };
 
 export interface SunsetCam {
   id: string;
@@ -19,9 +27,12 @@ export interface SunsetCam {
   lat: number;
   /** Longitude in decimal degrees (east positive). */
   lon: number;
-  /** 11-character YouTube video id of a public live stream. */
-  youtubeId: string;
+  source: CamSource;
+  /** Short provider attribution shown next to the cam (e.g. "YouTube"). */
+  credit: string;
 }
+
+const yt = (youtubeId: string): CamSource => ({ kind: 'youtube', youtubeId });
 
 export const CAMS: SunsetCam[] = [
   // --- Pacific ---
@@ -31,7 +42,8 @@ export const CAMS: SunsetCam[] = [
     location: 'North Shore, Oahu, Hawaii',
     lat: 21.665,
     lon: -158.053,
-    youtubeId: 'iHw4jLNvUJA',
+    source: yt('iHw4jLNvUJA'),
+    credit: 'explore.org',
   },
   {
     id: 'orewa-nz',
@@ -39,7 +51,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Hibiscus Coast, New Zealand',
     lat: -36.586,
     lon: 174.694,
-    youtubeId: 'HUMY8M8K4A4',
+    source: yt('HUMY8M8K4A4'),
+    credit: 'YouTube',
   },
 
   // --- US West Coast ---
@@ -49,7 +62,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Los Angeles, California',
     lat: 34.008,
     lon: -118.499,
-    youtubeId: 'qmE7U1YZPQA',
+    source: yt('qmE7U1YZPQA'),
+    credit: 'explore.org',
   },
   {
     id: 'glass-beach',
@@ -57,7 +71,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Fort Bragg, California',
     lat: 39.448,
     lon: -123.812,
-    youtubeId: 'zaTW0UqZCzY',
+    source: yt('zaTW0UqZCzY'),
+    credit: 'YouTube',
   },
 
   // --- US Gulf / Southeast ---
@@ -67,7 +82,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Santa Rosa Beach, Florida',
     lat: 30.366,
     lon: -86.23,
-    youtubeId: 'ftGfQqCA184',
+    source: yt('ftGfQqCA184'),
+    credit: 'YouTube',
   },
   {
     id: 'clearwater',
@@ -75,7 +91,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Clearwater, Florida',
     lat: 27.978,
     lon: -82.827,
-    youtubeId: 'rxBBRLWF0mM',
+    source: yt('rxBBRLWF0mM'),
+    credit: 'YouTube',
   },
 
   // --- Caribbean ---
@@ -85,7 +102,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Jost Van Dyke, British Virgin Islands',
     lat: 18.447,
     lon: -64.749,
-    youtubeId: 'LXWVYoBluT4',
+    source: yt('LXWVYoBluT4'),
+    credit: 'YouTube',
   },
   {
     id: 'st-croix',
@@ -93,7 +111,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Frederiksted, St. Croix, USVI',
     lat: 17.711,
     lon: -64.883,
-    youtubeId: 'gdbRASr1dJw',
+    source: yt('gdbRASr1dJw'),
+    credit: 'YouTube',
   },
 
   // --- Eastern Atlantic ---
@@ -103,7 +122,8 @@ export const CAMS: SunsetCam[] = [
     location: 'Caniço, Madeira, Portugal',
     lat: 32.64,
     lon: -16.835,
-    youtubeId: '4bgsscC-fJc',
+    source: yt('4bgsscC-fJc'),
+    credit: 'Madeira-Web',
   },
 
   // --- Mediterranean ---
@@ -113,7 +133,54 @@ export const CAMS: SunsetCam[] = [
     location: 'Ibiza, Spain',
     lat: 38.967,
     lon: 1.3,
-    youtubeId: 'f6tsHCx4-3g',
+    source: yt('f6tsHCx4-3g'),
+    credit: 'YouTube',
+  },
+
+  // --- Southern Africa ---
+  {
+    id: 'bloubergstrand',
+    name: 'Bloubergstrand',
+    location: 'Cape Town, South Africa',
+    lat: -33.81,
+    lon: 18.46,
+    source: yt('-M9V6mhpxYw'),
+    credit: 'Table Mountain Live',
+  },
+
+  // --- Indian Ocean ---
+  {
+    id: 'seychelles',
+    name: 'North Island',
+    location: 'Seychelles',
+    lat: -4.395,
+    lon: 55.246,
+    source: yt('Thtj8Ht7Z_c'),
+    credit: 'YouTube',
+  },
+  {
+    id: 'maldives',
+    name: 'InterContinental Maldives',
+    location: 'Raa Atoll, Maldives',
+    lat: 5.483,
+    lon: 72.997,
+    source: yt('_BMi3usEwi8'),
+    credit: 'YouTube',
+  },
+
+  // --- Southeast Asia (rtsp.me iframe) ---
+  {
+    id: 'kata-phuket',
+    name: 'Kata Beach',
+    location: 'Phuket, Thailand',
+    lat: 7.82,
+    lon: 98.298,
+    source: {
+      kind: 'iframe',
+      embed: 'https://rtsp.me/embed/2F8DfBS5/',
+      watch: 'https://www.sssphuket.com/kata-beach-live-cam/',
+    },
+    credit: 'rtsp.me / SSS Phuket',
   },
 
   // --- East Asia ---
@@ -123,20 +190,42 @@ export const CAMS: SunsetCam[] = [
     location: 'Okinawa, Japan',
     lat: 26.5,
     lon: 127.918,
-    youtubeId: 'QuS6sJXQyVE',
+    source: yt('QuS6sJXQyVE'),
+    credit: 'YouTube',
+  },
+
+  // --- Australia (coastalcoms iframe) ---
+  {
+    id: 'gold-coast-seaway',
+    name: 'Gold Coast Seaway',
+    location: 'Southport, Queensland, Australia',
+    lat: -27.937,
+    lon: 153.428,
+    source: {
+      kind: 'iframe',
+      embed: 'https://widget.coastalcoms.com/video/962b4313-7445-46eb-b731-56edc8483082',
+      watch: 'https://www.vmrsouthport.com.au/surfcam/',
+    },
+    credit: 'VMR Southport',
   },
 ];
 
 export function embedUrl(cam: SunsetCam): string {
-  const params = new URLSearchParams({
-    autoplay: '1',
-    mute: '1',
-    playsinline: '1',
-    rel: '0',
-  });
-  return `https://www.youtube.com/embed/${cam.youtubeId}?${params.toString()}`;
+  if (cam.source.kind === 'youtube') {
+    const params = new URLSearchParams({
+      autoplay: '1',
+      mute: '1',
+      playsinline: '1',
+      rel: '0',
+    });
+    return `https://www.youtube.com/embed/${cam.source.youtubeId}?${params.toString()}`;
+  }
+  return cam.source.embed;
 }
 
 export function watchUrl(cam: SunsetCam): string {
-  return `https://www.youtube.com/watch?v=${cam.youtubeId}`;
+  if (cam.source.kind === 'youtube') {
+    return `https://www.youtube.com/watch?v=${cam.source.youtubeId}`;
+  }
+  return cam.source.watch ?? cam.source.embed;
 }
