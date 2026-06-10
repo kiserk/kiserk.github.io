@@ -128,13 +128,15 @@ function formatAuthors(authors: string[]) {
               <article class="surface rounded-xl p-6">
                 <div class="flex items-stretch gap-4">
                   {pub.thumbnail && (
-                    <img
-                      src={pub.thumbnail}
-                      alt={pub.thumbnailAlt}
-                      loading="lazy"
-                      decoding="async"
-                      class="shrink-0 w-24 md:w-28 self-stretch rounded-lg border border-white/10 bg-black/30 object-cover"
-                    />
+                    <div class="shrink-0 w-24 md:w-28 self-stretch rounded-lg overflow-hidden border border-white/10 bg-black/30">
+                      <img
+                        src={pub.thumbnail}
+                        alt={pub.thumbnailAlt}
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
                   )}
                   <div class="min-w-0 flex-1">
                     <div class="flex items-start justify-between gap-3">
