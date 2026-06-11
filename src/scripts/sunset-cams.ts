@@ -57,22 +57,22 @@ export const CAMS: SunsetCam[] = [
 
   // --- US West Coast ---
   {
-    id: 'santa-monica',
-    name: 'Santa Monica Beach',
-    location: 'Los Angeles, California',
-    lat: 34.008,
-    lon: -118.499,
-    source: yt('qmE7U1YZPQA'),
-    credit: 'explore.org',
+    id: 'san-diego',
+    name: 'San Diego Coast',
+    location: 'San Diego, California',
+    lat: 32.79,
+    lon: -117.255,
+    source: yt('edz0ux7JClE'),
+    credit: 'SunDiegoLive',
   },
   {
-    id: 'glass-beach',
-    name: 'Glass Beach',
-    location: 'Fort Bragg, California',
-    lat: 39.448,
-    lon: -123.812,
-    source: yt('zaTW0UqZCzY'),
-    credit: 'YouTube',
+    id: 'pacifica',
+    name: 'Pacifica Pier',
+    location: 'Pacifica, California',
+    lat: 37.638,
+    lon: -122.496,
+    source: yt('eYdiUX8mPM8'),
+    credit: 'PacificaView',
   },
 
   // --- US Gulf / Southeast ---
