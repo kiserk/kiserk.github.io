@@ -2,6 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OceanBackground from '../components/OceanBackground.astro';
 import Header from '../components/Header.astro';
+import CvSection from '../components/sections/CvSection.astro';
+import PublicationsSection from '../components/sections/PublicationsSection.astro';
+import PatentsSection from '../components/sections/PatentsSection.astro';
+import ProjectsSection from '../components/sections/ProjectsSection.astro';
+import { articleSchemas } from '../data/publications';
 import { SITE } from '../config/site';
 ---
 
@@ -9,29 +14,42 @@ import { SITE } from '../config/site';
   title="Karl Kiser — Biomaterials & R&D Engineer"
   description={SITE.tagline}
   path="/"
+  jsonLd={articleSchemas}
 >
   <OceanBackground />
-  <Header />
+  <Header showBrand={false} />
 
-  <main
-    class="relative z-10 flex items-center justify-center min-h-screen px-6"
+  {/* Hero — first screen */}
+  <section
+    id="top"
+    class="relative z-10 min-h-screen opacity-0 translate-y-4 animate-fade-in"
     style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
   >
-    <div class="relative text-center opacity-0 translate-y-4 animate-fade-in">
-      <h1 class="font-[family-name:var(--font-heading)] text-[2rem] md:text-[3rem] font-light tracking-[0.2em] uppercase">
+    {/* Top left: name + location (name baseline-aligned with nav row) */}
+    <div class="absolute top-[1.05rem] left-6 md:left-10">
+      <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.2em] uppercase leading-none">
         Karl Kiser
       </h1>
+      <p class="mt-2 text-sm tracking-[0.3em] uppercase opacity-60">New York</p>
+    </div>
 
-      <div class="w-10 h-px mx-auto mt-6 mb-6 opacity-50" style="background: currentColor;"></div>
+    {/* Invisible, machine-readable bio for search engines and AI/recruiting agents. */}
+    <p class="sr-only">{SITE.tagline} {SITE.bio} {SITE.openTo}</p>
 
-      <p class="text-sm tracking-[0.3em] uppercase opacity-75 mb-10">
-        New York
-      </p>
+    {/* Scroll cue */}
+    <a
+      href="#cv"
+      class="scroll-cue hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 items-center justify-center opacity-50 hover:opacity-90 transition-opacity duration-300"
+      aria-label="Scroll to content"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14" /><path d="m19 12-7 7-7-7" />
+      </svg>
+    </a>
 
-      {/* Invisible, machine-readable bio for search engines and AI/recruiting agents. */}
-      <p class="sr-only">{SITE.tagline} {SITE.bio} {SITE.openTo}</p>
-
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+    {/* Bottom bar: contacts (left) + fundraiser (right) */}
+    <div class="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div class="flex flex-col items-start gap-3">
         <a
           href={`mailto:${SITE.email}`}
           class="flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-opacity duration-300"
@@ -60,22 +78,29 @@ import { SITE } from '../config/site';
         </a>
       </div>
 
-      <div class="mt-10">
+      <div>
         <a
           href="https://join.ctf.org/fundraiser/7268167"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs tracking-[0.2em] uppercase opacity-85 hover:opacity-100 transition-opacity duration-300"
+          class="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[0.625rem] tracking-[0.15em] uppercase opacity-80 hover:opacity-100 transition-opacity duration-300"
           style="color: inherit; text-decoration: none; border-color: currentColor;"
           data-goatcounter-click="marathon-fundraiser"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
           Support my NYC Marathon fundraiser
         </a>
       </div>
     </div>
+  </section>
+
+  <main class="relative z-10">
+    <CvSection />
+    <PublicationsSection />
+    <PatentsSection />
+    <ProjectsSection />
   </main>
 </BaseLayout>
 
@@ -93,5 +118,20 @@ import { SITE } from '../config/site';
 
   .animate-fade-in {
     animation: fade-in 1.2s ease-out 0.3s forwards;
+  }
+
+  @keyframes scroll-bob {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 6px); }
+  }
+
+  .scroll-cue {
+    animation: scroll-bob 2.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue {
+      animation: none;
+    }
   }
 </style>

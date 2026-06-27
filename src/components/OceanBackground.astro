@@ -2,6 +2,21 @@
 
 ---
 
+<video
+  id="water-video"
+  class="fixed inset-0 -z-10 w-screen h-screen object-cover"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  poster="/water/IMG_5047_twilight_mono.jpg"
+  aria-hidden="true"
+  style="display:none"
+>
+  <source src="/water/IMG_5047_twilight_mono.mp4" type="video/mp4" />
+  <source src="/water/IMG_5047_twilight_mono.webm" type="video/webm" />
+</video>
 <canvas id="ocean-canvas" class="fixed inset-0 -z-10 w-screen h-screen"></canvas>
 <div
   class="fixed inset-0 w-screen h-screen pointer-events-none"
@@ -21,48 +36,80 @@
     document.documentElement.style.setProperty('--text-shadow', visuals.textShadow);
   }
 
-  async function init() {
-    const canvas = document.getElementById('ocean-canvas') as HTMLCanvasElement | null;
-    if (!canvas) return;
-
-    const renderer = new OceanRenderer(canvas);
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const initialVisuals = computeVisuals(null);
-    renderer.updateVisuals(initialVisuals);
-    applyTextStyles(initialVisuals);
-    if (reduceMotion) {
-      renderer.renderOnce();
-    } else {
-      renderer.start();
+  // Plain looping video unless the device/user prefers otherwise, in which
+  // case we fall back to the procedural ocean canvas.
+  function canUseVideo(): boolean {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+      const conn = (navigator as any).connection;
+      if (conn && conn.saveData) return false;
+      return true;
+    } catch {
+      return false;
     }
+  }
 
-    async function refresh() {
+  function init() {
+    const video = document.getElementById('water-video') as HTMLVideoElement | null;
+    const oceanCanvas = document.getElementById('ocean-canvas') as HTMLCanvasElement | null;
+    if (!video || !oceanCanvas) return;
+
+    let oceanRenderer: OceanRenderer | null = null;
+    let intervalId: number | undefined;
+
+    function startCanvasFallback() {
+      if (oceanRenderer) return;
       try {
-        const data = await getOceanData();
-        const visuals = computeVisuals(data);
-        renderer.updateVisuals(visuals);
-        applyTextStyles(visuals);
-        if (reduceMotion) renderer.renderOnce();
+        video!.pause();
       } catch {
-        // data fetch failed; renderer continues with last known visuals
+        // ignore
       }
+      video!.style.display = 'none';
+      oceanCanvas!.style.display = '';
+      oceanRenderer = new OceanRenderer(oceanCanvas!);
+      const initialVisuals = computeVisuals(null);
+      oceanRenderer.updateVisuals(initialVisuals);
+      applyTextStyles(initialVisuals);
+      oceanRenderer.start();
+
+      const refresh = async () => {
+        try {
+          const data = await getOceanData();
+          const visuals = computeVisuals(data);
+          oceanRenderer?.updateVisuals(visuals);
+          applyTextStyles(visuals);
+        } catch {
+          // data fetch failed; renderer keeps last known visuals
+        }
+      };
+      refresh();
+      intervalId = window.setInterval(refresh, DATA_REFRESH_INTERVAL);
+
+      const onResize = () => oceanRenderer?.resize();
+      window.addEventListener('resize', onResize);
+      window.addEventListener('unload', () => {
+        if (intervalId) clearInterval(intervalId);
+        window.removeEventListener('resize', onResize);
+        oceanRenderer?.destroy();
+      });
     }
 
-    refresh();
-    const intervalId = setInterval(refresh, DATA_REFRESH_INTERVAL);
+    if (canUseVideo()) {
+      oceanCanvas.style.display = 'none';
+      video.style.display = '';
+      applyTextStyles(computeVisuals(null));
 
-    const onResize = () => {
-      renderer.resize();
-      if (reduceMotion) renderer.renderOnce();
-    };
-    window.addEventListener('resize', onResize);
-
-    window.addEventListener('unload', () => {
-      clearInterval(intervalId);
-      window.removeEventListener('resize', onResize);
-      renderer.destroy();
-    });
+      const playAttempt = video.play();
+      if (playAttempt && typeof playAttempt.catch === 'function') {
+        playAttempt.catch(() => startCanvasFallback());
+      }
+      // If autoplay silently fails (still paused), fall back.
+      window.setTimeout(() => {
+        if (video.paused || video.readyState < 2) startCanvasFallback();
+      }, 5000);
+    } else {
+      startCanvasFallback();
+    }
   }
 
   if (document.readyState === 'loading') {

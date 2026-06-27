@@ -1,13 +1,20 @@
 ---
 const navItems = [
-  { label: 'CV', href: '/cv' },
-  { label: 'Publications', href: '/publications' },
-  { label: 'Patents', href: '/patents' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Swell', href: '/swell' },
+  { label: 'CV', section: 'cv', href: '/#cv' },
+  { label: 'Publications', section: 'publications', href: '/#publications' },
+  { label: 'Patents', section: 'patents', href: '/#patents' },
+  { label: 'Projects', section: 'projects', href: '/#projects' },
+  { label: 'Swell', section: null, href: '/swell' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const { showBrand = true } = Astro.props;
+
+function isActive(item: (typeof navItems)[number]): boolean {
+  if (item.section) return currentPath === `/${item.section}`;
+  return currentPath === item.href.replace(/\/$/, '');
+}
 ---
 
 <header
@@ -15,30 +22,32 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
   style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
 >
   <div class="flex items-center justify-between max-w-7xl mx-auto">
-    <a
-      href="/"
-      class="font-[family-name:var(--font-heading)] text-sm font-normal tracking-widest uppercase opacity-90 hover:opacity-100 transition-opacity duration-300"
-      style="color: inherit;"
-    >
-      Karl Kiser
-    </a>
+    {showBrand ? (
+      <a
+        href="/"
+        class="font-[family-name:var(--font-heading)] text-sm font-normal tracking-widest uppercase opacity-90 hover:opacity-100 transition-opacity duration-300"
+        style="color: inherit;"
+      >
+        Karl Kiser
+      </a>
+    ) : (
+      <span aria-hidden="true"></span>
+    )}
 
     <nav class="hidden md:flex items-center gap-8">
-      {navItems.map((item) => {
-        const isActive = currentPath === item.href;
-        return (
-          <a
-            href={item.href}
-            class:list={[
-              'text-xs font-normal tracking-wider uppercase transition-opacity duration-300',
-              isActive ? 'opacity-100' : 'opacity-65 hover:opacity-100',
-            ]}
-            style="color: inherit; text-decoration: none;"
-          >
-            {item.label}
-          </a>
-        );
-      })}
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          data-nav-section={item.section}
+          class:list={[
+            'nav-link text-xs font-normal tracking-wider uppercase transition-opacity duration-300',
+            isActive(item) ? 'nav-active opacity-100' : 'opacity-65 hover:opacity-100',
+          ]}
+          style="color: inherit; text-decoration: none;"
+        >
+          {item.label}
+        </a>
+      ))}
     </nav>
 
     <button
@@ -61,21 +70,19 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     class="md:hidden hidden flex-col items-end gap-5 pt-6 pb-2"
     style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
   >
-    {navItems.map((item) => {
-      const isActive = currentPath === item.href;
-      return (
-        <a
-          href={item.href}
-          class:list={[
-            'text-sm font-normal tracking-wider uppercase transition-opacity duration-300',
-            isActive ? 'opacity-100' : 'opacity-70 hover:opacity-100',
-          ]}
-          style="color: inherit; text-decoration: none;"
-        >
-          {item.label}
-        </a>
-      );
-    })}
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        data-nav-section={item.section}
+        class:list={[
+          'nav-link text-sm font-normal tracking-wider uppercase transition-opacity duration-300',
+          isActive(item) ? 'nav-active opacity-100' : 'opacity-70 hover:opacity-100',
+        ]}
+        style="color: inherit; text-decoration: none;"
+      >
+        {item.label}
+      </a>
+    ))}
   </nav>
 </header>
 
@@ -83,10 +90,58 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
   const toggle = document.getElementById('mobile-menu-toggle');
   const menu = document.getElementById('mobile-menu');
   if (toggle && menu) {
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+      toggle.setAttribute('aria-expanded', 'false');
+    };
     toggle.addEventListener('click', () => {
       const isOpen = menu.classList.toggle('flex');
       menu.classList.toggle('hidden');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
+    // Close the menu after tapping a link (so smooth-scroll is visible).
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+
+  // Scroll-spy: highlight the nav item for the section currently in view.
+  const sectionLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-section]')
+  ).filter((el) => el.dataset.navSection);
+
+  if (sectionLinks.length) {
+    const linksBySection = new Map<string, HTMLAnchorElement[]>();
+    for (const link of sectionLinks) {
+      const id = link.dataset.navSection as string;
+      const arr = linksBySection.get(id) ?? [];
+      arr.push(link);
+      linksBySection.set(id, arr);
+    }
+
+    const sections = Array.from(linksBySection.keys())
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (sections.length) {
+      const setActive = (id: string | null) => {
+        for (const link of sectionLinks) {
+          link.classList.toggle('nav-active', link.dataset.navSection === id);
+        }
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          if (visible[0]) setActive(visible[0].target.id);
+        },
+        { rootMargin: '-45% 0px -50% 0px', threshold: [0, 0.25, 0.5, 1] }
+      );
+
+      sections.forEach((s) => observer.observe(s));
+    }
   }
 </script>

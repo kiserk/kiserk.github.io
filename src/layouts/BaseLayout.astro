@@ -97,5 +97,27 @@ const schemas = [personSchema, websiteSchema, ...jsonLd];
   </head>
   <body>
     <slot />
+
+    <script>
+      // Scroll-reveal sections as they enter the viewport. Guarded so content
+      // stays visible if JS is unavailable or reduced motion is preferred.
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealEls = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+      if (revealEls.length && !prefersReduced) {
+        document.documentElement.classList.add('js-reveal');
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.08 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>

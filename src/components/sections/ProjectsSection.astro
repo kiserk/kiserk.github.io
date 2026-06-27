@@ -1,0 +1,128 @@
+---
+const projects = [
+  {
+    title: 'Aerial Mycelium Process Development',
+    institution: 'Ecovative Design',
+    dates: '2023–2026',
+    description:
+      'Developed and optimized cultivation processes for aerial mycelium production, resulting in co-inventorship on a patent covering growth media compositions and environmental conditions. Work encompassed media design, environmental programming (temperature, CO₂, airflow, mist rate), pre-colonization optimization, and aerial growth phase control. Contributed to a platform tracking 25 environmental conditions in real time, with AI-model-informed decision-making across 26,000+ growth records.',
+    tags: [
+      'Mycelium Cultivation',
+      'Process Development',
+      'Media Optimization',
+      'Environmental Programming',
+      'Patent',
+      'Scale-up',
+    ],
+  },
+  {
+    title: 'Partner Technology Transfer & Field Process Engineering',
+    institution: 'Ecovative Design',
+    dates: '2023–2026',
+    description:
+      'Deployed to domestic and international partner growers to transfer the aerial mycelium cultivation process and stand up production at their facilities (Ontario, Canada; Kennett Square, PA; Ammerzoden, Netherlands). Work spanned full technology transfer (process recipes, environmental control programs, and sensing/control systems), operations training, and hands-on troubleshooting — often taking direct control of partner lines during start-up. Built data pipelines to ingest partner facility data into internal systems and models, creating a tight bench-to-scale feedback loop. Led a Pennsylvania site\'s conversion from agaricus mushroom production to full mycelium production within a year, resolved a novel contamination event, trained operators in their primary language, and authored documentation that outlasted each engagement.',
+    tags: [
+      'Technology Transfer',
+      'Field Process Engineering',
+      'Operations Training',
+      'Data Pipelines',
+      'International Partners',
+      'Scale-up',
+    ],
+  },
+  {
+    title: 'Quantitative MRI for Tumor Treatment Response',
+    institution: 'Weill Cornell Medical College / NYU',
+    dates: '2020–2023',
+    description:
+      'Developed and validated novel MRI methods for measuring cellular water exchange and treatment response in glioma models. First-author work published in Scientific Reports demonstrated that a two-flip-angle DCE-MRI approach can quantify intracellular water lifetime (τᵢ), providing a metabolic biomarker that correlates negatively with FDG-PET uptake. This work bridges imaging physics, computational modeling, and translational cancer biology.',
+    tags: [
+      'DCE-MRI',
+      'Pharmacokinetic Modeling',
+      'Cancer Biology',
+      'Quantitative Imaging',
+      'Scientific Reports',
+    ],
+  },
+  {
+    title: 'Image Texture Analysis & Reproducibility in Preclinical MRI',
+    institution: 'Weill Cornell Medical College',
+    dates: '2021–2023',
+    description:
+      'Investigated how image resolution affects the reliability of texture features derived from pharmacokinetic parameter maps. First-author publication in Tomography demonstrated that 3D isotropic resolution is critical for reproducible radiomics analysis. This work has implications for standardizing preclinical imaging protocols and making quantitative biomarkers more robust across studies.',
+    tags: [
+      'Radiomics',
+      'Image Analysis',
+      'Reproducibility',
+      '7T MRI',
+      'Preclinical Imaging',
+      'Tomography',
+    ],
+  },
+  {
+    title: 'Active Contrast Encoding (ACE) MRI Development',
+    institution: 'NYU / Weill Cornell',
+    dates: '2020–2022',
+    description:
+      'Contributed to the development and validation of ACE-MRI, a method for simultaneous estimation of contrast agent kinetics and tissue relaxation parameters. This technique enables more efficient characterization of tumor microenvironment compared to conventional DCE-MRI. Research presented at multiple ISMRM annual meetings and published as a collaborative journal article.',
+    tags: [
+      'ACE-MRI',
+      'Method Development',
+      'Tumor Microenvironment',
+      'ISMRM',
+      'Collaboration',
+    ],
+  },
+];
+---
+
+<section id="projects" class="reveal relative z-10 px-5 md:px-6 py-16 md:py-24 scroll-mt-24" style={`color: var(--ink)`}>
+  <div class="mx-auto max-w-[720px]">
+    <div class="surface rounded-2xl px-7 py-10 md:px-12 md:py-14">
+
+      <header class="mb-12">
+        <h1 class="font-[family-name:var(--font-heading)] text-[1.75rem] md:text-[2.25rem] font-light tracking-[0.15em] uppercase">
+          Projects
+        </h1>
+        <div class="w-8 h-px mt-4 mb-4 opacity-50" style="background: currentColor;"></div>
+        <p class="text-sm tracking-[0.25em] uppercase" style="color: var(--ink-faint);">
+          Selected Work
+        </p>
+      </header>
+
+      <div class="space-y-10">
+        {projects.map((project, i) => (
+          <article class="project-card">
+            {i > 0 && (
+              <div class="w-full h-px mb-10 opacity-10" style="background: currentColor;"></div>
+            )}
+
+            <h2 class="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium tracking-wide">
+              {project.title}
+            </h2>
+
+            <p class="text-[0.95rem] mt-1" style="color: var(--ink-muted);">
+              {project.institution}
+            </p>
+            <p class="text-[0.8rem] mt-1 tracking-wider" style="color: var(--ink-faint);">
+              {project.dates}
+            </p>
+
+            <p class="text-[0.95rem] md:text-base leading-relaxed mt-4" style="color: var(--ink-muted);">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-5">
+              {project.tags.map(tag => (
+                <span class="inline-block px-3 py-1.5 text-[0.8rem] rounded-full border border-white/20 bg-white/10" style="color: var(--ink-muted);">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>

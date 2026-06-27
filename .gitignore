@@ -29,3 +29,7 @@ scraper_reference/
 
 # jetbrains setting folder
 .idea/
+
+# large local-only media: raw iPhone clips and preview/example renders
+water_images/
+.preview-shots/

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OceanBackground from '../components/OceanBackground.astro';
 import Header from '../components/Header.astro';
+import PatentsSection from '../components/sections/PatentsSection.astro';
 
 const patentSchema = {
   '@context': 'https://schema.org',
@@ -32,110 +33,7 @@ const patentSchema = {
   <OceanBackground />
   <Header />
 
-  <main
-    class="relative z-10 min-h-screen px-6 pt-24 pb-20 md:pt-32 md:pb-28"
-    style={`color: var(--ink)`}
-  >
-    <div class="mx-auto max-w-[720px] opacity-0 translate-y-4 animate-fade-in">
-
-      <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.12em] uppercase mb-4">
-        Patents
-      </h1>
-
-      <div class="w-8 h-px opacity-40 mb-14" style="background: currentColor;"></div>
-
-      <article class="surface rounded-2xl p-8 md:p-10">
-        <h2 class="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-normal leading-snug mb-8">
-          <a
-            href="https://patents.google.com/patent/US20240352400A1"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
-            style="color: inherit;"
-          >
-            Growth Media Compositions and Growth Environmental Conditions for Improved Aerial Mycelium
-          </a>
-        </h2>
-
-        <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-[0.95rem] mb-8">
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Publication</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">US 2024/0352400 A1</dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Application</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">18/642,656</dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">International</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">
-            <a
-              href="https://patents.google.com/patent/WO2024226467A1"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
-              style="color: inherit;"
-            >WO 2024/226467 A1 (PCT)</a>
-          </dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Priority</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">63/498,003 · 63/505,675 · 63/516,425</dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Filed</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">April 22, 2024</dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Published</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">October 24, 2024</dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Inventors</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">
-            Jacob Michael Winiski, <span class="font-semibold" style="color: var(--ink);">Karl John Kiser</span>
-          </dd>
-
-          <dt class="whitespace-nowrap" style="color: var(--ink-faint);">Assignee</dt>
-          <dd class="m-0" style="color: var(--ink-muted);">Ecovative LLC (formerly Ecovative Design LLC), Green Island, NY</dd>
-        </dl>
-
-        <div class="w-full h-px opacity-15 mb-8" style="background: currentColor;"></div>
-
-        <p class="text-[0.95rem] md:text-base leading-relaxed mb-8" style="color: var(--ink-muted);">
-          Claims center on preparing mycelium growth media with defined nutrition profiles and cultivating aerial mycelium under controlled temperature, CO₂, airflow, mist rate, mist composition, and related parameters. The application covers both pre-colonization and aerial-growth phase optimization. This patent addresses the core challenge of making aerial mycelium production more controllable, reproducible, and scalable.
-        </p>
-
-        <a
-          href="https://patents.google.com/patent/US20240352400A1"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-xs tracking-[0.1em] uppercase opacity-70 hover:opacity-100 transition-opacity duration-300"
-          style="color: inherit; text-decoration: none;"
-          data-goatcounter-click="patent-google-patents"
-        >
-          View on Google Patents
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 17 17 7" />
-            <path d="M7 7h10v10" />
-          </svg>
-        </a>
-      </article>
-
-      <p class="text-[0.8rem] tracking-wide mt-14 text-center" style="color: var(--ink-faint);">
-        Additional patents may be pending or in preparation.
-      </p>
-
-    </div>
+  <main class="relative z-10 min-h-screen pt-8 md:pt-10">
+    <PatentsSection />
   </main>
 </BaseLayout>
-
-<style>
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(1rem);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fade-in 1.2s ease-out 0.3s forwards;
-  }
-</style>

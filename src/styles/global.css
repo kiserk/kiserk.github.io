@@ -76,10 +76,39 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Active nav item (set by scroll-spy on the one-page home, or by path elsewhere). */
+.nav-active {
+  opacity: 1 !important;
+}
+
+/* Scroll-reveal: only hide content once JS has confirmed it can reveal it,
+   so the page degrades gracefully without JS. */
+html.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+
+html.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in,
   .project-card {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  html.js-reveal .reveal {
     opacity: 1 !important;
     transform: none !important;
   }
