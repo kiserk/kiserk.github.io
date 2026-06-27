@@ -73,7 +73,7 @@ personal_website/
 │   ├── layouts/
 │   │   └── BaseLayout.astro     # HTML shell + full SEO meta, JSON-LD, GoatCounter, global CSS
 │   ├── components/
-│   │   ├── Header.astro         # nav (CV, Publications, Patents, Projects, Swell, Golden Hour) + mobile menu
+│   │   ├── Header.astro         # nav (CV, Publications, Patents, Projects, Swell) + mobile menu
 │   │   ├── Footer.astro         # minimal footer (ambient conditions link + Privacy)
 │   │   └── OceanBackground.astro# canvas island; wires data → palette → renderer (static frame if reduced-motion)
 │   ├── pages/
@@ -83,7 +83,7 @@ personal_website/
 │   │   ├── patents.astro        # aerial mycelium patent + patent JSON-LD
 │   │   ├── projects.astro       # project cards
 │   │   ├── swell.astro          # interactive surf conditions page
-│   │   ├── golden-hour.astro    # live sunset/sunrise beach cam
+│   │   ├── _golden-hour.astro   # SHELVED live sunset/sunrise beach cam (underscore = not routed)
 │   │   ├── privacy.astro        # analytics privacy note
 │   │   └── 404.astro            # static 404 (noindex)
 │   ├── scripts/

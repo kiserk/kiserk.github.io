@@ -52,6 +52,9 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - Confirm tagline / "open to" wording in `src/config/site.ts`.
 - Optional: compress `og-image.png`; self-host fonts (only preconnect added so far).
 
+## Shelved
+- **Golden Hour** page is shelved: removed from `Header.astro` nav and renamed to `src/pages/_golden-hour.astro` (the `_` prefix makes Astro skip routing it, so it's not built/served). Code preserved (incl. `src/scripts/sunset-cams.ts`, `src/scripts/sun.ts`). To bring back: rename without the `_` and re-add the nav item.
+
 ## Settled (do not re-flag)
 - **GoatCounter**: account registered for code `karlkiser` (dashboard at https://karlkiser.goatcounter.com). Snippet in `BaseLayout` already matches — no code change needed; data records once deployed.
 - **ORCID / Google Scholar**: intentionally left blank in `SITE.profiles` per Karl's call. Blank values auto-hide on the homepage and in `sameAs`. Don't keep prompting to add them.
