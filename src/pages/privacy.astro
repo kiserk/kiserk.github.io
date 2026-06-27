@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OceanBackground from '../components/OceanBackground.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout
+  title="Privacy — Karl Kiser"
+  description="How this site handles analytics: anonymous, cookieless, and minimal."
+  path="/privacy"
+>
+  <OceanBackground />
+  <Header />
+
+  <main
+    class="relative z-10 min-h-screen px-5 pt-24 pb-20 md:pt-32 md:pb-28"
+    style={`color: var(--ink)`}
+  >
+    <div class="mx-auto max-w-[640px]">
+      <div class="surface rounded-2xl px-7 py-10 md:px-12 md:py-12">
+        <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.12em] uppercase mb-6">
+          Privacy
+        </h1>
+        <div class="w-8 h-px opacity-40 mb-8" style="background: currentColor;"></div>
+
+        <div class="space-y-4 text-[0.95rem] leading-relaxed" style="color: var(--ink-muted);">
+          <p>
+            This site uses privacy-friendly analytics (GoatCounter) to understand
+            roughly how many people visit, which pages and links they find useful,
+            and which country and referring site they came from.
+          </p>
+          <p>
+            No cookies are set, no personal data is collected, and visitors are not
+            tracked across other websites. Counts are aggregate and anonymous, so
+            there is nothing here that identifies you as an individual.
+          </p>
+          <p>
+            No data is sold or shared. Questions are welcome at
+            <a
+              href="mailto:karl.j.kiser@gmail.com"
+              class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
+              style="color: inherit;"
+            >karl.j.kiser@gmail.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

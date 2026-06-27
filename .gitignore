@@ -21,6 +21,9 @@ pnpm-debug.log*
 # private career docs
 Career/
 
+# unrelated local project (not part of the site)
+scraper_reference/
+
 # macOS-specific files
 .DS_Store
 

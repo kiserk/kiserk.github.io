@@ -24,14 +24,16 @@
 :root {
   /* content text -- always light (cards are dark glass) */
   --ink: rgba(246, 244, 240, 0.96);
-  --ink-muted: rgba(236, 240, 246, 0.80);
-  --ink-faint: rgba(228, 236, 245, 0.56);
+  --ink-muted: rgba(236, 240, 246, 0.82);
+  /* faint tier kept readable (>= ~0.66 alpha) so it never drops below AA over a bright midday ocean */
+  --ink-faint: rgba(228, 236, 245, 0.66);
 
-  /* tuned-translucent glass surface (darker than before, ocean still shows) */
-  --surface: rgba(9, 15, 26, 0.6);
+  /* tuned-translucent glass surface -- dark enough to hold AA contrast even
+     when the ocean behind it renders bright (midday/dawn) */
+  --surface: rgba(9, 15, 26, 0.72);
   --surface-inset: rgba(255, 255, 255, 0.05);
   --surface-border: rgba(255, 255, 255, 0.12);
-  --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.35);
+  --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
 
   /* text sitting directly on the ocean (hero/header/footer) */
   --text-color: rgba(246, 244, 240, 0.96);
@@ -55,6 +57,13 @@ body {
 ::selection {
   background: rgba(255, 255, 255, 0.2);
   color: inherit;
+}
+
+/* Visible keyboard focus for accessibility (hover was opacity-only before). */
+:focus-visible {
+  outline: 2px solid rgba(246, 244, 240, 0.9);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 @layer components {

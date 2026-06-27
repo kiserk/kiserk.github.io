@@ -196,6 +196,11 @@ export class OceanRenderer {
     }
   }
 
+  /** Draw a single static frame (used when the visitor prefers reduced motion). */
+  renderOnce(): void {
+    this.render(0);
+  }
+
   resize(): void {
     this.logicalWidth = window.innerWidth;
     this.logicalHeight = window.innerHeight;

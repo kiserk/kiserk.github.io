@@ -26,11 +26,16 @@
     if (!canvas) return;
 
     const renderer = new OceanRenderer(canvas);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const initialVisuals = computeVisuals(null);
     renderer.updateVisuals(initialVisuals);
     applyTextStyles(initialVisuals);
-    renderer.start();
+    if (reduceMotion) {
+      renderer.renderOnce();
+    } else {
+      renderer.start();
+    }
 
     async function refresh() {
       try {
@@ -38,6 +43,7 @@
         const visuals = computeVisuals(data);
         renderer.updateVisuals(visuals);
         applyTextStyles(visuals);
+        if (reduceMotion) renderer.renderOnce();
       } catch {
         // data fetch failed; renderer continues with last known visuals
       }
@@ -46,7 +52,10 @@
     refresh();
     const intervalId = setInterval(refresh, DATA_REFRESH_INTERVAL);
 
-    const onResize = () => renderer.resize();
+    const onResize = () => {
+      renderer.resize();
+      if (reduceMotion) renderer.renderOnce();
+    };
     window.addEventListener('resize', onResize);
 
     window.addEventListener('unload', () => {

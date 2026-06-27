@@ -1,0 +1,26 @@
+---
+description: Read and maintain project memory for context continuity across sessions
+alwaysApply: true
+---
+
+# Project Memory
+
+At the start of any non-trivial task on this repo, read [memory.md](mdc:memory.md) first.
+It is the fast-refresh source of truth (live state, key decisions, gotchas, open TODOs).
+The longer prose docs live in [README.md](mdc:README.md).
+
+## Keeping memory.md current
+
+Update `memory.md` after any change that affects how the project works, including:
+
+- A new page, integration, dependency, or build/deploy change.
+- A key decision or trade-off (and *why*) — append to the Decisions section.
+- A new gotcha you hit (and how you resolved it).
+- Completing or adding a TODO — keep the Open TODOs list accurate.
+
+Rules of thumb:
+
+- Keep it concise and skimmable (lists over prose). It is a cheat sheet, not a tutorial.
+- Record intent and *why*, not a play-by-play of edits.
+- If a fact in `memory.md` or `README.md` is now wrong, fix it in the same change — never leave stale state.
+- Do not duplicate large content between `memory.md` and `README.md`; link instead.

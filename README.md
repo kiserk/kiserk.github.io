@@ -2,8 +2,9 @@
 
 A personal website and job-search landing site for Karl Kiser, hosted free on GitHub Pages. It pairs a minimal, design-forward landing page with a data-driven ambient ocean background, full CV/Publications/Patents/Projects content, and an interactive live surf conditions page. A companion GitHub Action emails a daily Rockaway Beach surf report.
 
-**Live site:** https://kiserk.github.io
-**Repo:** https://github.com/kiserk/kiserk.github.io (deploys from `main`)
+**Live site:** https://karlkiser.com (custom domain, GitHub Pages — deploys from `main`)
+
+> For a fast, skimmable snapshot of current state, decisions, and open TODOs, read [`memory.md`](memory.md) first. This README is the deeper reference.
 
 ---
 
@@ -20,7 +21,9 @@ This file exists to give **context continuity between chats / sessions**. If you
 | Framework | [Astro](https://astro.build) v6 (static output) | `output: 'static'`, ships zero JS except small client islands |
 | Styling | Tailwind CSS v4 | Via `@tailwindcss/vite` plugin (not the old PostCSS integration) |
 | Language | TypeScript | Client scripts in `src/scripts/` |
-| Hosting | GitHub Pages | Free; custom domain (karlkiser.com/.bio) is a future goal |
+| Hosting | GitHub Pages | Free; custom domain **karlkiser.com** is live (see `public/CNAME`) |
+| SEO | JSON-LD + `@astrojs/sitemap` + robots.txt | Person/WebSite/ScholarlyArticle/patent schema; AI crawlers allowed |
+| Analytics | GoatCounter | Free, cookieless; custom click events via `data-goatcounter-click` |
 | Deploy CI | GitHub Actions | `.github/workflows/deploy.yml` |
 | Background render | HTML5 Canvas 2D | Custom engine, no WebGL/libraries |
 | Email | [Resend](https://resend.com) free tier | Surf report only; needs `RESEND_API_KEY` secret |
@@ -61,21 +64,28 @@ personal_website/
 ├── astro.config.mjs            # site URL, static output, Tailwind plugin
 ├── package.json                # name: karl-kiser-site
 ├── public/
-│   └── favicon.svg             # "KK" monogram
+│   ├── favicon.svg             # "KK" monogram
+│   ├── og-image.png            # 1200x630 social/link-preview card
+│   └── robots.txt              # allows all + AI crawlers; points to sitemap
 ├── src/
+│   ├── config/
+│   │   └── site.ts              # SINGLE SOURCE OF TRUTH: identity, SEO, profiles, analytics code
 │   ├── layouts/
-│   │   └── BaseLayout.astro     # HTML shell, meta tags, global CSS import
+│   │   └── BaseLayout.astro     # HTML shell + full SEO meta, JSON-LD, GoatCounter, global CSS
 │   ├── components/
-│   │   ├── Header.astro         # nav (CV, Publications, Patents, Projects, Surf) + mobile menu
-│   │   ├── Footer.astro         # minimal footer ("ambient conditions: rockaway beach")
-│   │   └── OceanBackground.astro# canvas island; wires data → palette → renderer
+│   │   ├── Header.astro         # nav (CV, Publications, Patents, Projects, Swell, Golden Hour) + mobile menu
+│   │   ├── Footer.astro         # minimal footer (ambient conditions link + Privacy)
+│   │   └── OceanBackground.astro# canvas island; wires data → palette → renderer (static frame if reduced-motion)
 │   ├── pages/
-│   │   ├── index.astro          # landing: name, New York, email, LinkedIn
+│   │   ├── index.astro          # landing: name, tagline, open-to, contact + profile links
 │   │   ├── cv.astro             # professional summary, experience, skills, education
-│   │   ├── publications.astro   # journal articles + conference abstracts (DOIs)
-│   │   ├── patents.astro        # aerial mycelium patent
+│   │   ├── publications.astro   # journal articles + conference abstracts (DOIs) + ScholarlyArticle JSON-LD
+│   │   ├── patents.astro        # aerial mycelium patent + patent JSON-LD
 │   │   ├── projects.astro       # project cards
-│   │   └── surf.astro           # interactive surf conditions page
+│   │   ├── swell.astro          # interactive surf conditions page
+│   │   ├── golden-hour.astro    # live sunset/sunrise beach cam
+│   │   ├── privacy.astro        # analytics privacy note
+│   │   └── 404.astro            # static 404 (noindex)
 │   ├── scripts/
 │   │   ├── ocean-data.ts        # fetch+cache marine/weather/tide → OceanData
 │   │   ├── ocean-palette.ts     # OceanData → OceanVisuals (colors, motion)
@@ -186,7 +196,8 @@ Both the email footer and the `/swell` footnote state which source is in use. Do
 ## Conventions & gotchas
 
 - **Deploy = push to `main`.** There is no separate publish step. The GitHub default "pages-build-deployment" check may show as failed/skipped — that's a harmless conflict with the custom Action; the `Deploy to GitHub Pages` workflow is the source of truth.
-- **`site` in `astro.config.mjs`** is `https://kiserk.github.io` (matches the GitHub username). Keep this correct or asset/SEO URLs break.
+- **`site` in `astro.config.mjs`** is `https://karlkiser.com` (the live custom domain). Keep this correct or canonical/sitemap/OG URLs break.
+- **Identity/SEO/analytics config** lives in `src/config/site.ts` — edit copy, profile links (`sameAs`), keywords, and the GoatCounter code there, not scattered across pages.
 - **Tailwind v4** uses the Vite plugin + `@import "tailwindcss"` in `global.css` and a `@theme { ... }` block for tokens — not a `tailwind.config.js`.
 - **Text legibility over the canvas** relies on the `--text-color` / `--text-shadow` vars set by `OceanBackground.astro`. New pages placed over the background should use `var(--text-color, ...)`.
 - **Don't commit `Career/` or `scraper_reference/`.** The former is gitignored; the latter is not — watch out.
@@ -197,8 +208,15 @@ Both the email footer and the `/swell` footnote state which source is in use. Do
 
 ## Roadmap / ideas
 
-- Custom domain (`karlkiser.com` or `karlkiser.bio`).
+- Optional: compress `og-image.png`, self-host fonts.
+- (Settled) GoatCounter registered as `karlkiser`; ORCID/Scholar intentionally left blank in `src/config/site.ts`.
 - More surf spots and/or a real embeddable live cam if a good source appears.
+
+### Downloadable CV PDF
+`public/Karl-Kiser-CV.pdf` is generated from `cv/Karl-Kiser-CV.md` (the PDF source) and linked from the homepage and `/cv`. The web CV (`src/pages/cv.astro`) and the markdown source are **separate** — keep them in sync. Regenerate the PDF after edits:
+```bash
+python3 /Users/karlkiser/Documents/Vehicles/_tools/md_to_pdf.py "cv/Karl-Kiser-CV.md" --output "public/Karl-Kiser-CV.pdf"
+```
 - Optionally let the surf report cover the user's currently selected spot rather than hardcoded Rockaway.
 
 ---

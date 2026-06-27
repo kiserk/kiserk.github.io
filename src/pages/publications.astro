@@ -106,9 +106,26 @@ function formatAuthors(authors: string[]) {
       : name
   ).join(', ');
 }
+
+const articleSchemas = journalArticles.map((pub) => ({
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: pub.title,
+  name: pub.title,
+  author: pub.authors.map((name) => ({ '@type': 'Person', name })),
+  isPartOf: { '@type': 'Periodical', name: pub.journal },
+  datePublished: String(pub.year),
+  ...(pub.doi ? { sameAs: pub.doi, identifier: pub.doi } : {}),
+  ...(pub.thumbnail ? { image: new URL(pub.thumbnail, 'https://karlkiser.com').href } : {}),
+}));
 ---
 
-<BaseLayout title="Publications — Karl Kiser" description="Research publications by Karl Kiser in quantitative MRI and biomedical imaging.">
+<BaseLayout
+  title="Publications — Karl Kiser"
+  description="Peer-reviewed publications and ISMRM conference abstracts by Karl Kiser in quantitative MRI, pharmacokinetic modeling, and biomedical imaging."
+  path="/publications"
+  jsonLd={articleSchemas}
+>
   <OceanBackground />
   <Header />
 
@@ -152,6 +169,7 @@ function formatAuthors(authors: string[]) {
                             rel="noopener noreferrer"
                             class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
                             style="color: inherit;"
+                            data-goatcounter-click={`pub:${pub.journal}-${pub.year}`}
                           >
                             {pub.title}
                           </a>
@@ -177,6 +195,7 @@ function formatAuthors(authors: string[]) {
                         rel="noopener noreferrer"
                         class="inline-block mt-3 text-[0.8rem] tracking-wide opacity-70 hover:opacity-100 transition-opacity duration-300"
                         style="color: inherit; text-decoration: none;"
+                        data-goatcounter-click={`doi:${pub.journal}-${pub.year}`}
                       >
                         DOI ↗
                       </a>

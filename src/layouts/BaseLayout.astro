@@ -1,15 +1,56 @@
 ---
 import '../styles/global.css';
+import { SITE, PROFILE_LINKS, type SeoProps } from '../config/site';
 
-interface Props {
-  title?: string;
-  description?: string;
-}
+type Props = SeoProps;
 
-const { 
-  title = 'Karl Kiser', 
-  description = 'Biomaterials scientist, process development, and quantitative imaging research.' 
+const {
+  title = SITE.name,
+  description = SITE.tagline,
+  path,
+  ogImage = SITE.ogImage,
+  jsonLd = [],
+  noindex = false,
 } = Astro.props;
+
+const pagePath = path ?? Astro.url.pathname;
+const canonical = new URL(pagePath, SITE.url).href;
+const ogImageUrl = new URL(ogImage, SITE.url).href;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE.url}/#person`,
+  name: SITE.name,
+  url: SITE.url,
+  email: `mailto:${SITE.email}`,
+  jobTitle: SITE.jobTitle,
+  description: SITE.bio,
+  knowsAbout: [...SITE.knowsAbout],
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: SITE.alumniOf.name,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.location.locality,
+    addressRegion: SITE.location.region,
+    addressCountry: SITE.location.country,
+  },
+  ...(PROFILE_LINKS.length ? { sameAs: PROFILE_LINKS } : {}),
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  url: SITE.url,
+  name: SITE.name,
+  description: SITE.tagline,
+  publisher: { '@id': `${SITE.url}/#person` },
+};
+
+const schemas = [personSchema, websiteSchema, ...jsonLd];
 ---
 
 <!doctype html>
@@ -17,12 +58,42 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    {schemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+
+    {SITE.goatCounterCode && (
+      <script
+        is:inline
+        data-goatcounter={`https://${SITE.goatCounterCode}.goatcounter.com/count`}
+        async
+        src="//gc.zgo.at/count.js"
+      ></script>
+    )}
   </head>
   <body>
     <slot />
