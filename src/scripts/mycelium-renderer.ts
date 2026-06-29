@@ -378,8 +378,8 @@ export class MyceliumRenderer {
       x,
       y,
       age: 0,
-      life: strong ? 900 : 480,
-      maxR: strong ? 64 : 26,
+      life: strong ? 760 : 420,
+      maxR: strong ? 40 : 16,
       strong,
     });
   }
@@ -592,22 +592,14 @@ export class MyceliumRenderer {
     for (const p of this.pulses) {
       const t = p.age / p.life; // 0..1
       const r = p.maxR * (1 - (1 - t) * (1 - t)); // ease-out expansion
-      const alpha = (1 - t) * (p.strong ? 0.7 : 0.45);
+      const alpha = (1 - t) * (p.strong ? 0.34 : 0.2);
       ctx.beginPath();
       ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
       ctx.strokeStyle = p.strong
         ? `rgba(150, 226, 198, ${alpha})`
         : `rgba(214, 234, 226, ${alpha})`;
-      ctx.lineWidth = p.strong ? 1.6 : 1;
+      ctx.lineWidth = p.strong ? 1 : 0.8;
       ctx.stroke();
-      // A second, faster inner ring on phase transitions for extra punch.
-      if (p.strong) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r * 0.55, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(190, 240, 220, ${alpha * 0.8})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
     }
   }
 

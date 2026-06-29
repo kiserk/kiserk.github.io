@@ -189,13 +189,14 @@ Higher vigor scales:
 - On *contact*: a burst of **5–8** new foraging tips fan out from the nutrient,
   plus a soft expanding **pulse** ring on the fx layer.
 - On *exhaustion* (energy ≤ 0) — a **phase transition**: `vigor += 1`, a bigger
-  radial proliferation of **8–12** tips, a **strong** double-ring pulse (greenish,
-  larger/brighter), and a **species switch** (`nextSpecies`, see below). This is
-  the visible "the colony just levelled up" moment.
+  radial proliferation of **8–12** tips, a **strong** (slightly larger, greenish)
+  pulse, and a **species switch** (`nextSpecies`, see below). This is the visible
+  "the colony just levelled up" moment.
 
 **Pulses** (`Pulse[]`, drawn in `drawPulses()`): transient ease-out expanding
-rings on the fx layer. Normal uptake = small whitish ring; phase transition =
-larger green ring + inner ring. Purely cosmetic feedback for uptake/maturation.
+rings on the fx layer — deliberately **subtle/damped** (small radius, low alpha,
+thin line). Normal uptake = small faint whitish ring; phase transition = a
+slightly larger, faint greenish ring. Purely cosmetic feedback.
 
 > Tuning these for more/less drama: burst counts and `addPulse(...)` sizes live
 > in `consume()` / `burstTips()` / `addPulse()`; the vigor multipliers live in
