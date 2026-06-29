@@ -55,13 +55,14 @@
     pointer-events: none;
     transition: opacity 0.6s ease;
   }
-  /* Dark backdrop lives here so the dwell "seed" can grow over the live page
-     (transparent), then the backdrop dissolves in when the game goes active. */
+  /* Semi-transparent dark veil: the dwell "seed" grows over the live page
+     (transparent), then a translucent scrim dissolves in when the game goes
+     active — darkening the page/ocean for contrast while keeping it visible. */
   #myc-overlay::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(120% 120% at 50% 40%, #070b12 0%, #04060a 100%);
+    background: radial-gradient(120% 120% at 50% 40%, rgba(6, 10, 16, 0.55) 0%, rgba(3, 5, 9, 0.72) 100%);
     opacity: 0;
     transition: opacity 0.8s ease;
   }

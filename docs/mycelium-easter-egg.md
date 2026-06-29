@@ -117,8 +117,10 @@ Both are sized with `devicePixelRatio` (capped to 1.5 on touch devices for
 perf) and use `setTransform(dpr,...)` so all drawing is in logical px. `resize()`
 rebuilds canvases + the density grid on viewport changes.
 
-`#myc-overlay` sits at `z-index: 60` (cursor SVG at 70), above the page but the
-backdrop only becomes opaque in `active`, so `seed` growth overlays live content.
+`#myc-overlay` sits at `z-index: 60` (cursor SVG at 70), above the page. Its
+`::before` backdrop is transparent during `seed` (growth overlays live content)
+and fades to a **translucent dark veil** (not opaque) in `active`, so the page /
+ocean background stays visible underneath, just darkened for contrast.
 
 ---
 
