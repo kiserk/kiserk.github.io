@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OceanBackground from '../components/OceanBackground.astro';
+import Header from '../components/Header.astro';
+import { SITE } from '../config/site';
+
+const web3formsKey = SITE.web3formsKey;
+const configured = web3formsKey.length > 0;
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  '@id': `${SITE.url}/contact/#contactpage`,
+  url: `${SITE.url}/contact`,
+  name: `Contact ${SITE.name}`,
+  about: { '@id': `${SITE.url}/#person` },
+};
+---
+
+<BaseLayout
+  title="Contact — Karl Kiser"
+  description="Send Karl Kiser a message. Leave your contact details and a note and it goes straight to his inbox."
+  path="/contact"
+  jsonLd={[contactSchema]}
+>
+  <OceanBackground />
+  <Header />
+
+  <main
+    class="relative z-10 min-h-screen px-5 pt-24 pb-20 md:pt-32 md:pb-28"
+    style={`color: var(--ink)`}
+  >
+    <div class="mx-auto max-w-[640px]">
+      <div class="surface rounded-2xl px-7 py-10 md:px-12 md:py-12">
+        <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.12em] uppercase mb-6">
+          Contact
+        </h1>
+        <div class="w-8 h-px opacity-40 mb-8" style="background: currentColor;"></div>
+
+        <p class="text-[0.95rem] leading-relaxed mb-8" style="color: var(--ink-muted);">
+          Have a role, a question, or just want to say hello? Leave your details
+          and a message below and it will land in my inbox. You can also reach me
+          directly at
+          <a
+            href={`mailto:${SITE.email}`}
+            class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
+            style="color: inherit;"
+            data-goatcounter-click="contact-email"
+          >{SITE.email}</a>.
+        </p>
+
+        <form id="contact-form" class="space-y-6" novalidate data-key={web3formsKey}>
+          {/* Web3Forms hidden fields */}
+          <input type="hidden" name="access_key" value={web3formsKey} />
+          <input type="hidden" name="subject" value="New message from karlkiser.com" />
+          <input type="hidden" name="from_name" value="karlkiser.com contact form" />
+          {/* Honeypot anti-spam field (kept visually hidden) */}
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <label for="cf-name" class="text-xs tracking-[0.18em] uppercase" style="color: var(--ink-faint);">
+                Your name
+              </label>
+              <input
+                id="cf-name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                class="contact-input"
+                placeholder="Jane Doe"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="cf-email" class="text-xs tracking-[0.18em] uppercase" style="color: var(--ink-faint);">
+                Your email
+              </label>
+              <input
+                id="cf-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="contact-input"
+                placeholder="you@example.com"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="cf-company" class="text-xs tracking-[0.18em] uppercase" style="color: var(--ink-faint);">
+              Company / org <span class="opacity-50">(optional)</span>
+            </label>
+            <input
+              id="cf-company"
+              name="company"
+              type="text"
+              autocomplete="organization"
+              class="contact-input"
+              placeholder="Where you're reaching out from"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="cf-message" class="text-xs tracking-[0.18em] uppercase" style="color: var(--ink-faint);">
+              Message
+            </label>
+            <textarea
+              id="cf-message"
+              name="message"
+              required
+              rows="6"
+              class="contact-input resize-y"
+              placeholder="What's on your mind?"
+            ></textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              type="submit"
+              id="cf-submit"
+              class="inline-flex items-center gap-2 rounded-full border px-6 py-2.5 text-xs tracking-[0.18em] uppercase transition-opacity duration-300 hover:opacity-100 opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
+              style="border-color: currentColor; color: inherit;"
+              data-goatcounter-click="contact-submit"
+              disabled={!configured}
+            >
+              <span id="cf-submit-label">Send message</span>
+            </button>
+            <p
+              id="cf-status"
+              class="text-sm"
+              style="color: var(--ink-muted);"
+              role="status"
+              aria-live="polite"
+            >
+              {!configured && (
+                <span style="color: var(--ink-faint);">
+                  The form isn't connected yet — set <code>web3formsKey</code> in
+                  <code>src/config/site.ts</code>. Meanwhile, email me directly.
+                </span>
+              )}
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .contact-input {
+    width: 100%;
+    background: var(--surface-inset);
+    border: 1px solid var(--surface-border);
+    border-radius: 0.625rem;
+    padding: 0.65rem 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink);
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+  .contact-input::placeholder {
+    color: var(--ink-faint);
+    opacity: 0.7;
+  }
+  .contact-input:focus {
+    outline: none;
+    border-color: rgba(246, 244, 240, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .contact-input:user-invalid {
+    border-color: rgba(244, 130, 120, 0.7);
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('cf-status');
+  const submit = document.getElementById('cf-submit') as HTMLButtonElement | null;
+  const submitLabel = document.getElementById('cf-submit-label');
+
+  if (form && status && submit && submitLabel) {
+    const key = form.dataset.key ?? '';
+
+    const setStatus = (msg: string, tone: 'ok' | 'err' | 'info') => {
+      status.textContent = msg;
+      status.style.color =
+        tone === 'ok'
+          ? 'rgba(150, 226, 198, 0.95)'
+          : tone === 'err'
+            ? 'rgba(244, 150, 140, 0.95)'
+            : 'var(--ink-muted)';
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!key) {
+        setStatus('The form isn’t connected yet. Please email me directly.', 'err');
+        return;
+      }
+      // Native validation first.
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      submit.disabled = true;
+      const original = submitLabel.textContent;
+      submitLabel.textContent = 'Sending…';
+      setStatus('', 'info');
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: data,
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.success) {
+          form.reset();
+          setStatus('Thanks — your message is on its way. I’ll get back to you soon.', 'ok');
+          submitLabel.textContent = 'Sent ✓';
+        } else {
+          setStatus(
+            (json && json.message) || 'Something went wrong sending that. Please try again or email me directly.',
+            'err'
+          );
+          submitLabel.textContent = original;
+          submit.disabled = false;
+        }
+      } catch {
+        setStatus('Network error — please try again, or email me directly.', 'err');
+        submitLabel.textContent = original;
+        submit.disabled = false;
+      }
+    });
+  }
+</script>

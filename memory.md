@@ -19,6 +19,7 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - `src/config/site.ts` — **single source of truth** for identity, tagline, bio, profile links (`sameAs`), `knowsAbout` keywords, OG image, and the GoatCounter code. Edit copy/links here.
 - `src/layouts/BaseLayout.astro` — all SEO: title/description, canonical, OG + Twitter, JSON-LD (Person + WebSite always; pages pass extra via `jsonLd` prop), font preconnect, GoatCounter snippet. Accepts `{ title, description, path, ogImage, jsonLd, noindex }`.
 - `src/pages/*` — each page passes a unique `title`/`description`/`path`. `publications` emits `ScholarlyArticle` JSON-LD from its data array; `patents` emits a patent `CreativeWork`.
+- `src/pages/contact.astro` — Contact page (in nav). Static-friendly form via **Web3Forms** (AJAX POST to `api.web3forms.com`, no backend). Reads `SITE.web3formsKey`; if blank it disables submit + shows a "not connected" notice. **ACTION NEEDED:** get a free key at https://web3forms.com (enter `karl.j.kiser@gmail.com`) and set `web3formsKey` in `src/config/site.ts` (public, safe to commit). Emits `ContactPage` JSON-LD.
 - `src/components/OceanBackground.astro` + `src/scripts/ocean-*.ts` — signature animated canvas (see README).
 - `src/components/MyceliumEasterEgg.astro` + `src/scripts/mycelium-*.ts` — site-wide, ignorable mycelium growth-sim easter egg (wired in `BaseLayout` after `<slot/>`). **Full docs: `docs/mycelium-easter-egg.md`.** Dwell→seed→hold→game, ESC to exit; decorative (`aria-hidden`), gated off links/inputs/selection + `prefers-reduced-motion`.
 
@@ -56,6 +57,7 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - **Dual-source gotcha:** `src/pages/cv.astro` (web) and `cv/Karl-Kiser-CV.md` (PDF) are separate; keep them in sync when CV content changes.
 
 ## Open TODOs / needs from Karl
+- **Contact form:** get a Web3Forms access key (https://web3forms.com, deliver to `karl.j.kiser@gmail.com`) and set `web3formsKey` in `src/config/site.ts` so `/contact` can send. Until then the form is shown but submit is disabled.
 - Confirm tagline / "open to" wording in `src/config/site.ts`.
 - Optional: compress `og-image.png`; self-host fonts (only preconnect added so far).
 

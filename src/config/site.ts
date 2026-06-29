@@ -65,6 +65,15 @@ export const SITE = {
    * 2. Put that code here. Leave '' to disable analytics entirely.
    */
   goatCounterCode: 'karlkiser',
+  /**
+   * Web3Forms access key for the /contact form (free, no backend needed).
+   * 1. Go to https://web3forms.com, enter karl.j.kiser@gmail.com, and they email
+   *    you an access key (a UUID). It is safe to commit — it's a public key tied
+   *    only to your delivery email, not a secret.
+   * 2. Paste it here. Leave '' and the contact form shows a "not configured yet"
+   *    notice instead of submitting.
+   */
+  web3formsKey: '',
 } as const;
 
 /** Profile URLs that are actually set, for `sameAs` and link lists. */
