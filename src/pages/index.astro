@@ -19,20 +19,27 @@ import { SITE } from '../config/site';
   <OceanBackground />
   <Header showBrand={false} />
 
+  {/* Persistent name / home button: stays fixed as you scroll and returns to
+      the top of the page (baseline-aligned with the nav row). */}
+  <a
+    id="brand-home"
+    href="/#top"
+    class="fixed top-[1.05rem] left-6 md:left-10 z-50 block opacity-0 animate-fade-in group"
+    style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
+    aria-label="Karl Kiser — back to top"
+  >
+    <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.2em] uppercase leading-none transition-opacity duration-300 group-hover:opacity-90">
+      Karl Kiser
+    </h1>
+    <p class="mt-2 text-sm tracking-[0.3em] uppercase opacity-60">New York</p>
+  </a>
+
   {/* Hero — first screen */}
   <section
     id="top"
     class="relative z-10 min-h-screen opacity-0 translate-y-4 animate-fade-in"
     style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
   >
-    {/* Top left: name + location (name baseline-aligned with nav row) */}
-    <div class="absolute top-[1.05rem] left-6 md:left-10">
-      <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.2em] uppercase leading-none">
-        Karl Kiser
-      </h1>
-      <p class="mt-2 text-sm tracking-[0.3em] uppercase opacity-60">New York</p>
-    </div>
-
     {/* Invisible, machine-readable bio for search engines and AI/recruiting agents. */}
     <p class="sr-only">{SITE.tagline} {SITE.bio} {SITE.openTo}</p>
 
