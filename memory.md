@@ -20,6 +20,7 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - `src/layouts/BaseLayout.astro` — all SEO: title/description, canonical, OG + Twitter, JSON-LD (Person + WebSite always; pages pass extra via `jsonLd` prop), font preconnect, GoatCounter snippet. Accepts `{ title, description, path, ogImage, jsonLd, noindex }`.
 - `src/pages/*` — each page passes a unique `title`/`description`/`path`. `publications` emits `ScholarlyArticle` JSON-LD from its data array; `patents` emits a patent `CreativeWork`.
 - `src/components/OceanBackground.astro` + `src/scripts/ocean-*.ts` — signature animated canvas (see README).
+- `src/components/MyceliumEasterEgg.astro` + `src/scripts/mycelium-*.ts` — site-wide, ignorable mycelium growth-sim easter egg (wired in `BaseLayout` after `<slot/>`). **Full docs: `docs/mycelium-easter-egg.md`.** Dwell→seed→hold→game, ESC to exit; decorative (`aria-hidden`), gated off links/inputs/selection + `prefers-reduced-motion`.
 
 ## SEO / agent-readability (done)
 - JSON-LD: `Person` (jobTitle, knowsAbout, alumniOf, address, sameAs, email) + `WebSite` on every page; `ScholarlyArticle` x4 on /publications; patent `CreativeWork` on /patents.
@@ -36,6 +37,12 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 ## Accessibility / contrast (done)
 - `--surface` darkened to `rgba(9,15,26,0.72)` and `--ink-faint` raised to `0.66` so cards hold AA over a bright midday ocean (text-over-ocean already handled by a scrim + always-light text in `ocean-palette.ts`).
 - `:focus-visible` outline in `global.css`; canvas draws a single static frame under `prefers-reduced-motion` (`renderer.renderOnce()`); mobile menu toggles `aria-expanded`.
+
+## Mycelium easter egg (done; tunable)
+- Site-wide via `BaseLayout`. Neighbour-Sensing growth (Meskauskas/Fricker/Moore 2004): density field + negative autotropism + persistence + density-gated branching; chemotropism→nutrients, "oxygen" tropism→mouse. Two canvases (persistent hyphae + cleared fx layer for nutrients/pulses).
+- **Mouse = mobile refilling nutrient** (forage + feed, throttled); **left-click drops** nutrients; arrows bias drift. **Vigor** (cap 10) densifies the colony; exhausting a nutrient = a **phase transition** (vigor++, big tip burst, strong pulse ring, species switch). All knobs + a cheat sheet in `docs/mycelium-easter-egg.md`.
+- Site background overlay (`OceanBackground.astro`) darkened slightly (edges 0.45→0.55, mid 0.12→0.24) to better contrast the game/seed.
+- **Dev-only page `/mycelium-preview`** (tuning panel) is still routable/served. Before "final": keep it public or rename to `_mycelium-preview.astro` to de-route (like `_golden-hour.astro`).
 
 ## Decisions / trade-offs
 - Card contrast hardened via a **static** surface/ink bump (not palette-driven) — simpler, lower risk, AA across all states.

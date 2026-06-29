@@ -1,0 +1,339 @@
+---
+// Site-wide, ignorable easter egg. Dwell the cursor and it morphs into a
+// mycelium tip; press-and-hold and the page dissolves into a borderless growth
+// sim (src/scripts/mycelium-renderer.ts). ESC dissolves back. Decorative only
+// (aria-hidden), so it has no effect on content, SEO, or crawlers.
+---
+
+<div id="myc-cursor" aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+    <path d="M12 12 C10 10 8.5 7.5 7 5" />
+    <path d="M7 5 l-1.6 0.2 M7 5 l0.4 -1.6" />
+    <path d="M12 12 C14 10.5 16.5 9.5 19 8.5" />
+    <path d="M19 8.5 l1.4 0.7 M19 8.5 l0.9 -1.3" />
+    <path d="M12 12 C13 14.5 13.8 17 14 19.5" />
+    <path d="M14 19.5 l1.5 0.4 M14 19.5 l-1.3 0.9" />
+    <path d="M12 12 C9.5 13.5 7 15 5 17" />
+    <path d="M5 17 l-1.5 -0.2 M5 17 l0.2 1.5" />
+    <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
+  </svg>
+</div>
+
+<div id="myc-overlay" aria-hidden="true" data-state="idle">
+  <canvas id="myc-canvas"></canvas>
+  <canvas id="myc-fx"></canvas>
+  <span id="myc-hint">press esc to return</span>
+</div>
+
+<style>
+  #myc-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    color: rgba(210, 222, 220, 0.92);
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.6) rotate(-8deg);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    filter: drop-shadow(0 0 4px rgba(120, 200, 180, 0.5));
+    will-change: transform, opacity;
+  }
+  :global(body.myc-dwell) #myc-cursor {
+    opacity: 0.85;
+    transform: scale(1) rotate(0deg);
+  }
+
+  #myc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+  /* Dark backdrop lives here so the dwell "seed" can grow over the live page
+     (transparent), then the backdrop dissolves in when the game goes active. */
+  #myc-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 120% at 50% 40%, #070b12 0%, #04060a 100%);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  #myc-overlay[data-state='seed'] {
+    opacity: 1;
+    pointer-events: none;
+  }
+  #myc-overlay[data-state='active'] {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: none;
+  }
+  #myc-overlay[data-state='active']::before {
+    opacity: 1;
+  }
+  #myc-canvas,
+  #myc-fx {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  #myc-hint {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.625rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(220, 230, 226, 0.4);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease 0.6s;
+  }
+  #myc-overlay[data-state='active'] #myc-hint {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #myc-cursor { display: none; }
+    #myc-overlay { transition: none; }
+    #myc-hint { transition: none; }
+  }
+</style>
+
+<script>
+  import { MyceliumRenderer } from '../scripts/mycelium-renderer';
+
+  const DWELL_MS = 700;        // mouse-still time before the cursor morphs + seed starts
+  const HOLD_MS = 260;         // shorter press-hold to commit into the full game
+  const MOVE_TOL = 6;          // drag beyond this cancels a pending hold
+  const SEED_ABANDON = 14;     // moving this far from the seed point abandons the teaser
+  const SEED_INIT_SPEED = 0.28;// growth speed for the initial seed burst
+  const SEED_SLOW_SPEED = 0.045;// "really slow" creep once the seed has established
+  const SEED_SLOW_AFTER = 2800;// ms of initial growth before slowing the creep
+  const GAME_SPEED = 0.26;     // growth speed once the game is active
+
+  type Mode = 'idle' | 'seed' | 'active';
+
+  function init() {
+    const cursorEl = document.getElementById('myc-cursor');
+    const overlay = document.getElementById('myc-overlay');
+    const canvas = document.getElementById('myc-canvas') as HTMLCanvasElement | null;
+    const fxCanvas = document.getElementById('myc-fx') as HTMLCanvasElement | null;
+    if (!cursorEl || !overlay || !canvas || !fxCanvas) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let renderer: MyceliumRenderer | null = null;
+    let mode: Mode = 'idle';
+
+    let dwellTimer: number | undefined;
+    let holdTimer: number | undefined;
+    let seedSlowTimer: number | undefined;
+    let downPoint: { x: number; y: number } | null = null;
+    let seedOrigin: { x: number; y: number } | null = null;
+    const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+    const isInteractive = (t: EventTarget | null) =>
+      t instanceof Element &&
+      !!t.closest('a, button, input, textarea, select, label, summary, [role="button"], [contenteditable]');
+
+    const hasSelection = () => (window.getSelection()?.toString().length ?? 0) > 0;
+    const dwelling = () => document.body.classList.contains('myc-dwell');
+
+    function showDwellCursor() {
+      cursorEl!.style.left = `${pointer.x}px`;
+      cursorEl!.style.top = `${pointer.y}px`;
+      document.body.classList.add('myc-dwell');
+    }
+    function hideDwellCursor() {
+      document.body.classList.remove('myc-dwell');
+    }
+
+    function ensureRenderer(x: number, y: number) {
+      if (!renderer) {
+        renderer = new MyceliumRenderer(canvas!, fxCanvas!, { x, y });
+        renderer.setReducedMotion(prefersReduced);
+        renderer.start();
+      }
+      return renderer;
+    }
+
+    // Dwell fired: morph the cursor and quietly start the colony at this point.
+    function onDwell() {
+      if (mode !== 'idle' || prefersReduced) return;
+      showDwellCursor();
+      seedOrigin = { x: pointer.x, y: pointer.y };
+      mode = 'seed';
+      overlay!.dataset.state = 'seed';
+      const r = ensureRenderer(pointer.x, pointer.y);
+      r.setSpeed(SEED_INIT_SPEED);
+      window.clearTimeout(seedSlowTimer);
+      seedSlowTimer = window.setTimeout(() => {
+        if (mode === 'seed') renderer?.setSpeed(SEED_SLOW_SPEED);
+      }, SEED_SLOW_AFTER);
+    }
+
+    function armDwell(target: EventTarget | null) {
+      window.clearTimeout(dwellTimer);
+      if (mode !== 'idle' || prefersReduced) return;
+      if (isInteractive(target) || hasSelection()) return;
+      dwellTimer = window.setTimeout(onDwell, DWELL_MS);
+    }
+
+    function abandonSeed() {
+      window.clearTimeout(seedSlowTimer);
+      renderer?.destroy();
+      renderer = null;
+      seedOrigin = null;
+      mode = 'idle';
+      overlay!.dataset.state = 'idle';
+      hideDwellCursor();
+    }
+
+    function cancelHold() {
+      window.clearTimeout(holdTimer);
+      downPoint = null;
+    }
+
+    // Commit to the full immersive game. If a seed is already growing, the same
+    // renderer simply continues — the dark backdrop dissolves in around it.
+    function commit(x: number, y: number) {
+      if (mode === 'active') return;
+      window.clearTimeout(dwellTimer);
+      window.clearTimeout(seedSlowTimer);
+      cancelHold();
+      hideDwellCursor();
+      window.getSelection()?.removeAllRanges();
+
+      mode = 'active';
+      overlay!.dataset.state = 'active';
+      document.body.classList.add('myc-active');
+
+      const r = ensureRenderer(x, y);
+      r.setSpeed(GAME_SPEED);
+      r.setBias(pointer.x, pointer.y);
+    }
+
+    function exit() {
+      if (mode === 'idle') return;
+      window.clearTimeout(dwellTimer);
+      window.clearTimeout(seedSlowTimer);
+      cancelHold();
+      renderer?.destroy();
+      renderer = null;
+      seedOrigin = null;
+      mode = 'idle';
+      overlay!.dataset.state = 'idle';
+      document.body.classList.remove('myc-active');
+      hideDwellCursor();
+    }
+
+    // --- pointer ----------------------------------------------------------
+    window.addEventListener(
+      'pointermove',
+      (e) => {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+
+        if (mode === 'active') {
+          renderer?.setBias(e.clientX, e.clientY);
+          return;
+        }
+
+        if (downPoint && Math.hypot(e.clientX - downPoint.x, e.clientY - downPoint.y) > MOVE_TOL) {
+          cancelHold();
+        }
+
+        if (mode === 'seed') {
+          // Small jitter keeps the seed creeping; real movement abandons it.
+          if (seedOrigin && Math.hypot(e.clientX - seedOrigin.x, e.clientY - seedOrigin.y) > SEED_ABANDON) {
+            abandonSeed();
+            armDwell(e.target);
+          }
+          return;
+        }
+
+        if (dwelling()) {
+          cursorEl!.style.left = `${pointer.x}px`;
+          cursorEl!.style.top = `${pointer.y}px`;
+        }
+        armDwell(e.target);
+      },
+      { passive: true }
+    );
+
+    window.addEventListener('pointerdown', (e) => {
+      if (mode === 'active') {
+        // In-game: click to drop a nutrient the colony will forage toward.
+        if (e.button === 0) renderer?.dropNutrient(e.clientX, e.clientY);
+        return;
+      }
+      if (e.button !== 0) return;
+      if (isInteractive(e.target) || hasSelection()) return;
+      downPoint = { x: e.clientX, y: e.clientY };
+      holdTimer = window.setTimeout(() => {
+        if (downPoint) commit(downPoint.x, downPoint.y);
+      }, HOLD_MS);
+    });
+
+    window.addEventListener('pointerup', cancelHold);
+    window.addEventListener('pointercancel', cancelHold);
+    window.addEventListener('blur', () => {
+      cancelHold();
+      window.clearTimeout(dwellTimer);
+      if (mode === 'seed') abandonSeed();
+    });
+
+    // --- keyboard ---------------------------------------------------------
+    window.addEventListener('keydown', (e) => {
+      if (mode === 'idle') return;
+      if (e.key === 'Escape') {
+        exit();
+        return;
+      }
+      if (mode !== 'active') return;
+      const nudges: Record<string, [number, number]> = {
+        ArrowUp: [0, -1],
+        ArrowDown: [0, 1],
+        ArrowLeft: [-1, 0],
+        ArrowRight: [1, 0],
+      };
+      const n = nudges[e.key];
+      if (n) {
+        e.preventDefault();
+        renderer?.nudge(n[0], n[1]);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (mode !== 'idle') renderer?.resize();
+    });
+    window.addEventListener('pagehide', exit);
+
+    // --- debug handle for the preview page --------------------------------
+    (window as any).__myc = {
+      start: (x?: number, y?: number) =>
+        commit(x ?? window.innerWidth / 2, y ?? window.innerHeight / 2),
+      stop: exit,
+      isActive: () => mode === 'active',
+      getMode: () => mode,
+      getRenderer: () => renderer,
+    };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>

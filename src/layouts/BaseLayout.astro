@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE, PROFILE_LINKS, type SeoProps } from '../config/site';
+import MyceliumEasterEgg from '../components/MyceliumEasterEgg.astro';
 
 type Props = SeoProps;
 
@@ -97,6 +98,8 @@ const schemas = [personSchema, websiteSchema, ...jsonLd];
   </head>
   <body>
     <slot />
+
+    <MyceliumEasterEgg />
 
     <script>
       // Scroll-reveal sections as they enter the viewport. Guarded so content
