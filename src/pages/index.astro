@@ -50,67 +50,9 @@ const proofPoints = [
     {/* Invisible, machine-readable bio for search engines and AI/recruiting agents. */}
     <p class="sr-only">{SITE.tagline} {SITE.bio} {SITE.openTo}</p>
 
-    {/* Value proposition — vertically centered between the fixed brand and the bottom bar */}
-    <div class="relative z-10 flex min-h-screen flex-col justify-center px-6 md:px-10 pt-32 pb-44 md:pt-36 md:pb-32">
-      <div class="max-w-2xl">
-        <h2 class="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-light leading-[1.15] tracking-tight">
-          I build controlled biological systems.
-        </h2>
-
-        <p class="mt-6 max-w-xl text-base md:text-lg font-light leading-relaxed opacity-85">
-          Turning experimental biology into reliable, manufacturable processes — across biomaterials,
-          cultivation, custom sensing, and closed-loop control.
-        </p>
-
-        <ul class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-70">
-          {proofPoints.map((point, i) => (
-            <li class="flex items-center gap-3">
-              {i > 0 && <span aria-hidden="true" class="opacity-50">·</span>}
-              <span>{point}</span>
-            </li>
-          ))}
-        </ul>
-
-        <p class="mt-7 text-[0.7rem] tracking-[0.15em] uppercase opacity-60">
-          {SITE.openTo}
-        </p>
-
-        <div class="mt-9 flex flex-wrap items-center gap-3">
-          <a
-            href="#cv"
-            class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-90 hover:opacity-100 transition-opacity duration-300"
-            style="color: inherit; text-decoration: none; border-color: currentColor;"
-            data-goatcounter-click="cta-view-work"
-          >
-            View work
-          </a>
-          <a
-            href="/Karl-Kiser-CV.pdf"
-            download
-            class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-80 hover:opacity-100 transition-opacity duration-300"
-            style="color: inherit; text-decoration: none; border-color: currentColor;"
-            data-goatcounter-click="cv-download"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" />
-            </svg>
-            Download CV
-          </a>
-          <a
-            href="/contact"
-            class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-80 hover:opacity-100 transition-opacity duration-300"
-            style="color: inherit; text-decoration: none; border-color: currentColor;"
-            data-goatcounter-click="cta-contact"
-          >
-            Contact
-          </a>
-        </div>
-      </div>
-    </div>
-
-    {/* Scroll cue */}
+    {/* Scroll cue → first content panel */}
     <a
-      href="#cv"
+      href="#intro"
       class="scroll-cue hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 items-center justify-center opacity-50 hover:opacity-90 transition-opacity duration-300"
       aria-label="Scroll to content"
     >
@@ -163,6 +105,68 @@ const proofPoints = [
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
           Support my NYC Marathon fundraiser
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* Value proposition — first panel you scroll to (intentionally not in the nav) */}
+  <section
+    id="intro"
+    class="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-10 py-32 md:py-36"
+    style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
+  >
+    <div class="max-w-2xl">
+      <h2 class="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-light leading-[1.15] tracking-tight">
+        I build controlled biological systems.
+      </h2>
+
+      <p class="mt-6 max-w-xl text-base md:text-lg font-light leading-relaxed opacity-85">
+        Turning experimental biology into reliable, manufacturable processes — across biomaterials,
+        cultivation, custom sensing, and closed-loop control.
+      </p>
+
+      <ul class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-70">
+        {proofPoints.map((point, i) => (
+          <li class="flex items-center gap-3">
+            {i > 0 && <span aria-hidden="true" class="opacity-50">·</span>}
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="mt-7 text-[0.7rem] tracking-[0.15em] uppercase opacity-60">
+        {SITE.openTo}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <a
+          href="#cv"
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-90 hover:opacity-100 transition-opacity duration-300"
+          style="color: inherit; text-decoration: none; border-color: currentColor;"
+          data-goatcounter-click="cta-view-work"
+        >
+          View work
+        </a>
+        <a
+          href="/Karl-Kiser-CV.pdf"
+          download
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-80 hover:opacity-100 transition-opacity duration-300"
+          style="color: inherit; text-decoration: none; border-color: currentColor;"
+          data-goatcounter-click="cv-download"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" />
+          </svg>
+          Download CV
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase opacity-80 hover:opacity-100 transition-opacity duration-300"
+          style="color: inherit; text-decoration: none; border-color: currentColor;"
+          data-goatcounter-click="cta-contact"
+        >
+          Contact
         </a>
       </div>
     </div>
