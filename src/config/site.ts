@@ -9,15 +9,15 @@ export const SITE = {
   url: 'https://karlkiser.com',
   name: 'Karl Kiser',
   /** Short role line used in titles and the Person schema jobTitle. */
-  jobTitle: 'Biomaterials & R&D Engineer',
+  jobTitle: 'Biomaterials & Bioprocess Engineer',
   /** One-line value proposition shown on the homepage and used as default description. */
   tagline:
-    'Biomaterials and R&D engineer — bioprocess development, controls and instrumentation, and quantitative imaging.',
+    'I build controlled biological systems — turning experimental biology into reliable, manufacturable processes across biomaterials, cultivation, custom sensing, and closed-loop control.',
   /** Longer bio for meta descriptions, sr-only text, and structured data. */
   bio:
-    'Applied biomaterials scientist and research engineer. Co-inventor on aerial-mycelium cultivation IP and first author on peer-reviewed quantitative-MRI research. I translate lab experimentation into model-based analysis and manufacturable process improvement across bioprocess development, sensor and control-system design, and data-driven optimization.',
+    'I turn experimental biology into manufacturable processes. Co-inventor on aerial-mycelium cultivation IP and first author on peer-reviewed research, I design and build custom sensors and closed-loop control, develop cultivation processes, and transfer them to partner facilities in the U.S., Canada, and the Netherlands — taking direct control of partner lines during start-up and bringing material to commercial spec. Earlier, first-author quantitative-MRI research. Based in New York.',
   /** Status signal for recruiters / agents. Set to '' to hide. */
-  openTo: 'Open to R&D, process engineering, and applied-science roles in biomaterials and biotech.',
+  openTo: 'Open to R&D and process-engineering roles building controlled biological systems — biomaterials, cultivation, sensing, and scale-up.',
   email: 'karl.j.kiser@gmail.com',
   location: {
     locality: 'New York',
@@ -42,6 +42,11 @@ export const SITE = {
     'Design of experiments',
     'Technology transfer',
     'Scale-up',
+    'Closed-loop control',
+    'Cultivation systems',
+    'Microcontroller programming',
+    'Data pipelines',
+    'Pilot-scale process development',
   ],
   alumniOf: {
     name: 'Pitzer College',

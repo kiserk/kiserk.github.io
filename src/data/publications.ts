@@ -58,7 +58,7 @@ export const journalArticles: JournalArticle[] = [
     doi: 'https://doi.org/10.1371/journal.pone.0234520',
     firstAuthor: false,
     thumbnail: '/images/treatment-response-thumbnail.png',
-    thumbnailAlt: 'Pre-treatment and post-treatment parameter maps of a tumor showing treatment response',
+    thumbnailAlt: 'Pre-treatment and post-treatment MRI parameter maps of a tumor, illustrating treatment response',
   },
 ];
 

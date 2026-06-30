@@ -20,6 +20,10 @@ pnpm-debug.log*
 
 # private career docs
 Career/
+# private job-search research (never publish)
+Karl Kiser Dream Job Research Report.md
+*Research Report*.md
+*Dream Job*.md
 
 # unrelated local project (not part of the site)
 scraper_reference/

@@ -56,9 +56,14 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
   `python3 /Users/karlkiser/Documents/Vehicles/_tools/md_to_pdf.py "cv/Karl-Kiser-CV.md" --output "public/Karl-Kiser-CV.pdf"`
 - **Dual-source gotcha:** `src/pages/cv.astro` (web) and `cv/Karl-Kiser-CV.md` (PDF) are separate; keep them in sync when CV content changes.
 
+## Positioning / hero copy (done)
+- **Sharp positioning** adopted: Karl "builds controlled biological systems" — turning experimental biology into manufacturable processes (biomaterials, cultivation, sensing, closed-loop control, transfer/scale-up).
+- The homepage **hero (`#top` in `index.astro`)** now shows visible value-prop copy as the **first panel** (headline + subhead + proof strip + `openTo` line + CTAs: View work / Download CV / Contact). Previously the value prop was `sr-only` only; the sr-only line is preserved for crawlers.
+- `SITE.jobTitle` = "Biomaterials & Bioprocess Engineer"; `tagline`/`bio`/`openTo` rewritten to the sharp framing (feeds SEO + JSON-LD + sr-only). CV `Summary` aligned (impersonal voice; hero/config use first person by convention). Projects descriptions reordered to problem→system→outcome→ownership.
+
 ## Open TODOs / needs from Karl
 - **Contact form:** get a Web3Forms access key (https://web3forms.com, deliver to `karl.j.kiser@gmail.com`) and set `web3formsKey` in `src/config/site.ts` so `/contact` can send. Until then the form is shown but submit is disabled.
-- Confirm tagline / "open to" wording in `src/config/site.ts`.
+- Optional confirm: `jobTitle` now leads with "Bioprocess" (was "R&D"); "R&D" still in `openTo`. Hero names U.S./Canada/Netherlands explicitly.
 - Optional: compress `og-image.png`; self-host fonts (only preconnect added so far).
 
 ## Shelved
@@ -71,5 +76,6 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 ## Gotchas
 - `scraper_reference/` is an unrelated local project; now gitignored — don't commit it.
 - Don't commit `Career/` (private; gitignored).
+- **`Karl Kiser Dream Job Research Report.md`** (private job-search research) is **gitignored** (`*Dream Job*.md` / `*Research Report*.md` patterns) — never commit/publish it.
 - Don't hand-edit `dist/` (build artifact, gitignored).
 - CV exists in two places (web page + markdown PDF source) — keep in sync (see CV PDF above).
