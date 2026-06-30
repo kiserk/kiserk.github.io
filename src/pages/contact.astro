@@ -37,25 +37,6 @@ const contactSchema = {
         </h1>
         <div class="w-8 h-px opacity-40 mb-8" style="background: currentColor;"></div>
 
-        <p class="text-[0.95rem] leading-relaxed mb-5" style="color: var(--ink-muted);">
-          I'm open to senior individual-contributor roles in process development,
-          automation and controls, cultivation systems, and pilot-to-scale —
-          anywhere experimental biology has to become a manufacturable process.
-          If you're a recruiter, founder, or hiring lead in biomaterials, biotech,
-          or climate hardtech, I'd like to hear from you.
-        </p>
-
-        <p class="text-[0.95rem] leading-relaxed mb-8" style="color: var(--ink-muted);">
-          Leave your details and a message below and it lands straight in my
-          inbox. You can also reach me directly at
-          <a
-            href={`mailto:${SITE.email}`}
-            class="underline decoration-white/25 underline-offset-4 hover:decoration-white/80 transition-colors duration-300"
-            style="color: inherit;"
-            data-goatcounter-click="contact-email"
-          >{SITE.email}</a>.
-        </p>
-
         <form id="contact-form" class="space-y-6" novalidate data-key={web3formsKey}>
           {/* Web3Forms hidden fields */}
           <input type="hidden" name="access_key" value={web3formsKey} />
@@ -76,7 +57,6 @@ const contactSchema = {
                 required
                 autocomplete="name"
                 class="contact-input"
-                placeholder="Jane Doe"
               />
             </div>
             <div class="flex flex-col gap-2">
@@ -90,23 +70,8 @@ const contactSchema = {
                 required
                 autocomplete="email"
                 class="contact-input"
-                placeholder="you@example.com"
               />
             </div>
-          </div>
-
-          <div class="flex flex-col gap-2">
-            <label for="cf-company" class="text-xs tracking-[0.18em] uppercase" style="color: var(--ink-faint);">
-              Company / org <span class="opacity-50">(optional)</span>
-            </label>
-            <input
-              id="cf-company"
-              name="company"
-              type="text"
-              autocomplete="organization"
-              class="contact-input"
-              placeholder="Where you're reaching out from"
-            />
           </div>
 
           <div class="flex flex-col gap-2">
@@ -119,7 +84,6 @@ const contactSchema = {
               required
               rows="6"
               class="contact-input resize-y"
-              placeholder="What's on your mind?"
             ></textarea>
           </div>
 
