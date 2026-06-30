@@ -63,9 +63,9 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - **Controls framing:** the "Aerial Mycelium Process Development" project card in `ProjectsSection.astro` now uses explicit control-systems vocabulary (instrumentation, real-time data acquisition, closed-loop feedback on setpoints, observability, reliability) with controls-focused tags — to read clearly to automation/controls hiring teams.
 - **Private job-search assets** (NOT on the site; in gitignored `Career/`): `LinkedIn-copy.md` (headline + About short/long + skills), `Resume-A-Process-Development.md`/`.pdf`, `Resume-B-Controls-Cultivation.md`/`.pdf`. Built from `cv/Karl-Kiser-CV.md` (authoritative). Tier 2 (project visuals + case studies) is owner-gated on IP-cleared images.
 
-## Data accuracy flags (reconcile)
-- "**26,000+ growth records**" appears in the web Projects/CV sections but is **not** in `cv/Karl-Kiser-CV.md` (the PDF source). Web CV and markdown CV are dual-source — reconcile the number (and re-add to resumes if confirmed).
-- Controls phrasing on the mycelium card implies the system **actuated** setpoints (temp/CO₂/airflow/mist) and that Karl built the sensor hardware; confirm both are accurate (the patent covers controlling those conditions, so it is defensible).
+## Data accuracy (settled)
+- Dropped the specific "26,000+ growth records" figure from the site (not in `cv/Karl-Kiser-CV.md`; Karl opted not to cite a number). Resumes never included it.
+- Confirmed by Karl: the mycelium platform **actuated** setpoints (temp/CO₂/airflow/mist) and Karl built the sensor/microcontroller instrumentation — the controls phrasing on the project card is accurate.
 
 ## Open TODOs / needs from Karl
 - Optional confirm: `jobTitle` now leads with "Bioprocess" (was "R&D"); "R&D" still in `openTo`. Hero names U.S./Canada/Netherlands explicitly.
