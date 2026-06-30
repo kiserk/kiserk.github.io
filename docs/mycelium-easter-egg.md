@@ -98,7 +98,9 @@ active ──(ESC / pagehide)─────────────────
   below). The colony forages toward and feeds on the cursor.
 - **Left-click:** `dropNutrient(x, y)` — drops a permanent nutrient (hard cap 48).
 - **Arrow keys:** `nudge()` — bias the global drift direction (±1 clamped).
-- **ESC:** exit (dissolve back to the page).
+- **Exit:** **ESC**, or tap the subtle **✕** button (top-right, `#myc-exit`) — the
+  latter is the only way out on touch devices, where there is no ESC. Its
+  `pointerdown` is stopped so tapping it doesn't also drop a nutrient.
 
 ---
 

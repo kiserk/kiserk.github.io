@@ -1,7 +1,8 @@
 ---
 // Site-wide, ignorable easter egg. Dwell the cursor and it morphs into a
 // mycelium tip; press-and-hold and the page dissolves into a borderless growth
-// sim (src/scripts/mycelium-renderer.ts). ESC dissolves back. Decorative only
+// sim (src/scripts/mycelium-renderer.ts). ESC or the subtle ✕ (top-right, the
+// touch exit) dissolves back. Decorative only
 // (aria-hidden), so it has no effect on content, SEO, or crawlers.
 ---
 
@@ -22,7 +23,12 @@
 <div id="myc-overlay" aria-hidden="true" data-state="idle">
   <canvas id="myc-canvas"></canvas>
   <canvas id="myc-fx"></canvas>
-  <span id="myc-hint">press esc to return</span>
+  <button id="myc-exit" type="button" aria-label="Exit">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M6 6 L18 18 M18 6 L6 18" />
+    </svg>
+  </button>
+  <span id="myc-hint">esc / tap ✕ to return</span>
 </div>
 
 <style>
@@ -104,10 +110,44 @@
     opacity: 1;
   }
 
+  /* Subtle, always-tappable exit (essential on touch where there's no ESC). */
+  #myc-exit {
+    position: fixed;
+    top: max(0.9rem, env(safe-area-inset-top));
+    right: max(0.9rem, env(safe-area-inset-right));
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(220, 230, 226, 0.22);
+    background: rgba(8, 12, 18, 0.32);
+    color: rgba(220, 230, 226, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease 0.3s, color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  #myc-overlay[data-state='active'] #myc-exit {
+    opacity: 0.55;
+    pointer-events: auto;
+  }
+  #myc-exit:hover,
+  #myc-exit:focus-visible {
+    opacity: 1;
+    color: rgba(232, 240, 236, 0.95);
+    border-color: rgba(220, 230, 226, 0.5);
+    background: rgba(8, 12, 18, 0.5);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #myc-cursor { display: none; }
     #myc-overlay { transition: none; }
     #myc-hint { transition: none; }
+    #myc-exit { transition: opacity 0.2s ease; }
   }
 </style>
 
@@ -130,6 +170,7 @@
     const overlay = document.getElementById('myc-overlay');
     const canvas = document.getElementById('myc-canvas') as HTMLCanvasElement | null;
     const fxCanvas = document.getElementById('myc-fx') as HTMLCanvasElement | null;
+    const exitBtn = document.getElementById('myc-exit');
     if (!cursorEl || !overlay || !canvas || !fxCanvas) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -320,6 +361,15 @@
       if (mode !== 'idle') renderer?.resize();
     });
     window.addEventListener('pagehide', exit);
+
+    // Tap-to-exit (the only way out on touch devices, where there's no ESC).
+    // Stop the pointerdown so it doesn't also drop a nutrient on the way out.
+    exitBtn?.addEventListener('pointerdown', (e) => e.stopPropagation());
+    exitBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      exit();
+    });
 
     // --- debug handle for the preview page --------------------------------
     (window as any).__myc = {
