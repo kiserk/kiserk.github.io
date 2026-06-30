@@ -78,7 +78,7 @@ export const SITE = {
    * 2. Paste it here. Leave '' and the contact form shows a "not configured yet"
    *    notice instead of submitting.
    */
-  web3formsKey: '',
+  web3formsKey: '4d71d36e-fcf5-49c4-849c-ec3945bdcf5f',
 } as const;
 
 /** Profile URLs that are actually set, for `sameAs` and link lists. */
