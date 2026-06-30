@@ -19,7 +19,7 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - `src/config/site.ts` — **single source of truth** for identity, tagline, bio, profile links (`sameAs`), `knowsAbout` keywords, OG image, and the GoatCounter code. Edit copy/links here.
 - `src/layouts/BaseLayout.astro` — all SEO: title/description, canonical, OG + Twitter, JSON-LD (Person + WebSite always; pages pass extra via `jsonLd` prop), font preconnect, GoatCounter snippet. Accepts `{ title, description, path, ogImage, jsonLd, noindex }`.
 - `src/pages/*` — each page passes a unique `title`/`description`/`path`. `publications` emits `ScholarlyArticle` JSON-LD from its data array; `patents` emits a patent `CreativeWork`.
-- `src/pages/contact.astro` — Contact page (in nav). Static-friendly form via **Web3Forms** (AJAX POST to `api.web3forms.com`, no backend). Reads `SITE.web3formsKey`; if blank it disables submit + shows a "not connected" notice. **ACTION NEEDED:** get a free key at https://web3forms.com (enter `karl.j.kiser@gmail.com`) and set `web3formsKey` in `src/config/site.ts` (public, safe to commit). Emits `ContactPage` JSON-LD.
+- `src/pages/contact.astro` — Contact page (in nav). Static-friendly form via **Web3Forms** (AJAX POST to `api.web3forms.com`, no backend). Reads `SITE.web3formsKey`; if blank it disables submit + shows a "not connected" notice. **CONNECTED:** key is set in `src/config/site.ts` (public, safe to commit) → form is live and emails `karl.j.kiser@gmail.com`. Emits `ContactPage` JSON-LD.
 - `src/components/OceanBackground.astro` + `src/scripts/ocean-*.ts` — signature animated canvas (see README).
 - `src/components/MyceliumEasterEgg.astro` + `src/scripts/mycelium-*.ts` — site-wide, ignorable mycelium growth-sim easter egg (wired in `BaseLayout` after `<slot/>`). **Full docs: `docs/mycelium-easter-egg.md`.** Dwell→seed→hold→game, ESC to exit; decorative (`aria-hidden`), gated off links/inputs/selection + `prefers-reduced-motion`.
 
@@ -60,9 +60,14 @@ Karl Kiser's personal / job-search site. Purpose: present credibly to employers 
 - **Sharp positioning** adopted: Karl "builds controlled biological systems" — turning experimental biology into manufacturable processes (biomaterials, cultivation, sensing, closed-loop control, transfer/scale-up).
 - The homepage **hero (`#top` in `index.astro`)** now shows visible value-prop copy as the **first panel** (headline + subhead + proof strip + `openTo` line + CTAs: View work / Download CV / Contact). Previously the value prop was `sr-only` only; the sr-only line is preserved for crawlers.
 - `SITE.jobTitle` = "Biomaterials & Bioprocess Engineer"; `tagline`/`bio`/`openTo` rewritten to the sharp framing (feeds SEO + JSON-LD + sr-only). CV `Summary` aligned (impersonal voice; hero/config use first person by convention). Projects descriptions reordered to problem→system→outcome→ownership.
+- **Controls framing:** the "Aerial Mycelium Process Development" project card in `ProjectsSection.astro` now uses explicit control-systems vocabulary (instrumentation, real-time data acquisition, closed-loop feedback on setpoints, observability, reliability) with controls-focused tags — to read clearly to automation/controls hiring teams.
+- **Private job-search assets** (NOT on the site; in gitignored `Career/`): `LinkedIn-copy.md` (headline + About short/long + skills), `Resume-A-Process-Development.md`/`.pdf`, `Resume-B-Controls-Cultivation.md`/`.pdf`. Built from `cv/Karl-Kiser-CV.md` (authoritative). Tier 2 (project visuals + case studies) is owner-gated on IP-cleared images.
+
+## Data accuracy flags (reconcile)
+- "**26,000+ growth records**" appears in the web Projects/CV sections but is **not** in `cv/Karl-Kiser-CV.md` (the PDF source). Web CV and markdown CV are dual-source — reconcile the number (and re-add to resumes if confirmed).
+- Controls phrasing on the mycelium card implies the system **actuated** setpoints (temp/CO₂/airflow/mist) and that Karl built the sensor hardware; confirm both are accurate (the patent covers controlling those conditions, so it is defensible).
 
 ## Open TODOs / needs from Karl
-- **Contact form:** get a Web3Forms access key (https://web3forms.com, deliver to `karl.j.kiser@gmail.com`) and set `web3formsKey` in `src/config/site.ts` so `/contact` can send. Until then the form is shown but submit is disabled.
 - Optional confirm: `jobTitle` now leads with "Bioprocess" (was "R&D"); "R&D" still in `openTo`. Hero names U.S./Canada/Netherlands explicitly.
 - Optional: compress `og-image.png`; self-host fonts (only preconnect added so far).
 
