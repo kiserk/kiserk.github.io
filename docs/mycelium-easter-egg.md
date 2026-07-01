@@ -72,7 +72,7 @@ active ──(ESC / pagehide)─────────────────
 
 | Const | Default | Meaning |
 | --- | --- | --- |
-| `DWELL_MS` | 5000 | mouse-still time before the cursor morphs + seed starts |
+| `DWELL_MS` | 4000 | mouse-still time before the cursor morphs + seed starts |
 | `HOLD_MS` | 260 | press-hold duration to commit into the full game |
 | `MOVE_TOL` | 6 | drag (px) beyond which a pending hold is cancelled |
 | `SEED_ABANDON` | 14 | move (px) from the seed point that abandons the teaser |
