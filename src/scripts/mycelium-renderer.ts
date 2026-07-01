@@ -147,7 +147,7 @@ export class MyceliumRenderer {
     this.origin = { ...origin };
     for (let i = 0; i < 8; i++) this.mouseVerts.push(Math.random() * Math.PI * 2);
     this.resize();
-    this.seedFromOrigin(7);
+    this.seedFromOrigin(10);
   }
 
   // ---- param helpers -------------------------------------------------------
@@ -297,7 +297,7 @@ export class MyceliumRenderer {
     this.species = SPECIES[0];
     this.overrides = {};
     this.buildGrid();
-    this.seedFromOrigin(7);
+    this.seedFromOrigin(10);
   }
 
   getStats(): { tips: number; nutrients: number; species: string; vigor: number } {
