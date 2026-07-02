@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-02T16:08:26.967Z",
+  "fetchedAt": "2026-07-02T21:15:51.466Z",
   "spotId": "5842041f4e65fad6a7708852",
   "source": "surfline",
   "location": {
@@ -12,23 +12,23 @@
     "temp": "F"
   },
   "current": {
-    "timestamp": 1783008000,
+    "timestamp": 1783026000,
     "utcOffset": -4,
     "surfMin": 1,
     "surfMax": 2,
     "humanRelation": "Knee to thigh",
-    "windSpeed": 9.9,
-    "windDirection": 204,
+    "windSpeed": 21.7,
+    "windDirection": 191,
     "windType": "Onshore",
     "swell": {
-      "height": 2.3,
+      "height": 2.8,
       "period": 5,
-      "direction": 181
+      "direction": 188
     },
-    "ratingKey": "POOR_TO_FAIR",
+    "ratingKey": "POOR",
     "airTemp": 79,
-    "rating": "Poor to Fair",
-    "ratingValue": 2
+    "rating": "Poor",
+    "ratingValue": 1
   },
   "hourly": [
     {
