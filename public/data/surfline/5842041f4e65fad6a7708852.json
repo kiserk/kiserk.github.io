@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-09T16:31:11.478Z",
+  "fetchedAt": "2026-07-09T21:27:26.060Z",
   "spotId": "5842041f4e65fad6a7708852",
   "source": "surfline",
   "location": {
@@ -12,21 +12,21 @@
     "temp": "F"
   },
   "current": {
-    "timestamp": 1783616400,
+    "timestamp": 1783630800,
     "utcOffset": -4,
     "surfMin": 1,
     "surfMax": 2,
     "humanRelation": "Knee to thigh",
-    "windSpeed": 16.9,
-    "windDirection": 179,
+    "windSpeed": 17.1,
+    "windDirection": 194,
     "windType": "Onshore",
     "swell": {
-      "height": 1.2,
-      "period": 8,
-      "direction": 99
+      "height": 3.1,
+      "period": 4,
+      "direction": 192
     },
     "ratingKey": "POOR",
-    "airTemp": 73,
+    "airTemp": 72,
     "rating": "Poor",
     "ratingValue": 1
   },
@@ -173,9 +173,9 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.8,
-      "windDirection": 234,
-      "windType": "Cross",
+      "windSpeed": 10.4,
+      "windDirection": 233,
+      "windType": "Onshore",
       "swell": {
         "height": 1.2,
         "period": 8,
@@ -190,8 +190,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.2,
-      "windDirection": 223,
+      "windSpeed": 9.9,
+      "windDirection": 220,
       "windType": "Onshore",
       "swell": {
         "height": 0.7,
@@ -207,8 +207,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.7,
-      "windDirection": 211,
+      "windSpeed": 9.5,
+      "windDirection": 206,
       "windType": "Onshore",
       "swell": {
         "height": 0.7,
@@ -224,13 +224,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.6,
-      "windDirection": 184,
+      "windSpeed": 12.2,
+      "windDirection": 179,
       "windType": "Onshore",
       "swell": {
-        "height": 1.7,
-        "period": 6,
-        "direction": 189
+        "height": 0.7,
+        "period": 10,
+        "direction": 138
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -241,13 +241,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.4,
-      "windDirection": 172,
+      "windSpeed": 14.8,
+      "windDirection": 173,
       "windType": "Onshore",
       "swell": {
         "height": 1.7,
         "period": 6,
-        "direction": 187
+        "direction": 186
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -258,13 +258,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.9,
-      "windDirection": 179,
+      "windSpeed": 16.6,
+      "windDirection": 177,
       "windType": "Onshore",
       "swell": {
-        "height": 1.2,
-        "period": 8,
-        "direction": 99
+        "height": 1.9,
+        "period": 6,
+        "direction": 185
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -275,8 +275,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 17,
-      "windDirection": 190,
+      "windSpeed": 17.8,
+      "windDirection": 186,
       "windType": "Onshore",
       "swell": {
         "height": 2.2,
@@ -284,7 +284,7 @@
         "direction": 186
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783623600,
@@ -292,16 +292,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 17.8,
-      "windDirection": 191,
+      "windSpeed": 19.4,
+      "windDirection": 185,
       "windType": "Onshore",
       "swell": {
         "height": 2.5,
         "period": 4,
-        "direction": 189
+        "direction": 188
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783627200,
@@ -309,11 +309,11 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 19.2,
-      "windDirection": 195,
+      "windSpeed": 20.8,
+      "windDirection": 193,
       "windType": "Onshore",
       "swell": {
-        "height": 2.8,
+        "height": 2.9,
         "period": 4,
         "direction": 190
       },
@@ -326,16 +326,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 17.8,
-      "windDirection": 193,
+      "windSpeed": 17.1,
+      "windDirection": 194,
       "windType": "Onshore",
       "swell": {
-        "height": 3,
+        "height": 3.1,
         "period": 4,
         "direction": 192
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 72
     },
     {
       "timestamp": 1783634400,
@@ -343,11 +343,11 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.2,
-      "windDirection": 189,
+      "windSpeed": 15.2,
+      "windDirection": 193,
       "windType": "Onshore",
       "swell": {
-        "height": 3.1,
+        "height": 3,
         "period": 5,
         "direction": 191
       },
@@ -360,16 +360,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 19.2,
-      "windDirection": 195,
+      "windSpeed": 16.9,
+      "windDirection": 183,
       "windType": "Onshore",
       "swell": {
-        "height": 3.2,
+        "height": 2.9,
         "period": 5,
-        "direction": 190
+        "direction": 189
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1783641600,
@@ -377,13 +377,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.7,
-      "windDirection": 188,
+      "windSpeed": 18.1,
+      "windDirection": 196,
       "windType": "Onshore",
       "swell": {
-        "height": 3.2,
+        "height": 3,
         "period": 5,
-        "direction": 189
+        "direction": 188
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -394,11 +394,11 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 19.5,
-      "windDirection": 197,
+      "windSpeed": 16,
+      "windDirection": 200,
       "windType": "Onshore",
       "swell": {
-        "height": 3.1,
+        "height": 3,
         "period": 5,
         "direction": 188
       },
@@ -411,13 +411,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 17.2,
-      "windDirection": 196,
+      "windSpeed": 16.5,
+      "windDirection": 203,
       "windType": "Onshore",
       "swell": {
-        "height": 3.1,
+        "height": 2.9,
         "period": 5,
-        "direction": 188
+        "direction": 189
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -428,16 +428,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 15.3,
-      "windDirection": 200,
+      "windSpeed": 13.1,
+      "windDirection": 193,
       "windType": "Onshore",
       "swell": {
-        "height": 3,
+        "height": 2.7,
         "period": 5,
-        "direction": 188
+        "direction": 187
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1783656000,
@@ -445,13 +445,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13.9,
-      "windDirection": 210,
+      "windSpeed": 11.7,
+      "windDirection": 200,
       "windType": "Onshore",
       "swell": {
-        "height": 2.7,
+        "height": 2.4,
         "period": 5,
-        "direction": 186
+        "direction": 184
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -462,13 +462,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13.5,
-      "windDirection": 224,
+      "windSpeed": 11,
+      "windDirection": 211,
       "windType": "Onshore",
       "swell": {
-        "height": 2.5,
+        "height": 2.2,
         "period": 5,
-        "direction": 185
+        "direction": 182
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -479,13 +479,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13,
+      "windSpeed": 8.7,
       "windDirection": 237,
       "windType": "Cross",
       "swell": {
-        "height": 2.3,
+        "height": 2.1,
         "period": 5,
-        "direction": 184
+        "direction": 179
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -496,13 +496,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12.5,
-      "windDirection": 250,
+      "windSpeed": 8.1,
+      "windDirection": 241,
       "windType": "Cross",
       "swell": {
-        "height": 2.2,
+        "height": 1.9,
         "period": 5,
-        "direction": 183
+        "direction": 177
       },
       "ratingKey": "POOR",
       "airTemp": 73
@@ -513,16 +513,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12.7,
-      "windDirection": 252,
+      "windSpeed": 9.9,
+      "windDirection": 256,
       "windType": "Cross",
       "swell": {
-        "height": 2.2,
+        "height": 1.9,
         "period": 5,
-        "direction": 182
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783674000,
@@ -530,16 +530,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13.1,
-      "windDirection": 254,
+      "windSpeed": 11.2,
+      "windDirection": 267,
       "windType": "Cross",
       "swell": {
-        "height": 2.2,
+        "height": 1.8,
         "period": 5,
-        "direction": 182
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783677600,
@@ -547,16 +547,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12.6,
-      "windDirection": 272,
-      "windType": "Cross",
+      "windSpeed": 10.5,
+      "windDirection": 286,
+      "windType": "Offshore",
       "swell": {
-        "height": 2.1,
+        "height": 1.8,
         "period": 5,
-        "direction": 177
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783681200,
@@ -564,16 +564,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12,
-      "windDirection": 286,
+      "windSpeed": 12.3,
+      "windDirection": 296,
       "windType": "Offshore",
       "swell": {
-        "height": 2.1,
+        "height": 1.8,
         "period": 5,
-        "direction": 179
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783684800,
@@ -581,13 +581,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.9,
-      "windDirection": 293,
+      "windSpeed": 12.6,
+      "windDirection": 306,
       "windType": "Offshore",
       "swell": {
-        "height": 2,
+        "height": 1.7,
         "period": 5,
-        "direction": 179
+        "direction": 176
       },
       "ratingKey": "POOR",
       "airTemp": 74
@@ -598,13 +598,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.5,
+      "windSpeed": 12.5,
       "windDirection": 299,
       "windType": "Offshore",
       "swell": {
-        "height": 1.9,
+        "height": 1.7,
         "period": 5,
-        "direction": 178
+        "direction": 175
       },
       "ratingKey": "POOR",
       "airTemp": 75
@@ -615,16 +615,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11,
-      "windDirection": 283,
-      "windType": "Cross",
+      "windSpeed": 10.9,
+      "windDirection": 291,
+      "windType": "Offshore",
       "swell": {
-        "height": 1.8,
+        "height": 1.6,
         "period": 5,
-        "direction": 177
+        "direction": 175
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1783695600,
@@ -632,13 +632,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.5,
-      "windDirection": 275,
+      "windSpeed": 11,
+      "windDirection": 274,
       "windType": "Cross",
       "swell": {
-        "height": 1.7,
+        "height": 1.6,
         "period": 5,
-        "direction": 176
+        "direction": 174
       },
       "ratingKey": "POOR",
       "airTemp": 76
@@ -649,13 +649,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.1,
-      "windDirection": 256,
+      "windSpeed": 11.7,
+      "windDirection": 259,
       "windType": "Cross",
       "swell": {
-        "height": 1.6,
+        "height": 1.5,
         "period": 5,
-        "direction": 176
+        "direction": 173
       },
       "ratingKey": "POOR",
       "airTemp": 77
@@ -666,13 +666,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.8,
-      "windDirection": 243,
+      "windSpeed": 11.2,
+      "windDirection": 251,
       "windType": "Cross",
       "swell": {
-        "height": 1.5,
+        "height": 1.4,
         "period": 5,
-        "direction": 176
+        "direction": 173
       },
       "ratingKey": "POOR",
       "airTemp": 78
@@ -683,16 +683,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11,
-      "windDirection": 240,
+      "windSpeed": 10.7,
+      "windDirection": 238,
       "windType": "Cross",
       "swell": {
-        "height": 1.4,
-        "period": 5,
-        "direction": 177
+        "height": 0.7,
+        "period": 11,
+        "direction": 139
       },
       "ratingKey": "POOR",
-      "airTemp": 78
+      "airTemp": 79
     },
     {
       "timestamp": 1783710000,
@@ -700,8 +700,25 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.3,
-      "windDirection": 264,
+      "windSpeed": 12.6,
+      "windDirection": 234,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.5,
+        "period": 5,
+        "direction": 200
+      },
+      "ratingKey": "POOR",
+      "airTemp": 79
+    },
+    {
+      "timestamp": 1783713600,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 13.7,
+      "windDirection": 239,
       "windType": "Cross",
       "swell": {
         "height": 0.7,
@@ -712,35 +729,18 @@
       "airTemp": 80
     },
     {
-      "timestamp": 1783713600,
-      "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 16,
-      "windDirection": 274,
-      "windType": "Cross",
-      "swell": {
-        "height": 0.8,
-        "period": 10,
-        "direction": 136
-      },
-      "ratingKey": "POOR",
-      "airTemp": 79
-    },
-    {
       "timestamp": 1783717200,
       "utcOffset": -4,
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.7,
-      "windDirection": 270,
+      "windSpeed": 13.6,
+      "windDirection": 239,
       "windType": "Cross",
       "swell": {
-        "height": 1.4,
-        "period": 5,
-        "direction": 176
+        "height": 0.7,
+        "period": 10,
+        "direction": 138
       },
       "ratingKey": "POOR",
       "airTemp": 79
@@ -751,16 +751,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 17.7,
-      "windDirection": 282,
+      "windSpeed": 12.9,
+      "windDirection": 261,
       "windType": "Cross",
       "swell": {
-        "height": 1.4,
-        "period": 6,
-        "direction": 176
+        "height": 0.7,
+        "period": 10,
+        "direction": 137
       },
       "ratingKey": "POOR",
-      "airTemp": 80
+      "airTemp": 79
     },
     {
       "timestamp": 1783724400,
@@ -768,16 +768,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.5,
-      "windDirection": 285,
+      "windSpeed": 15.5,
+      "windDirection": 301,
       "windType": "Offshore",
       "swell": {
-        "height": 1.4,
-        "period": 6,
-        "direction": 176
+        "height": 0.7,
+        "period": 10,
+        "direction": 138
       },
       "ratingKey": "POOR",
-      "airTemp": 78
+      "airTemp": 79
     },
     {
       "timestamp": 1783728000,
@@ -785,13 +785,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 15,
-      "windDirection": 278,
-      "windType": "Cross",
+      "windSpeed": 11.3,
+      "windDirection": 306,
+      "windType": "Offshore",
       "swell": {
-        "height": 1.5,
-        "period": 6,
-        "direction": 176
+        "height": 0.8,
+        "period": 10,
+        "direction": 139
       },
       "ratingKey": "POOR",
       "airTemp": 77
@@ -802,16 +802,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.6,
-      "windDirection": 292,
+      "windSpeed": 12.1,
+      "windDirection": 289,
       "windType": "Offshore",
       "swell": {
-        "height": 0.8,
-        "period": 10,
-        "direction": 139
+        "height": 1.3,
+        "period": 6,
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 77
     },
     {
       "timestamp": 1783735200,
@@ -819,15 +819,15 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12.5,
-      "windDirection": 272,
-      "windType": "Cross",
+      "windSpeed": 10.3,
+      "windDirection": 295,
+      "windType": "Offshore",
       "swell": {
-        "height": 1.5,
-        "period": 6,
-        "direction": 177
+        "height": 1.7,
+        "period": 7,
+        "direction": 175
       },
-      "ratingKey": "POOR",
+      "ratingKey": "POOR_TO_FAIR",
       "airTemp": 76
     },
     {
@@ -836,16 +836,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.7,
-      "windDirection": 281,
+      "windSpeed": 9.9,
+      "windDirection": 271,
       "windType": "Cross",
       "swell": {
         "height": 1.8,
-        "period": 6,
+        "period": 7,
         "direction": 176
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1783742400,
@@ -853,13 +853,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.9,
-      "windDirection": 279,
+      "windSpeed": 9.4,
+      "windDirection": 275,
       "windType": "Cross",
       "swell": {
-        "height": 1.8,
-        "period": 6,
-        "direction": 176
+        "height": 1.9,
+        "period": 7,
+        "direction": 175
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 75
@@ -870,16 +870,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.1,
-      "windDirection": 285,
-      "windType": "Offshore",
+      "windSpeed": 9.9,
+      "windDirection": 279,
+      "windType": "Cross",
       "swell": {
         "height": 1.9,
-        "period": 6,
-        "direction": 177
+        "period": 7,
+        "direction": 176
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 74
+      "airTemp": 75
     },
     {
       "timestamp": 1783749600,
@@ -887,13 +887,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.5,
-      "windDirection": 283,
-      "windType": "Cross",
+      "windSpeed": 9.3,
+      "windDirection": 286,
+      "windType": "Offshore",
       "swell": {
         "height": 1.9,
-        "period": 6,
-        "direction": 177
+        "period": 7,
+        "direction": 176
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 74
@@ -904,9 +904,9 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.3,
-      "windDirection": 274,
-      "windType": "Cross",
+      "windSpeed": 9,
+      "windDirection": 288,
+      "windType": "Offshore",
       "swell": {
         "height": 1.9,
         "period": 7,
@@ -921,8 +921,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 7.6,
-      "windDirection": 292,
+      "windSpeed": 8.2,
+      "windDirection": 295,
       "windType": "Offshore",
       "swell": {
         "height": 1.9,
@@ -930,7 +930,7 @@
         "direction": 177
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783760400,
@@ -938,8 +938,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 6.6,
-      "windDirection": 297,
+      "windSpeed": 8.2,
+      "windDirection": 327,
       "windType": "Offshore",
       "swell": {
         "height": 1.9,
@@ -947,7 +947,7 @@
         "direction": 178
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1783764000,
@@ -955,11 +955,11 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 5.1,
-      "windDirection": 315,
+      "windSpeed": 6,
+      "windDirection": 358,
       "windType": "Offshore",
       "swell": {
-        "height": 1.9,
+        "height": 1.8,
         "period": 7,
         "direction": 178
       },
@@ -972,8 +972,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 6.5,
-      "windDirection": 344,
+      "windSpeed": 7.3,
+      "windDirection": 5,
       "windType": "Offshore",
       "swell": {
         "height": 1.8,
@@ -981,7 +981,7 @@
         "direction": 178
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 74
+      "airTemp": 73
     },
     {
       "timestamp": 1783771200,
@@ -989,16 +989,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 6.5,
-      "windDirection": 7,
+      "windSpeed": 7.3,
+      "windDirection": 11,
       "windType": "Offshore",
       "swell": {
-        "height": 1.8,
+        "height": 1.7,
         "period": 7,
         "direction": 178
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 74
+      "airTemp": 73
     },
     {
       "timestamp": 1783774800,
@@ -1006,13 +1006,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 5.9,
-      "windDirection": 11,
+      "windSpeed": 5.8,
+      "windDirection": 12,
       "windType": "Offshore",
       "swell": {
         "height": 1.7,
         "period": 7,
-        "direction": 178
+        "direction": 179
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 74
@@ -1023,13 +1023,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 3.7,
-      "windDirection": 22,
+      "windSpeed": 5,
+      "windDirection": 31,
       "windType": "Offshore",
       "swell": {
-        "height": 1.7,
-        "period": 6,
-        "direction": 179
+        "height": 1.6,
+        "period": 7,
+        "direction": 178
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 75
@@ -1040,16 +1040,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 1.6,
-      "windDirection": 83,
+      "windSpeed": 3.8,
+      "windDirection": 56,
       "windType": "Cross",
       "swell": {
         "height": 1.6,
-        "period": 6,
-        "direction": 177
+        "period": 7,
+        "direction": 178
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 76
+      "airTemp": 75
     },
     {
       "timestamp": 1783785600,
@@ -1057,15 +1057,15 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 4.5,
-      "windDirection": 158,
+      "windSpeed": 3.7,
+      "windDirection": 122,
       "windType": "Onshore",
       "swell": {
         "height": 1.5,
-        "period": 6,
-        "direction": 180
+        "period": 7,
+        "direction": 181
       },
-      "ratingKey": "POOR",
+      "ratingKey": "POOR_TO_FAIR",
       "airTemp": 76
     },
     {
@@ -1074,13 +1074,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 7.8,
-      "windDirection": 163,
+      "windSpeed": 6.2,
+      "windDirection": 133,
       "windType": "Onshore",
       "swell": {
         "height": 1.5,
         "period": 6,
-        "direction": 180
+        "direction": 181
       },
       "ratingKey": "POOR",
       "airTemp": 76
@@ -1091,16 +1091,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 8.4,
-      "windDirection": 163,
+      "windSpeed": 8.7,
+      "windDirection": 117,
       "windType": "Onshore",
       "swell": {
         "height": 1.4,
         "period": 6,
-        "direction": 180
+        "direction": 181
       },
       "ratingKey": "POOR",
-      "airTemp": 77
+      "airTemp": 75
     },
     {
       "timestamp": 1783796400,
@@ -1108,8 +1108,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 7.7,
-      "windDirection": 162,
+      "windSpeed": 9.8,
+      "windDirection": 111,
       "windType": "Onshore",
       "swell": {
         "height": 1.4,
@@ -1117,7 +1117,7 @@
         "direction": 180
       },
       "ratingKey": "POOR",
-      "airTemp": 77
+      "airTemp": 74
     },
     {
       "timestamp": 1783800000,
@@ -1125,16 +1125,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 8,
-      "windDirection": 155,
+      "windSpeed": 11.4,
+      "windDirection": 121,
       "windType": "Onshore",
       "swell": {
-        "height": 1.4,
+        "height": 1.3,
         "period": 6,
         "direction": 180
       },
       "ratingKey": "POOR",
-      "airTemp": 77
+      "airTemp": 74
     },
     {
       "timestamp": 1783803600,
@@ -1142,8 +1142,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 8,
-      "windDirection": 142,
+      "windSpeed": 11.4,
+      "windDirection": 119,
       "windType": "Onshore",
       "swell": {
         "height": 1.3,
@@ -1151,7 +1151,7 @@
         "direction": 180
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 74
     },
     {
       "timestamp": 1783807200,
@@ -1159,8 +1159,8 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 8,
-      "windDirection": 126,
+      "windSpeed": 12.2,
+      "windDirection": 112,
       "windType": "Onshore",
       "swell": {
         "height": 1.3,
@@ -1168,7 +1168,7 @@
         "direction": 179
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 73
     },
     {
       "timestamp": 1783810800,
@@ -1176,16 +1176,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.2,
-      "windDirection": 104,
+      "windSpeed": 12.4,
+      "windDirection": 107,
       "windType": "Onshore",
       "swell": {
         "height": 1.3,
         "period": 6,
-        "direction": 179
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1783814400,
@@ -1193,16 +1193,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.6,
-      "windDirection": 113,
+      "windSpeed": 12.8,
+      "windDirection": 106,
       "windType": "Onshore",
       "swell": {
         "height": 1.3,
         "period": 6,
-        "direction": 179
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1783818000,
@@ -1210,16 +1210,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.3,
-      "windDirection": 99,
-      "windType": "Cross",
+      "windSpeed": 13,
+      "windDirection": 103,
+      "windType": "Onshore",
       "swell": {
         "height": 1.3,
         "period": 6,
         "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 74
+      "airTemp": 72
     },
     {
       "timestamp": 1783821600,
@@ -1227,16 +1227,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12.1,
-      "windDirection": 98,
+      "windSpeed": 13.8,
+      "windDirection": 95,
       "windType": "Cross",
       "swell": {
         "height": 1.3,
-        "period": 6,
+        "period": 7,
         "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 72
     },
     {
       "timestamp": 1783825200,
@@ -1244,16 +1244,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13.5,
-      "windDirection": 100,
+      "windSpeed": 13.2,
+      "windDirection": 95,
       "windType": "Cross",
       "swell": {
         "height": 1.4,
         "period": 7,
-        "direction": 176
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 72
     },
     {
       "timestamp": 1783828800,
@@ -1261,13 +1261,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.8,
-      "windDirection": 104,
-      "windType": "Onshore",
+      "windSpeed": 11.2,
+      "windDirection": 97,
+      "windType": "Cross",
       "swell": {
-        "height": 1.3,
+        "height": 1.4,
         "period": 7,
-        "direction": 177
+        "direction": 178
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1278,13 +1278,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.6,
-      "windDirection": 101,
+      "windSpeed": 12.3,
+      "windDirection": 85,
       "windType": "Cross",
       "swell": {
         "height": 1.4,
         "period": 7,
-        "direction": 177
+        "direction": 178
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1295,13 +1295,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.2,
-      "windDirection": 93,
+      "windSpeed": 11.7,
+      "windDirection": 72,
       "windType": "Cross",
       "swell": {
         "height": 1.4,
         "period": 7,
-        "direction": 177
+        "direction": 178
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1312,13 +1312,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13.2,
-      "windDirection": 71,
+      "windSpeed": 11.9,
+      "windDirection": 62,
       "windType": "Cross",
       "swell": {
         "height": 1.4,
         "period": 7,
-        "direction": 177
+        "direction": 178
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1329,16 +1329,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.1,
-      "windDirection": 55,
-      "windType": "Cross",
+      "windSpeed": 12.5,
+      "windDirection": 52,
+      "windType": "Offshore",
       "swell": {
-        "height": 1.4,
+        "height": 1.5,
         "period": 7,
-        "direction": 177
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 71
+      "airTemp": 72
     },
     {
       "timestamp": 1783846800,
@@ -1346,16 +1346,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.3,
-      "windDirection": 46,
+      "windSpeed": 14.1,
+      "windDirection": 43,
       "windType": "Offshore",
       "swell": {
-        "height": 1.4,
+        "height": 1.5,
         "period": 7,
         "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 70
+      "airTemp": 71
     },
     {
       "timestamp": 1783850400,
@@ -1363,41 +1363,7 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13.7,
-      "windDirection": 44,
-      "windType": "Offshore",
-      "swell": {
-        "height": 1.4,
-        "period": 7,
-        "direction": 177
-      },
-      "ratingKey": "POOR",
-      "airTemp": 70
-    },
-    {
-      "timestamp": 1783854000,
-      "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 15.8,
-      "windDirection": 42,
-      "windType": "Offshore",
-      "swell": {
-        "height": 1.4,
-        "period": 7,
-        "direction": 178
-      },
-      "ratingKey": "POOR",
-      "airTemp": 69
-    },
-    {
-      "timestamp": 1783857600,
-      "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 16.7,
+      "windSpeed": 16.5,
       "windDirection": 46,
       "windType": "Offshore",
       "swell": {
@@ -1406,16 +1372,33 @@
         "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 69
+      "airTemp": 71
     },
     {
-      "timestamp": 1783861200,
+      "timestamp": 1783854000,
       "utcOffset": -4,
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 15.6,
-      "windDirection": 53,
+      "windSpeed": 18.1,
+      "windDirection": 46,
+      "windType": "Offshore",
+      "swell": {
+        "height": 1.4,
+        "period": 7,
+        "direction": 179
+      },
+      "ratingKey": "POOR",
+      "airTemp": 70
+    },
+    {
+      "timestamp": 1783857600,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 16.8,
+      "windDirection": 49,
       "windType": "Offshore",
       "swell": {
         "height": 1.4,
@@ -1423,33 +1406,16 @@
         "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 70
+      "airTemp": 71
     },
     {
-      "timestamp": 1783864800,
+      "timestamp": 1783861200,
       "utcOffset": -4,
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 12.7,
-      "windDirection": 64,
-      "windType": "Cross",
-      "swell": {
-        "height": 0.9,
-        "period": 11,
-        "direction": 126
-      },
-      "ratingKey": "POOR",
-      "airTemp": 72
-    },
-    {
-      "timestamp": 1783868400,
-      "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 10.8,
-      "windDirection": 79,
+      "windSpeed": 15.7,
+      "windDirection": 56,
       "windType": "Cross",
       "swell": {
         "height": 1.3,
@@ -1460,18 +1426,52 @@
       "airTemp": 72
     },
     {
-      "timestamp": 1783872000,
+      "timestamp": 1783864800,
       "utcOffset": -4,
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.4,
-      "windDirection": 100,
+      "windSpeed": 14.6,
+      "windDirection": 68,
       "windType": "Cross",
       "swell": {
-        "height": 2.2,
+        "height": 2.6,
         "period": 5,
-        "direction": 103
+        "direction": 97
+      },
+      "ratingKey": "POOR",
+      "airTemp": 73
+    },
+    {
+      "timestamp": 1783868400,
+      "utcOffset": -4,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 13.3,
+      "windDirection": 86,
+      "windType": "Cross",
+      "swell": {
+        "height": 2.7,
+        "period": 5,
+        "direction": 100
+      },
+      "ratingKey": "POOR",
+      "airTemp": 73
+    },
+    {
+      "timestamp": 1783872000,
+      "utcOffset": -4,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 14.3,
+      "windDirection": 102,
+      "windType": "Cross",
+      "swell": {
+        "height": 2.9,
+        "period": 5,
+        "direction": 102
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1479,16 +1479,16 @@
     {
       "timestamp": 1783875600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 12.7,
-      "windDirection": 121,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.9,
+      "windDirection": 115,
       "windType": "Onshore",
       "swell": {
-        "height": 2.3,
+        "height": 3,
         "period": 5,
-        "direction": 104
+        "direction": 105
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1496,16 +1496,16 @@
     {
       "timestamp": 1783879200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 14.4,
-      "windDirection": 124,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 16.9,
+      "windDirection": 118,
       "windType": "Onshore",
       "swell": {
-        "height": 2.5,
+        "height": 3.2,
         "period": 5,
-        "direction": 104
+        "direction": 108
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1516,13 +1516,13 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 14.9,
-      "windDirection": 119,
+      "windSpeed": 16.7,
+      "windDirection": 121,
       "windType": "Onshore",
       "swell": {
-        "height": 2.6,
+        "height": 3.2,
         "period": 5,
-        "direction": 104
+        "direction": 108
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1533,13 +1533,13 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 14.6,
-      "windDirection": 118,
+      "windSpeed": 14.5,
+      "windDirection": 127,
       "windType": "Onshore",
       "swell": {
-        "height": 2.7,
+        "height": 3,
         "period": 5,
-        "direction": 104
+        "direction": 107
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1547,16 +1547,16 @@
     {
       "timestamp": 1783890000,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 14,
-      "windDirection": 127,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 12.1,
+      "windDirection": 146,
       "windType": "Onshore",
       "swell": {
-        "height": 2.7,
+        "height": 2.8,
         "period": 5,
-        "direction": 105
+        "direction": 108
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1564,16 +1564,16 @@
     {
       "timestamp": 1783893600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 13.3,
-      "windDirection": 143,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 11.7,
+      "windDirection": 158,
       "windType": "Onshore",
       "swell": {
-        "height": 2.6,
+        "height": 2.8,
         "period": 5,
-        "direction": 105
+        "direction": 109
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1581,33 +1581,33 @@
     {
       "timestamp": 1783897200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 11.4,
-      "windDirection": 144,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 9.5,
+      "windDirection": 146,
       "windType": "Onshore",
       "swell": {
-        "height": 2.4,
-        "period": 5,
-        "direction": 105
+        "height": 2.7,
+        "period": 6,
+        "direction": 110
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 71
     },
     {
       "timestamp": 1783900800,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 9.6,
-      "windDirection": 143,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 10.7,
+      "windDirection": 133,
       "windType": "Onshore",
       "swell": {
-        "height": 2.3,
-        "period": 5,
-        "direction": 106
+        "height": 2.7,
+        "period": 6,
+        "direction": 111
       },
       "ratingKey": "POOR",
       "airTemp": 71
@@ -1615,16 +1615,16 @@
     {
       "timestamp": 1783904400,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 9.1,
-      "windDirection": 143,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 11.3,
+      "windDirection": 127,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.7,
         "period": 6,
-        "direction": 106
+        "direction": 112
       },
       "ratingKey": "POOR",
       "airTemp": 71
@@ -1632,33 +1632,33 @@
     {
       "timestamp": 1783908000,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 9.6,
-      "windDirection": 130,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 10.5,
+      "windDirection": 123,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.7,
         "period": 6,
-        "direction": 106
+        "direction": 112
       },
-      "ratingKey": "POOR_TO_FAIR",
+      "ratingKey": "POOR",
       "airTemp": 71
     },
     {
       "timestamp": 1783911600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 10,
-      "windDirection": 128,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 8.7,
+      "windDirection": 133,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.7,
         "period": 6,
-        "direction": 107
+        "direction": 112
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 71
@@ -1666,16 +1666,16 @@
     {
       "timestamp": 1783915200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 7.3,
-      "windDirection": 119,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 6.4,
+      "windDirection": 134,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.8,
         "period": 6,
-        "direction": 108
+        "direction": 114
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 71
@@ -1683,16 +1683,16 @@
     {
       "timestamp": 1783918800,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
       "windSpeed": 5.4,
-      "windDirection": 112,
+      "windDirection": 116,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.8,
         "period": 6,
-        "direction": 107
+        "direction": 113
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 71
@@ -1700,16 +1700,16 @@
     {
       "timestamp": 1783922400,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 3.8,
-      "windDirection": 108,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 5.4,
+      "windDirection": 109,
       "windType": "Onshore",
       "swell": {
-        "height": 2.3,
+        "height": 2.7,
         "period": 6,
-        "direction": 110
+        "direction": 112
       },
       "ratingKey": "POOR_TO_FAIR",
       "airTemp": 71
@@ -1717,53 +1717,53 @@
     {
       "timestamp": 1783926000,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 3,
-      "windDirection": 117,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 5.2,
+      "windDirection": 105,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.7,
         "period": 6,
-        "direction": 110
+        "direction": 112
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 71
+      "airTemp": 70
     },
     {
       "timestamp": 1783929600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 1.9,
-      "windDirection": 107,
-      "windType": "Onshore",
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 4.8,
+      "windDirection": 94,
+      "windType": "Cross",
       "swell": {
-        "height": 2.2,
+        "height": 2.7,
         "period": 6,
-        "direction": 109
+        "direction": 114
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 71
+      "airTemp": 70
     },
     {
       "timestamp": 1783933200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 2.2,
-      "windDirection": 59,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 3.2,
+      "windDirection": 91,
       "windType": "Cross",
       "swell": {
-        "height": 2.3,
+        "height": 2.6,
         "period": 6,
-        "direction": 109
+        "direction": 110
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 71
+      "airTemp": 70
     },
     {
       "timestamp": 1783936800,
@@ -1771,16 +1771,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 3.6,
-      "windDirection": 49,
-      "windType": "Offshore",
+      "windSpeed": 2.8,
+      "windDirection": 81,
+      "windType": "Cross",
       "swell": {
-        "height": 2.1,
+        "height": 2.6,
         "period": 6,
-        "direction": 105
+        "direction": 111
       },
-      "ratingKey": "FAIR",
-      "airTemp": 71
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 70
     },
     {
       "timestamp": 1783940400,
@@ -1788,16 +1788,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 4.5,
-      "windDirection": 37,
-      "windType": "Offshore",
+      "windSpeed": 1.8,
+      "windDirection": 67,
+      "windType": "Cross",
       "swell": {
-        "height": 2.2,
-        "period": 6,
-        "direction": 106
+        "height": 2.5,
+        "period": 7,
+        "direction": 110
       },
       "ratingKey": "FAIR",
-      "airTemp": 71
+      "airTemp": 70
     },
     {
       "timestamp": 1783944000,
@@ -1805,13 +1805,13 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 3.2,
-      "windDirection": 47,
-      "windType": "Offshore",
+      "windSpeed": 0.8,
+      "windDirection": 121,
+      "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 6,
-        "direction": 107
+        "height": 2.5,
+        "period": 7,
+        "direction": 111
       },
       "ratingKey": "FAIR",
       "airTemp": 71
@@ -1822,16 +1822,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 2.6,
-      "windDirection": 81,
-      "windType": "Cross",
+      "windSpeed": 1.4,
+      "windDirection": 143,
+      "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.4,
         "period": 7,
-        "direction": 107
+        "direction": 111
       },
       "ratingKey": "FAIR",
-      "airTemp": 72
+      "airTemp": 71
     },
     {
       "timestamp": 1783951200,
@@ -1839,16 +1839,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 3.4,
-      "windDirection": 150,
+      "windSpeed": 3.6,
+      "windDirection": 156,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
+        "height": 2.4,
         "period": 7,
-        "direction": 108
+        "direction": 112
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 71
     },
     {
       "timestamp": 1783954800,
@@ -1856,33 +1856,33 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 6.6,
-      "windDirection": 170,
+      "windSpeed": 6.4,
+      "windDirection": 169,
       "windType": "Onshore",
       "swell": {
-        "height": 2.3,
+        "height": 2.4,
         "period": 7,
-        "direction": 110
+        "direction": 112
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 71
     },
     {
       "timestamp": 1783958400,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 8.1,
-      "windDirection": 170,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 8,
+      "windDirection": 169,
       "windType": "Onshore",
       "swell": {
         "height": 2.3,
         "period": 7,
-        "direction": 110
+        "direction": 112
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 71
     },
     {
       "timestamp": 1783962000,
@@ -1890,16 +1890,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 8.9,
-      "windDirection": 168,
+      "windSpeed": 9.8,
+      "windDirection": 164,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 7,
-        "direction": 111
+        "height": 1.5,
+        "period": 8,
+        "direction": 126
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 71
     },
     {
       "timestamp": 1783965600,
@@ -1907,16 +1907,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.2,
-      "windDirection": 166,
+      "windSpeed": 12,
+      "windDirection": 163,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 7,
-        "direction": 111
+        "height": 1.5,
+        "period": 8,
+        "direction": 130
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 71
     },
     {
       "timestamp": 1783969200,
@@ -1924,13 +1924,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 13,
+      "windSpeed": 15.3,
       "windDirection": 166,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 7,
-        "direction": 111
+        "height": 1.5,
+        "period": 8,
+        "direction": 131
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1941,13 +1941,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 15.2,
-      "windDirection": 170,
+      "windSpeed": 17.9,
+      "windDirection": 171,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 7,
-        "direction": 112
+        "height": 1.5,
+        "period": 8,
+        "direction": 130
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -1958,16 +1958,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.4,
-      "windDirection": 178,
+      "windSpeed": 18.8,
+      "windDirection": 179,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 7,
-        "direction": 112
+        "height": 1.5,
+        "period": 8,
+        "direction": 131
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 72
     },
     {
       "timestamp": 1783980000,
@@ -1975,16 +1975,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 18.2,
-      "windDirection": 182,
+      "windSpeed": 20.2,
+      "windDirection": 187,
       "windType": "Onshore",
       "swell": {
-        "height": 2.1,
-        "period": 7,
-        "direction": 113
+        "height": 1.4,
+        "period": 8,
+        "direction": 128
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 72
     },
     {
       "timestamp": 1783983600,
@@ -1992,16 +1992,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 20,
-      "windDirection": 188,
+      "windSpeed": 20.9,
+      "windDirection": 190,
       "windType": "Onshore",
       "swell": {
-        "height": 2.1,
-        "period": 7,
-        "direction": 114
+        "height": 1.3,
+        "period": 8,
+        "direction": 130
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 72
     },
     {
       "timestamp": 1783987200,
@@ -2010,12 +2010,12 @@
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
       "windSpeed": 21,
-      "windDirection": 193,
+      "windDirection": 195,
       "windType": "Onshore",
       "swell": {
-        "height": 1.5,
+        "height": 1.3,
         "period": 8,
-        "direction": 130
+        "direction": 129
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -2026,96 +2026,11 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 21.8,
-      "windDirection": 203,
+      "windSpeed": 21.4,
+      "windDirection": 205,
       "windType": "Onshore",
       "swell": {
-        "height": 1.5,
-        "period": 8,
-        "direction": 130
-      },
-      "ratingKey": "POOR",
-      "airTemp": 73
-    },
-    {
-      "timestamp": 1783994400,
-      "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 19.5,
-      "windDirection": 211,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.5,
-        "period": 8,
-        "direction": 131
-      },
-      "ratingKey": "POOR",
-      "airTemp": 73
-    },
-    {
-      "timestamp": 1783998000,
-      "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 18.7,
-      "windDirection": 219,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.5,
-        "period": 8,
-        "direction": 131
-      },
-      "ratingKey": "POOR",
-      "airTemp": 73
-    },
-    {
-      "timestamp": 1784001600,
-      "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 18,
-      "windDirection": 224,
-      "windType": "Onshore",
-      "swell": {
-        "height": 2.5,
-        "period": 4,
-        "direction": 204
-      },
-      "ratingKey": "POOR",
-      "airTemp": 73
-    },
-    {
-      "timestamp": 1784005200,
-      "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 16.3,
-      "windDirection": 227,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.6,
-        "period": 8,
-        "direction": 130
-      },
-      "ratingKey": "POOR",
-      "airTemp": 72
-    },
-    {
-      "timestamp": 1784008800,
-      "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 14.5,
-      "windDirection": 247,
-      "windType": "Cross",
-      "swell": {
-        "height": 1.6,
+        "height": 1.3,
         "period": 8,
         "direction": 129
       },
@@ -2123,52 +2038,137 @@
       "airTemp": 72
     },
     {
-      "timestamp": 1784012400,
+      "timestamp": 1783994400,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 14.5,
-      "windDirection": 247,
-      "windType": "Cross",
+      "windSpeed": 19,
+      "windDirection": 213,
+      "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 8,
-        "direction": 119
+        "height": 2.6,
+        "period": 4,
+        "direction": 194
+      },
+      "ratingKey": "POOR",
+      "airTemp": 73
+    },
+    {
+      "timestamp": 1783998000,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 16.5,
+      "windDirection": 224,
+      "windType": "Onshore",
+      "swell": {
+        "height": 2.6,
+        "period": 4,
+        "direction": 199
       },
       "ratingKey": "POOR",
       "airTemp": 72
     },
     {
-      "timestamp": 1784016000,
+      "timestamp": 1784001600,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 14.5,
-      "windDirection": 247,
-      "windType": "Cross",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 15.9,
+      "windDirection": 228,
+      "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 8,
-        "direction": 120
+        "height": 2.5,
+        "period": 4,
+        "direction": 202
       },
       "ratingKey": "POOR",
       "airTemp": 72
     },
     {
-      "timestamp": 1784019600,
+      "timestamp": 1784005200,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 18.6,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 15.3,
+      "windDirection": 232,
+      "windType": "Onshore",
+      "swell": {
+        "height": 2.3,
+        "period": 4,
+        "direction": 204
+      },
+      "ratingKey": "POOR",
+      "airTemp": 72
+    },
+    {
+      "timestamp": 1784008800,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 16.6,
       "windDirection": 235,
       "windType": "Cross",
       "swell": {
         "height": 2.2,
-        "period": 8,
-        "direction": 122
+        "period": 4,
+        "direction": 210
+      },
+      "ratingKey": "POOR",
+      "airTemp": 71
+    },
+    {
+      "timestamp": 1784012400,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 17,
+      "windDirection": 239,
+      "windType": "Cross",
+      "swell": {
+        "height": 2.2,
+        "period": 4,
+        "direction": 214
+      },
+      "ratingKey": "POOR",
+      "airTemp": 71
+    },
+    {
+      "timestamp": 1784016000,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 19.6,
+      "windDirection": 239,
+      "windType": "Cross",
+      "swell": {
+        "height": 2.4,
+        "period": 4,
+        "direction": 216
+      },
+      "ratingKey": "POOR",
+      "airTemp": 71
+    },
+    {
+      "timestamp": 1784019600,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 19.1,
+      "windDirection": 246,
+      "windType": "Cross",
+      "swell": {
+        "height": 2.4,
+        "period": 4,
+        "direction": 220
       },
       "ratingKey": "POOR",
       "airTemp": 71
@@ -2176,36 +2176,36 @@
     {
       "timestamp": 1784023200,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 18.6,
-      "windDirection": 235,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 15.6,
+      "windDirection": 267,
       "windType": "Cross",
       "swell": {
-        "height": 2.2,
-        "period": 8,
-        "direction": 120
+        "height": 2.3,
+        "period": 4,
+        "direction": 224
       },
       "ratingKey": "POOR",
-      "airTemp": 71
+      "airTemp": 72
     },
     {
       "timestamp": 1784026800,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 18.6,
-      "windDirection": 235,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 15.9,
+      "windDirection": 264,
       "windType": "Cross",
       "swell": {
-        "height": 2.1,
-        "period": 8,
-        "direction": 120
+        "height": 0.9,
+        "period": 9,
+        "direction": 137
       },
       "ratingKey": "POOR",
-      "airTemp": 71
+      "airTemp": 72
     },
     {
       "timestamp": 1784030400,
@@ -2213,13 +2213,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.1,
-      "windDirection": 264,
+      "windSpeed": 16.4,
+      "windDirection": 260,
       "windType": "Cross",
       "swell": {
-        "height": 2.1,
-        "period": 8,
-        "direction": 120
+        "height": 0.9,
+        "period": 9,
+        "direction": 136
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -2230,13 +2230,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.1,
-      "windDirection": 264,
+      "windSpeed": 16.4,
+      "windDirection": 260,
       "windType": "Cross",
       "swell": {
-        "height": 2.1,
-        "period": 8,
-        "direction": 121
+        "height": 0.9,
+        "period": 9,
+        "direction": 137
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -2247,13 +2247,13 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.1,
-      "windDirection": 264,
+      "windSpeed": 16.4,
+      "windDirection": 260,
       "windType": "Cross",
       "swell": {
-        "height": 2.1,
-        "period": 8,
-        "direction": 121
+        "height": 1.5,
+        "period": 7,
+        "direction": 115
       },
       "ratingKey": "POOR",
       "airTemp": 72
@@ -2265,15 +2265,15 @@
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
       "windSpeed": 13,
-      "windDirection": 242,
+      "windDirection": 246,
       "windType": "Cross",
       "swell": {
-        "height": 2,
+        "height": 1.5,
         "period": 8,
-        "direction": 122
+        "direction": 117
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784044800,
@@ -2282,15 +2282,15 @@
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
       "windSpeed": 13,
-      "windDirection": 242,
+      "windDirection": 246,
       "windType": "Cross",
       "swell": {
-        "height": 2,
-        "period": 8,
-        "direction": 121
+        "height": 1.7,
+        "period": 9,
+        "direction": 123
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784048400,
@@ -2299,15 +2299,15 @@
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
       "windSpeed": 13,
-      "windDirection": 242,
+      "windDirection": 246,
       "windType": "Cross",
       "swell": {
-        "height": 2,
+        "height": 1.5,
         "period": 8,
-        "direction": 124
+        "direction": 117
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784052000,
@@ -2315,50 +2315,50 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.4,
-      "windDirection": 187,
+      "windSpeed": 11.7,
+      "windDirection": 226,
       "windType": "Onshore",
       "swell": {
-        "height": 1.9,
-        "period": 8,
-        "direction": 122
+        "height": 1.7,
+        "period": 9,
+        "direction": 125
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 79
     },
     {
       "timestamp": 1784055600,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 16.4,
-      "windDirection": 187,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 11.7,
+      "windDirection": 226,
       "windType": "Onshore",
       "swell": {
-        "height": 1.9,
-        "period": 8,
-        "direction": 122
+        "height": 1.8,
+        "period": 9,
+        "direction": 127
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 79
     },
     {
       "timestamp": 1784059200,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 16.4,
-      "windDirection": 187,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 11.7,
+      "windDirection": 226,
       "windType": "Onshore",
       "swell": {
-        "height": 1.9,
-        "period": 8,
-        "direction": 121
+        "height": 1.7,
+        "period": 9,
+        "direction": 126
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 79
     },
     {
       "timestamp": 1784062800,
@@ -2366,16 +2366,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 23.5,
-      "windDirection": 189,
+      "windSpeed": 12.6,
+      "windDirection": 207,
       "windType": "Onshore",
       "swell": {
-        "height": 3.5,
-        "period": 4,
-        "direction": 190
+        "height": 1.7,
+        "period": 9,
+        "direction": 125
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 75
+      "ratingKey": "POOR",
+      "airTemp": 79
     },
     {
       "timestamp": 1784066400,
@@ -2383,135 +2383,135 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 23.5,
-      "windDirection": 189,
+      "windSpeed": 12.6,
+      "windDirection": 207,
       "windType": "Onshore",
       "swell": {
-        "height": 4,
-        "period": 5,
-        "direction": 191
+        "height": 1.7,
+        "period": 9,
+        "direction": 124
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 75
+      "ratingKey": "POOR",
+      "airTemp": 79
     },
     {
       "timestamp": 1784070000,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 23.5,
-      "windDirection": 189,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 12.6,
+      "windDirection": 207,
       "windType": "Onshore",
       "swell": {
-        "height": 4.5,
-        "period": 5,
-        "direction": 192
+        "height": 1.7,
+        "period": 9,
+        "direction": 123
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 75
+      "ratingKey": "POOR",
+      "airTemp": 79
     },
     {
       "timestamp": 1784073600,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 14.8,
-      "windDirection": 213,
-      "windType": "Onshore",
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.1,
+      "windDirection": 266,
+      "windType": "Cross",
       "swell": {
-        "height": 4.9,
+        "height": 2.9,
         "period": 5,
-        "direction": 193
+        "direction": 189
       },
       "ratingKey": "POOR",
-      "airTemp": 77
+      "airTemp": 80
     },
     {
       "timestamp": 1784077200,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 14.8,
-      "windDirection": 213,
-      "windType": "Onshore",
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.1,
+      "windDirection": 266,
+      "windType": "Cross",
       "swell": {
-        "height": 5,
-        "period": 6,
-        "direction": 194
+        "height": 3,
+        "period": 5,
+        "direction": 189
       },
       "ratingKey": "POOR",
-      "airTemp": 77
+      "airTemp": 80
     },
     {
       "timestamp": 1784080800,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 14.8,
-      "windDirection": 213,
-      "windType": "Onshore",
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.1,
+      "windDirection": 266,
+      "windType": "Cross",
       "swell": {
-        "height": 5.1,
-        "period": 6,
-        "direction": 194
+        "height": 3.1,
+        "period": 5,
+        "direction": 189
       },
       "ratingKey": "POOR",
-      "airTemp": 77
+      "airTemp": 80
     },
     {
       "timestamp": 1784084400,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 20,
-      "windDirection": 220,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 16.9,
+      "windDirection": 232,
       "windType": "Onshore",
       "swell": {
-        "height": 5,
-        "period": 6,
-        "direction": 195
+        "height": 3.2,
+        "period": 5,
+        "direction": 192
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784088000,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 20,
-      "windDirection": 220,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 16.9,
+      "windDirection": 232,
       "windType": "Onshore",
       "swell": {
-        "height": 4.8,
-        "period": 6,
-        "direction": 196
+        "height": 3.3,
+        "period": 5,
+        "direction": 192
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784091600,
       "utcOffset": -4,
       "surfMin": 2,
       "surfMax": 3,
-      "humanRelation": "Thigh to stomach",
-      "windSpeed": 20,
-      "windDirection": 220,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 16.9,
+      "windDirection": 232,
       "windType": "Onshore",
       "swell": {
-        "height": 4.5,
-        "period": 6,
-        "direction": 196
+        "height": 3.3,
+        "period": 5,
+        "direction": 194
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784095200,
@@ -2519,16 +2519,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 20.5,
-      "windDirection": 246,
+      "windSpeed": 17.3,
+      "windDirection": 238,
       "windType": "Cross",
       "swell": {
-        "height": 4.3,
-        "period": 6,
-        "direction": 198
+        "height": 3.2,
+        "period": 5,
+        "direction": 196
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 76
+      "ratingKey": "POOR",
+      "airTemp": 74
     },
     {
       "timestamp": 1784098800,
@@ -2536,16 +2536,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 20.5,
-      "windDirection": 246,
+      "windSpeed": 17.3,
+      "windDirection": 238,
       "windType": "Cross",
       "swell": {
-        "height": 4.1,
-        "period": 6,
+        "height": 3.2,
+        "period": 5,
         "direction": 198
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 76
+      "ratingKey": "POOR",
+      "airTemp": 74
     },
     {
       "timestamp": 1784102400,
@@ -2553,16 +2553,16 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 20.5,
-      "windDirection": 246,
+      "windSpeed": 17.3,
+      "windDirection": 238,
       "windType": "Cross",
       "swell": {
-        "height": 3.9,
-        "period": 6,
-        "direction": 198
+        "height": 3.1,
+        "period": 5,
+        "direction": 200
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 76
+      "ratingKey": "POOR",
+      "airTemp": 74
     },
     {
       "timestamp": 1784106000,
@@ -2570,84 +2570,84 @@
       "surfMin": 2,
       "surfMax": 3,
       "humanRelation": "Thigh to waist",
-      "windSpeed": 15.5,
-      "windDirection": 253,
+      "windSpeed": 16.2,
+      "windDirection": 243,
       "windType": "Cross",
       "swell": {
-        "height": 3.4,
-        "period": 6,
-        "direction": 187
+        "height": 3,
+        "period": 5,
+        "direction": 202
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1784109600,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 15.5,
-      "windDirection": 253,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 16.2,
+      "windDirection": 243,
       "windType": "Cross",
       "swell": {
-        "height": 3.3,
-        "period": 6,
-        "direction": 188
+        "height": 3,
+        "period": 5,
+        "direction": 202
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1784113200,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 15.5,
-      "windDirection": 253,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 16.2,
+      "windDirection": 243,
       "windType": "Cross",
       "swell": {
-        "height": 3.1,
-        "period": 6,
-        "direction": 185
+        "height": 2.9,
+        "period": 5,
+        "direction": 202
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1784116800,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 14.4,
-      "windDirection": 272,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 15.3,
+      "windDirection": 244,
       "windType": "Cross",
       "swell": {
-        "height": 3,
-        "period": 6,
-        "direction": 186
+        "height": 2.9,
+        "period": 5,
+        "direction": 202
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1784120400,
       "utcOffset": -4,
-      "surfMin": 2,
-      "surfMax": 3,
-      "humanRelation": "Thigh to waist",
-      "windSpeed": 14.4,
-      "windDirection": 272,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 15.3,
+      "windDirection": 244,
       "windType": "Cross",
       "swell": {
-        "height": 2.9,
-        "period": 6,
-        "direction": 186
+        "height": 2.8,
+        "period": 5,
+        "direction": 200
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1784124000,
@@ -2655,16 +2655,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.4,
-      "windDirection": 272,
+      "windSpeed": 15.3,
+      "windDirection": 244,
       "windType": "Cross",
       "swell": {
         "height": 2.7,
-        "period": 6,
-        "direction": 185
+        "period": 5,
+        "direction": 197
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 73
     },
     {
       "timestamp": 1784127600,
@@ -2672,15 +2672,15 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.9,
-      "windDirection": 289,
-      "windType": "Offshore",
+      "windSpeed": 10.6,
+      "windDirection": 238,
+      "windType": "Cross",
       "swell": {
         "height": 2.6,
-        "period": 6,
-        "direction": 184
+        "period": 5,
+        "direction": 194
       },
-      "ratingKey": "POOR_TO_FAIR",
+      "ratingKey": "POOR",
       "airTemp": 76
     },
     {
@@ -2689,15 +2689,15 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.9,
-      "windDirection": 289,
-      "windType": "Offshore",
+      "windSpeed": 10.6,
+      "windDirection": 238,
+      "windType": "Cross",
       "swell": {
         "height": 2.5,
-        "period": 6,
-        "direction": 182
+        "period": 5,
+        "direction": 192
       },
-      "ratingKey": "POOR_TO_FAIR",
+      "ratingKey": "POOR",
       "airTemp": 76
     },
     {
@@ -2706,15 +2706,15 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 11.9,
-      "windDirection": 289,
-      "windType": "Offshore",
+      "windSpeed": 10.6,
+      "windDirection": 238,
+      "windType": "Cross",
       "swell": {
-        "height": 2.4,
-        "period": 6,
-        "direction": 182
+        "height": 2.5,
+        "period": 5,
+        "direction": 191
       },
-      "ratingKey": "POOR_TO_FAIR",
+      "ratingKey": "POOR",
       "airTemp": 76
     },
     {
@@ -2723,16 +2723,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.7,
-      "windDirection": 312,
-      "windType": "Offshore",
+      "windSpeed": 13.9,
+      "windDirection": 181,
+      "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 6,
-        "direction": 181
+        "height": 2.6,
+        "period": 5,
+        "direction": 189
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 81
+      "ratingKey": "POOR",
+      "airTemp": 77
     },
     {
       "timestamp": 1784142000,
@@ -2740,475 +2740,475 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 16.7,
-      "windDirection": 312,
-      "windType": "Offshore",
+      "windSpeed": 13.9,
+      "windDirection": 181,
+      "windType": "Onshore",
       "swell": {
-        "height": 2.1,
-        "period": 6,
-        "direction": 182
+        "height": 2.9,
+        "period": 5,
+        "direction": 187
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 81
+      "ratingKey": "POOR",
+      "airTemp": 77
     },
     {
       "timestamp": 1784145600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 16.7,
-      "windDirection": 312,
-      "windType": "Offshore",
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 13.9,
+      "windDirection": 181,
+      "windType": "Onshore",
       "swell": {
-        "height": 2,
-        "period": 6,
-        "direction": 182
+        "height": 3.4,
+        "period": 5,
+        "direction": 186
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 81
+      "ratingKey": "POOR",
+      "airTemp": 77
     },
     {
       "timestamp": 1784149200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 18,
-      "windDirection": 340,
-      "windType": "Offshore",
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.6,
+      "windDirection": 189,
+      "windType": "Onshore",
       "swell": {
-        "height": 1.9,
-        "period": 6,
-        "direction": 182
+        "height": 4,
+        "period": 5,
+        "direction": 186
       },
       "ratingKey": "POOR",
-      "airTemp": 81
+      "airTemp": 77
     },
     {
       "timestamp": 1784152800,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 18,
-      "windDirection": 340,
-      "windType": "Offshore",
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.6,
+      "windDirection": 189,
+      "windType": "Onshore",
       "swell": {
-        "height": 1.9,
-        "period": 6,
-        "direction": 183
+        "height": 4,
+        "period": 5,
+        "direction": 186
       },
       "ratingKey": "POOR",
-      "airTemp": 81
+      "airTemp": 77
     },
     {
       "timestamp": 1784156400,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 18,
-      "windDirection": 340,
-      "windType": "Offshore",
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.6,
+      "windDirection": 189,
+      "windType": "Onshore",
       "swell": {
-        "height": 1.8,
+        "height": 3.7,
         "period": 6,
         "direction": 184
       },
       "ratingKey": "POOR",
-      "airTemp": 81
+      "airTemp": 77
     },
     {
       "timestamp": 1784160000,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 19,
-      "windDirection": 334,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 10.5,
+      "windDirection": 303,
       "windType": "Offshore",
       "swell": {
-        "height": 1.7,
+        "height": 3.5,
         "period": 6,
-        "direction": 184
+        "direction": 180
       },
-      "ratingKey": "POOR",
+      "ratingKey": "POOR_TO_FAIR",
       "airTemp": 79
     },
     {
       "timestamp": 1784163600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 19,
-      "windDirection": 334,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 10.5,
+      "windDirection": 303,
       "windType": "Offshore",
       "swell": {
-        "height": 1.7,
+        "height": 3.3,
         "period": 6,
-        "direction": 185
+        "direction": 178
       },
-      "ratingKey": "POOR",
+      "ratingKey": "POOR_TO_FAIR",
       "airTemp": 79
     },
     {
       "timestamp": 1784167200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 19,
-      "windDirection": 334,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 10.5,
+      "windDirection": 303,
       "windType": "Offshore",
       "swell": {
-        "height": 1.7,
+        "height": 3.2,
         "period": 6,
-        "direction": 184
+        "direction": 175
       },
-      "ratingKey": "POOR",
+      "ratingKey": "POOR_TO_FAIR",
       "airTemp": 79
     },
     {
       "timestamp": 1784170800,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 13.4,
-      "windDirection": 346,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.4,
+      "windDirection": 339,
       "windType": "Offshore",
       "swell": {
-        "height": 1.6,
+        "height": 3.1,
         "period": 6,
-        "direction": 184
+        "direction": 175
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1784174400,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 13.4,
-      "windDirection": 346,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.4,
+      "windDirection": 339,
       "windType": "Offshore",
       "swell": {
-        "height": 1.6,
+        "height": 3.1,
         "period": 6,
-        "direction": 184
+        "direction": 174
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1784178000,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 13.4,
-      "windDirection": 346,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15.4,
+      "windDirection": 339,
       "windType": "Offshore",
       "swell": {
-        "height": 1.5,
+        "height": 3,
         "period": 6,
-        "direction": 184
+        "direction": 174
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1784181600,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 9.7,
-      "windDirection": 344,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 13.9,
+      "windDirection": 326,
       "windType": "Offshore",
       "swell": {
-        "height": 1.5,
+        "height": 2.9,
         "period": 6,
-        "direction": 183
+        "direction": 174
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1784185200,
       "utcOffset": -4,
-      "surfMin": 1,
-      "surfMax": 2,
-      "humanRelation": "Knee to thigh",
-      "windSpeed": 9.7,
-      "windDirection": 344,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 13.9,
+      "windDirection": 326,
       "windType": "Offshore",
       "swell": {
-        "height": 1.4,
+        "height": 2.8,
         "period": 6,
-        "direction": 183
+        "direction": 174
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1784188800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.7,
-      "windDirection": 344,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 13.9,
+      "windDirection": 326,
       "windType": "Offshore",
       "swell": {
-        "height": 1.3,
-        "period": 5,
-        "direction": 184
+        "height": 2.7,
+        "period": 6,
+        "direction": 175
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 73
+      "airTemp": 74
     },
     {
       "timestamp": 1784192400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 7.8,
-      "windDirection": 329,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.6,
+      "windDirection": 346,
       "windType": "Offshore",
       "swell": {
-        "height": 1.3,
-        "period": 5,
-        "direction": 183
+        "height": 2.6,
+        "period": 6,
+        "direction": 176
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1784196000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 7.8,
-      "windDirection": 329,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.6,
+      "windDirection": 346,
       "windType": "Offshore",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 128
+        "height": 2.5,
+        "period": 6,
+        "direction": 177
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1784199600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 7.8,
-      "windDirection": 329,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.6,
+      "windDirection": 346,
       "windType": "Offshore",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 127
+        "height": 2.3,
+        "period": 6,
+        "direction": 179
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1784203200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 8.9,
-      "windDirection": 294,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 8.5,
+      "windDirection": 338,
       "windType": "Offshore",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 127
+        "height": 2.2,
+        "period": 6,
+        "direction": 181
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1784206800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 8.9,
-      "windDirection": 294,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 8.5,
+      "windDirection": 338,
       "windType": "Offshore",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 126
+        "height": 2.1,
+        "period": 6,
+        "direction": 181
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1784210400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 8.9,
-      "windDirection": 294,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 8.5,
+      "windDirection": 338,
       "windType": "Offshore",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 125
+        "height": 2,
+        "period": 6,
+        "direction": 179
       },
       "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "airTemp": 73
     },
     {
       "timestamp": 1784214000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 8.3,
-      "windDirection": 258,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 9.6,
+      "windDirection": 264,
       "windType": "Cross",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 126
+        "height": 2,
+        "period": 6,
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 76
     },
     {
       "timestamp": 1784217600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 8.3,
-      "windDirection": 258,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 9.6,
+      "windDirection": 264,
       "windType": "Cross",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 126
+        "height": 1.8,
+        "period": 6,
+        "direction": 180
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 76
     },
     {
       "timestamp": 1784221200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 8.3,
-      "windDirection": 258,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 9.6,
+      "windDirection": 264,
       "windType": "Cross",
       "swell": {
-        "height": 0.8,
-        "period": 9,
-        "direction": 128
+        "height": 1.8,
+        "period": 6,
+        "direction": 179
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 76
     },
     {
       "timestamp": 1784224800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 11.6,
-      "windDirection": 195,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.2,
+      "windDirection": 210,
       "windType": "Onshore",
       "swell": {
-        "height": 0.8,
-        "period": 9,
-        "direction": 127
+        "height": 1.8,
+        "period": 6,
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 77
     },
     {
       "timestamp": 1784228400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 11.6,
-      "windDirection": 195,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.2,
+      "windDirection": 210,
       "windType": "Onshore",
       "swell": {
-        "height": 0.9,
-        "period": 9,
-        "direction": 129
+        "height": 1.8,
+        "period": 6,
+        "direction": 179
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 77
     },
     {
       "timestamp": 1784232000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 11.6,
-      "windDirection": 195,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.2,
+      "windDirection": 210,
       "windType": "Onshore",
       "swell": {
-        "height": 0.8,
-        "period": 8,
-        "direction": 128
+        "height": 1.9,
+        "period": 5,
+        "direction": 180
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 77
     },
     {
       "timestamp": 1784235600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 21.4,
-      "windDirection": 184,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 17.3,
+      "windDirection": 208,
       "windType": "Onshore",
       "swell": {
-        "height": 0.8,
-        "period": 8,
-        "direction": 128
+        "height": 2.1,
+        "period": 5,
+        "direction": 180
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 75
+      "ratingKey": "POOR",
+      "airTemp": 77
     },
     {
       "timestamp": 1784239200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 21.4,
-      "windDirection": 184,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 17.3,
+      "windDirection": 208,
       "windType": "Onshore",
       "swell": {
-        "height": 1.8,
-        "period": 3,
-        "direction": 190
+        "height": 2.3,
+        "period": 6,
+        "direction": 178
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 75
+      "ratingKey": "POOR",
+      "airTemp": 77
     },
     {
       "timestamp": 1784242800,
@@ -3216,16 +3216,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 21.4,
-      "windDirection": 184,
+      "windSpeed": 17.3,
+      "windDirection": 208,
       "windType": "Onshore",
       "swell": {
-        "height": 2.2,
-        "period": 4,
-        "direction": 192
+        "height": 2.6,
+        "period": 5,
+        "direction": 182
       },
-      "ratingKey": "VERY_POOR",
-      "airTemp": 75
+      "ratingKey": "POOR",
+      "airTemp": 77
     },
     {
       "timestamp": 1784246400,
@@ -3233,16 +3233,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.8,
-      "windDirection": 224,
+      "windSpeed": 19.9,
+      "windDirection": 199,
       "windType": "Onshore",
       "swell": {
-        "height": 2.5,
+        "height": 2.8,
         "period": 4,
-        "direction": 193
+        "direction": 186
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 75
     },
     {
       "timestamp": 1784250000,
@@ -3250,16 +3250,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.8,
-      "windDirection": 224,
+      "windSpeed": 19.9,
+      "windDirection": 199,
       "windType": "Onshore",
       "swell": {
-        "height": 2.3,
-        "period": 4,
-        "direction": 197
+        "height": 2.8,
+        "period": 5,
+        "direction": 188
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 75
     },
     {
       "timestamp": 1784253600,
@@ -3267,16 +3267,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 14.8,
-      "windDirection": 224,
+      "windSpeed": 19.9,
+      "windDirection": 199,
       "windType": "Onshore",
       "swell": {
-        "height": 2.1,
-        "period": 4,
-        "direction": 197
+        "height": 2.7,
+        "period": 5,
+        "direction": 186
       },
       "ratingKey": "POOR",
-      "airTemp": 76
+      "airTemp": 75
     },
     {
       "timestamp": 1784257200,
@@ -3284,16 +3284,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.9,
-      "windDirection": 295,
+      "windSpeed": 3.5,
+      "windDirection": 346,
       "windType": "Offshore",
       "swell": {
-        "height": 1.7,
-        "period": 4,
-        "direction": 186
+        "height": 2.5,
+        "period": 5,
+        "direction": 183
       },
-      "ratingKey": "POOR",
-      "airTemp": 76
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 75
     },
     {
       "timestamp": 1784260800,
@@ -3301,16 +3301,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.9,
-      "windDirection": 295,
+      "windSpeed": 3.5,
+      "windDirection": 346,
       "windType": "Offshore",
       "swell": {
-        "height": 1.5,
-        "period": 4,
-        "direction": 179
+        "height": 2.3,
+        "period": 5,
+        "direction": 181
       },
-      "ratingKey": "POOR",
-      "airTemp": 76
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 75
     },
     {
       "timestamp": 1784264400,
@@ -3318,16 +3318,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.9,
-      "windDirection": 295,
+      "windSpeed": 3.5,
+      "windDirection": 346,
       "windType": "Offshore",
       "swell": {
-        "height": 1.4,
-        "period": 4,
-        "direction": 177
+        "height": 2.2,
+        "period": 5,
+        "direction": 179
       },
-      "ratingKey": "POOR",
-      "airTemp": 76
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 75
     },
     {
       "timestamp": 1784268000,
@@ -3335,16 +3335,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.8,
-      "windDirection": 271,
+      "windSpeed": 10,
+      "windDirection": 254,
       "windType": "Cross",
       "swell": {
-        "height": 1.4,
+        "height": 2,
         "period": 5,
-        "direction": 182
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784271600,
@@ -3352,16 +3352,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.8,
-      "windDirection": 271,
+      "windSpeed": 10,
+      "windDirection": 254,
       "windType": "Cross",
       "swell": {
-        "height": 1.6,
+        "height": 1.9,
         "period": 5,
         "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784275200,
@@ -3369,16 +3369,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 9.8,
-      "windDirection": 271,
+      "windSpeed": 10,
+      "windDirection": 254,
       "windType": "Cross",
       "swell": {
-        "height": 1.5,
+        "height": 1.8,
         "period": 5,
-        "direction": 176
+        "direction": 175
       },
       "ratingKey": "POOR",
-      "airTemp": 75
+      "airTemp": 76
     },
     {
       "timestamp": 1784278800,
@@ -3386,16 +3386,16 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.4,
-      "windDirection": 348,
+      "windSpeed": 13.1,
+      "windDirection": 290,
       "windType": "Offshore",
       "swell": {
-        "height": 1.5,
+        "height": 1.7,
         "period": 5,
-        "direction": 176
+        "direction": 174
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 75
     },
     {
       "timestamp": 1784282400,
@@ -3403,33 +3403,33 @@
       "surfMin": 1,
       "surfMax": 2,
       "humanRelation": "Knee to thigh",
-      "windSpeed": 10.4,
-      "windDirection": 348,
+      "windSpeed": 13.1,
+      "windDirection": 290,
       "windType": "Offshore",
       "swell": {
-        "height": 1.5,
+        "height": 1.6,
         "period": 5,
-        "direction": 176
+        "direction": 172
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 75
     },
     {
       "timestamp": 1784286000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 10.4,
-      "windDirection": 348,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 13.1,
+      "windDirection": 290,
       "windType": "Offshore",
       "swell": {
         "height": 1.5,
         "period": 5,
-        "direction": 178
+        "direction": 170
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 75
     },
     {
       "timestamp": 1784289600,
@@ -3437,16 +3437,16 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 9,
-      "windDirection": 335,
-      "windType": "Offshore",
+      "windSpeed": 9.7,
+      "windDirection": 274,
+      "windType": "Cross",
       "swell": {
-        "height": 1.4,
+        "height": 1.5,
         "period": 5,
-        "direction": 177
+        "direction": 170
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784293200,
@@ -3454,16 +3454,16 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 9,
-      "windDirection": 335,
-      "windType": "Offshore",
+      "windSpeed": 9.7,
+      "windDirection": 274,
+      "windType": "Cross",
       "swell": {
         "height": 1.4,
         "period": 5,
-        "direction": 177
+        "direction": 169
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784296800,
@@ -3471,16 +3471,16 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 9,
-      "windDirection": 335,
-      "windType": "Offshore",
+      "windSpeed": 9.7,
+      "windDirection": 274,
+      "windType": "Cross",
       "swell": {
         "height": 1.4,
         "period": 5,
-        "direction": 178
+        "direction": 168
       },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 72
+      "ratingKey": "POOR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784300400,
@@ -3488,16 +3488,16 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 11.4,
-      "windDirection": 9,
-      "windType": "Offshore",
+      "windSpeed": 10.5,
+      "windDirection": 245,
+      "windType": "Cross",
       "swell": {
         "height": 1.3,
         "period": 5,
-        "direction": 179
+        "direction": 171
       },
       "ratingKey": "POOR",
-      "airTemp": 71
+      "airTemp": 76
     },
     {
       "timestamp": 1784304000,
@@ -3505,16 +3505,16 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 11.4,
-      "windDirection": 9,
-      "windType": "Offshore",
+      "windSpeed": 10.5,
+      "windDirection": 245,
+      "windType": "Cross",
       "swell": {
         "height": 1.3,
         "period": 5,
-        "direction": 180
+        "direction": 170
       },
       "ratingKey": "POOR",
-      "airTemp": 71
+      "airTemp": 76
     },
     {
       "timestamp": 1784307600,
@@ -3522,16 +3522,16 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 11.4,
-      "windDirection": 9,
-      "windType": "Offshore",
+      "windSpeed": 10.5,
+      "windDirection": 245,
+      "windType": "Cross",
       "swell": {
-        "height": 1.3,
+        "height": 1.6,
         "period": 5,
-        "direction": 181
+        "direction": 195
       },
       "ratingKey": "POOR",
-      "airTemp": 71
+      "airTemp": 76
     },
     {
       "timestamp": 1784311200,
@@ -3539,523 +3539,523 @@
       "surfMin": 0,
       "surfMax": 1,
       "humanRelation": "Shin to knee",
-      "windSpeed": 4.5,
-      "windDirection": 316,
-      "windType": "Offshore",
+      "windSpeed": 13.7,
+      "windDirection": 241,
+      "windType": "Cross",
       "swell": {
-        "height": 1.3,
-        "period": 5,
-        "direction": 182
-      },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 70
-    },
-    {
-      "timestamp": 1784314800,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 4.5,
-      "windDirection": 316,
-      "windType": "Offshore",
-      "swell": {
-        "height": 1.2,
-        "period": 5,
-        "direction": 182
-      },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 70
-    },
-    {
-      "timestamp": 1784318400,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 4.5,
-      "windDirection": 316,
-      "windType": "Offshore",
-      "swell": {
-        "height": 0.8,
-        "period": 8,
-        "direction": 126
-      },
-      "ratingKey": "POOR_TO_FAIR",
-      "airTemp": 70
-    },
-    {
-      "timestamp": 1784322000,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.4,
-      "windDirection": 168,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.2,
-        "period": 5,
-        "direction": 183
-      },
-      "ratingKey": "POOR",
-      "airTemp": 72
-    },
-    {
-      "timestamp": 1784325600,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.4,
-      "windDirection": 168,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.2,
-        "period": 5,
-        "direction": 183
-      },
-      "ratingKey": "POOR",
-      "airTemp": 72
-    },
-    {
-      "timestamp": 1784329200,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.4,
-      "windDirection": 168,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.2,
-        "period": 5,
-        "direction": 186
-      },
-      "ratingKey": "POOR",
-      "airTemp": 72
-    },
-    {
-      "timestamp": 1784332800,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 16.7,
-      "windDirection": 193,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.5,
-        "period": 5,
-        "direction": 189
-      },
-      "ratingKey": "POOR",
-      "airTemp": 72
-    },
-    {
-      "timestamp": 1784336400,
-      "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 16.7,
-      "windDirection": 193,
-      "windType": "Onshore",
-      "swell": {
-        "height": 1.6,
+        "height": 1.7,
         "period": 5,
         "direction": 191
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 79
+    },
+    {
+      "timestamp": 1784314800,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 13.7,
+      "windDirection": 241,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.2,
+        "period": 5,
+        "direction": 156
+      },
+      "ratingKey": "POOR",
+      "airTemp": 79
+    },
+    {
+      "timestamp": 1784318400,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 13.7,
+      "windDirection": 241,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.1,
+        "period": 5,
+        "direction": 160
+      },
+      "ratingKey": "POOR",
+      "airTemp": 79
+    },
+    {
+      "timestamp": 1784322000,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 26.2,
+      "windDirection": 264,
+      "windType": "Cross",
+      "swell": {
+        "height": 1,
+        "period": 5,
+        "direction": 163
+      },
+      "ratingKey": "VERY_POOR",
+      "airTemp": 80
+    },
+    {
+      "timestamp": 1784325600,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 26.2,
+      "windDirection": 264,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.5,
+        "period": 5,
+        "direction": 170
+      },
+      "ratingKey": "VERY_POOR",
+      "airTemp": 80
+    },
+    {
+      "timestamp": 1784329200,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 26.2,
+      "windDirection": 264,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.6,
+        "period": 5,
+        "direction": 165
+      },
+      "ratingKey": "VERY_POOR",
+      "airTemp": 80
+    },
+    {
+      "timestamp": 1784332800,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 17.5,
+      "windDirection": 272,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.7,
+        "period": 5,
+        "direction": 165
+      },
+      "ratingKey": "POOR",
+      "airTemp": 79
+    },
+    {
+      "timestamp": 1784336400,
+      "utcOffset": -4,
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 17.5,
+      "windDirection": 272,
+      "windType": "Cross",
+      "swell": {
+        "height": 1.8,
+        "period": 5,
+        "direction": 166
+      },
+      "ratingKey": "POOR",
+      "airTemp": 79
     },
     {
       "timestamp": 1784340000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 16.7,
-      "windDirection": 193,
-      "windType": "Onshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 17.5,
+      "windDirection": 272,
+      "windType": "Cross",
       "swell": {
-        "height": 1.6,
-        "period": 4,
-        "direction": 192
+        "height": 1.8,
+        "period": 5,
+        "direction": 168
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 79
     },
     {
       "timestamp": 1784343600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 14.4,
-      "windDirection": 214,
-      "windType": "Onshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 5.7,
+      "windDirection": 255,
+      "windType": "Cross",
       "swell": {
-        "height": 1.5,
-        "period": 4,
-        "direction": 194
+        "height": 1.8,
+        "period": 5,
+        "direction": 169
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 77
     },
     {
       "timestamp": 1784347200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 14.4,
-      "windDirection": 214,
-      "windType": "Onshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 5.7,
+      "windDirection": 255,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 15,
-        "direction": 140
+        "height": 1.8,
+        "period": 5,
+        "direction": 171
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 77
     },
     {
       "timestamp": 1784350800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 14.4,
-      "windDirection": 214,
-      "windType": "Onshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 5.7,
+      "windDirection": 255,
+      "windType": "Cross",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 140
+        "height": 1.7,
+        "period": 5,
+        "direction": 172
       },
       "ratingKey": "POOR",
-      "airTemp": 73
+      "airTemp": 77
     },
     {
       "timestamp": 1784354400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 14.9,
-      "windDirection": 341,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 9.5,
+      "windDirection": 177,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 140
+        "height": 1.7,
+        "period": 5,
+        "direction": 173
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 74
     },
     {
       "timestamp": 1784358000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 14.9,
-      "windDirection": 341,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 9.5,
+      "windDirection": 177,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 139
+        "height": 1.6,
+        "period": 5,
+        "direction": 174
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 74
     },
     {
       "timestamp": 1784361600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 14.9,
-      "windDirection": 341,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 9.5,
+      "windDirection": 177,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 139
+        "height": 1.8,
+        "period": 5,
+        "direction": 176
       },
       "ratingKey": "POOR",
-      "airTemp": 72
+      "airTemp": 74
     },
     {
       "timestamp": 1784365200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 13.3,
-      "windDirection": 356,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 6.9,
+      "windDirection": 223,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 139
+        "height": 2,
+        "period": 5,
+        "direction": 178
       },
       "ratingKey": "POOR",
-      "airTemp": 70
+      "airTemp": 73
     },
     {
       "timestamp": 1784368800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 13.3,
-      "windDirection": 356,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 6.9,
+      "windDirection": 223,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 138
+        "height": 1.8,
+        "period": 5,
+        "direction": 190
       },
       "ratingKey": "POOR",
-      "airTemp": 70
+      "airTemp": 73
     },
     {
       "timestamp": 1784372400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 13.3,
-      "windDirection": 356,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 6.9,
+      "windDirection": 223,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.5,
-        "period": 14,
-        "direction": 138
+        "height": 2.4,
+        "period": 5,
+        "direction": 176
       },
-      "ratingKey": "POOR",
-      "airTemp": 70
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784376000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 12.4,
-      "windDirection": 339,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 7.3,
+      "windDirection": 241,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 138
+        "height": 1.9,
+        "period": 5,
+        "direction": 161
       },
-      "ratingKey": "POOR",
-      "airTemp": 69
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784379600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 12.4,
-      "windDirection": 339,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 7.3,
+      "windDirection": 241,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 137
+        "height": 2.7,
+        "period": 5,
+        "direction": 176
       },
-      "ratingKey": "POOR",
-      "airTemp": 69
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784383200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 12.4,
-      "windDirection": 339,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 7.3,
+      "windDirection": 241,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 137
+        "height": 2.7,
+        "period": 6,
+        "direction": 177
       },
-      "ratingKey": "POOR",
-      "airTemp": 69
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 73
     },
     {
       "timestamp": 1784386800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 13.4,
-      "windDirection": 327,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 7,
+      "windDirection": 271,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 137
+        "height": 2.8,
+        "period": 6,
+        "direction": 178
       },
-      "ratingKey": "POOR",
-      "airTemp": 73
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1784390400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 13.4,
-      "windDirection": 327,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 7,
+      "windDirection": 271,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 136
+        "height": 2.9,
+        "period": 6,
+        "direction": 179
       },
-      "ratingKey": "POOR",
-      "airTemp": 73
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1784394000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 13.4,
-      "windDirection": 327,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 7,
+      "windDirection": 271,
+      "windType": "Cross",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 136
+        "height": 3,
+        "period": 6,
+        "direction": 178
       },
-      "ratingKey": "POOR",
-      "airTemp": 73
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 76
     },
     {
       "timestamp": 1784397600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.9,
-      "windDirection": 305,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 4.9,
+      "windDirection": 168,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.4,
-        "period": 14,
-        "direction": 136
+        "height": 3,
+        "period": 6,
+        "direction": 179
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 78
     },
     {
       "timestamp": 1784401200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.9,
-      "windDirection": 305,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 4.9,
+      "windDirection": 168,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.4,
-        "period": 13,
-        "direction": 136
+        "height": 3,
+        "period": 6,
+        "direction": 179
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 78
     },
     {
       "timestamp": 1784404800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.9,
-      "windDirection": 305,
-      "windType": "Offshore",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 4.9,
+      "windDirection": 168,
+      "windType": "Onshore",
       "swell": {
-        "height": 0.4,
-        "period": 13,
-        "direction": 136
+        "height": 2.9,
+        "period": 6,
+        "direction": 179
       },
-      "ratingKey": "POOR",
-      "airTemp": 75
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 78
     },
     {
       "timestamp": 1784408400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 7.5,
-      "windDirection": 266,
-      "windType": "Cross",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.9,
+      "windDirection": 313,
+      "windType": "Offshore",
       "swell": {
-        "height": 0.4,
-        "period": 13,
-        "direction": 136
+        "height": 2.9,
+        "period": 6,
+        "direction": 179
       },
-      "ratingKey": "POOR",
-      "airTemp": 77
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 85
     },
     {
       "timestamp": 1784412000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 7.5,
-      "windDirection": 266,
-      "windType": "Cross",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.9,
+      "windDirection": 313,
+      "windType": "Offshore",
       "swell": {
-        "height": 0.4,
-        "period": 13,
-        "direction": 136
+        "height": 2.9,
+        "period": 6,
+        "direction": 178
       },
-      "ratingKey": "POOR",
-      "airTemp": 77
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 85
     },
     {
       "timestamp": 1784415600,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 7.5,
-      "windDirection": 266,
-      "windType": "Cross",
+      "surfMin": 1,
+      "surfMax": 2,
+      "humanRelation": "Knee to thigh",
+      "windSpeed": 12.9,
+      "windDirection": 313,
+      "windType": "Offshore",
       "swell": {
-        "height": 0.5,
-        "period": 13,
-        "direction": 136
+        "height": 3,
+        "period": 6,
+        "direction": 178
       },
-      "ratingKey": "POOR",
-      "airTemp": 77
+      "ratingKey": "POOR_TO_FAIR",
+      "airTemp": 85
     },
     {
       "timestamp": 1784419200,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 10,
-      "windDirection": 304,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 17.6,
+      "windDirection": 291,
       "windType": "Offshore",
       "swell": {
-        "height": 0.5,
-        "period": 13,
-        "direction": 136
+        "height": 3.2,
+        "period": 6,
+        "direction": 177
       },
       "ratingKey": "POOR",
       "airTemp": 77
@@ -4063,16 +4063,16 @@
     {
       "timestamp": 1784422800,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 10,
-      "windDirection": 304,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 17.6,
+      "windDirection": 291,
       "windType": "Offshore",
       "swell": {
-        "height": 0.5,
-        "period": 13,
-        "direction": 136
+        "height": 3.3,
+        "period": 6,
+        "direction": 176
       },
       "ratingKey": "POOR",
       "airTemp": 77
@@ -4080,16 +4080,16 @@
     {
       "timestamp": 1784426400,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 10,
-      "windDirection": 304,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 17.6,
+      "windDirection": 291,
       "windType": "Offshore",
       "swell": {
-        "height": 0.5,
-        "period": 13,
-        "direction": 136
+        "height": 3.3,
+        "period": 6,
+        "direction": 176
       },
       "ratingKey": "POOR",
       "airTemp": 77
@@ -4097,19 +4097,19 @@
     {
       "timestamp": 1784430000,
       "utcOffset": -4,
-      "surfMin": 0,
-      "surfMax": 1,
-      "humanRelation": "Shin to knee",
-      "windSpeed": 9.6,
-      "windDirection": 323,
+      "surfMin": 2,
+      "surfMax": 3,
+      "humanRelation": "Thigh to waist",
+      "windSpeed": 15,
+      "windDirection": 292,
       "windType": "Offshore",
       "swell": {
-        "height": 0.5,
-        "period": 13,
-        "direction": 136
+        "height": 3.2,
+        "period": 6,
+        "direction": 175
       },
       "ratingKey": "POOR",
-      "airTemp": 74
+      "airTemp": 76
     }
   ],
   "tides": [
