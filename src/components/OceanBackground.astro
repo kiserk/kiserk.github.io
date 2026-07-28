@@ -1,120 +1,80 @@
 ---
-
+// Site-wide background: one looping water clip over a matching still frame.
+//
+// Deliberately dumb. There is no canvas, no live swell data, and no timers —
+// the still frame is a CSS background behind the <video>, so every failure mode
+// (autoplay blocked, codec unsupported, reduced motion, decoder hiccup, Save-Data)
+// degrades to the same image with nothing to flash through.
+const CLIP = '/water/IMG_5047_twilight_mono';
 ---
 
-<video
-  id="water-video"
-  class="fixed inset-0 -z-10 w-screen h-screen object-cover"
-  autoplay
-  muted
-  loop
-  playsinline
-  preload="auto"
-  poster="/water/IMG_5047_twilight_mono.jpg"
-  aria-hidden="true"
-  style="display:none"
->
-  <source src="/water/IMG_5047_twilight_mono.mp4" type="video/mp4" />
-  <source src="/water/IMG_5047_twilight_mono.webm" type="video/webm" />
-</video>
-<canvas id="ocean-canvas" class="fixed inset-0 -z-10 w-screen h-screen"></canvas>
-<div
-  class="fixed inset-0 w-screen h-screen pointer-events-none"
-  style="z-index: -5; background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.24) 48%, rgba(0,0,0,0.24) 85%, rgba(0,0,0,0.55) 100%);"
-  aria-hidden="true"
-></div>
+<div class="water-bg" aria-hidden="true">
+  <video
+    id="water-video"
+    class="water-bg__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster={`${CLIP}.jpg`}
+    tabindex="-1"
+  >
+    <source src={`${CLIP}.mp4`} type="video/mp4" />
+    <source src={`${CLIP}.webm`} type="video/webm" />
+  </video>
+</div>
+
+<div class="water-scrim" aria-hidden="true"></div>
+
+<style>
+  .water-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    /* The still frame sits behind the video, and an opaque colour sits behind
+       that, so there is never bare page to flash white through. */
+    background-color: #0a0d12;
+    background-image: url('/water/IMG_5047_twilight_mono.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .water-bg__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Reduced motion (and Save-Data, via the script below): keep the still frame. */
+  @media (prefers-reduced-motion: reduce) {
+    .water-bg__video {
+      display: none;
+    }
+  }
+
+  .water-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.24) 48%,
+      rgba(0, 0, 0, 0.24) 85%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+</style>
 
 <script>
-  import { getOceanData } from '../scripts/ocean-data';
-  import { computeVisuals } from '../scripts/ocean-palette';
-  import { OceanRenderer } from '../scripts/ocean-renderer';
-
-  const DATA_REFRESH_INTERVAL = 30 * 60 * 1000;
-
-  function applyTextStyles(visuals: { textColor: string; textShadow: string }) {
-    document.documentElement.style.setProperty('--text-color', visuals.textColor);
-    document.documentElement.style.setProperty('--text-shadow', visuals.textShadow);
-  }
-
-  // Plain looping video unless the device/user prefers otherwise, in which
-  // case we fall back to the procedural ocean canvas.
-  function canUseVideo(): boolean {
-    try {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-      const conn = (navigator as any).connection;
-      if (conn && conn.saveData) return false;
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  function init() {
-    const video = document.getElementById('water-video') as HTMLVideoElement | null;
-    const oceanCanvas = document.getElementById('ocean-canvas') as HTMLCanvasElement | null;
-    if (!video || !oceanCanvas) return;
-
-    let oceanRenderer: OceanRenderer | null = null;
-    let intervalId: number | undefined;
-
-    function startCanvasFallback() {
-      if (oceanRenderer) return;
-      try {
-        video!.pause();
-      } catch {
-        // ignore
-      }
-      video!.style.display = 'none';
-      oceanCanvas!.style.display = '';
-      oceanRenderer = new OceanRenderer(oceanCanvas!);
-      const initialVisuals = computeVisuals(null);
-      oceanRenderer.updateVisuals(initialVisuals);
-      applyTextStyles(initialVisuals);
-      oceanRenderer.start();
-
-      const refresh = async () => {
-        try {
-          const data = await getOceanData();
-          const visuals = computeVisuals(data);
-          oceanRenderer?.updateVisuals(visuals);
-          applyTextStyles(visuals);
-        } catch {
-          // data fetch failed; renderer keeps last known visuals
-        }
-      };
-      refresh();
-      intervalId = window.setInterval(refresh, DATA_REFRESH_INTERVAL);
-
-      const onResize = () => oceanRenderer?.resize();
-      window.addEventListener('resize', onResize);
-      window.addEventListener('unload', () => {
-        if (intervalId) clearInterval(intervalId);
-        window.removeEventListener('resize', onResize);
-        oceanRenderer?.destroy();
-      });
-    }
-
-    if (canUseVideo()) {
-      oceanCanvas.style.display = 'none';
-      video.style.display = '';
-      applyTextStyles(computeVisuals(null));
-
-      const playAttempt = video.play();
-      if (playAttempt && typeof playAttempt.catch === 'function') {
-        playAttempt.catch(() => startCanvasFallback());
-      }
-      // If autoplay silently fails (still paused), fall back.
-      window.setTimeout(() => {
-        if (video.paused || video.readyState < 2) startCanvasFallback();
-      }, 5000);
-    } else {
-      startCanvasFallback();
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  // Visitors on a metered/limited connection get the still frame instead of a
+  // multi-megabyte clip. Dropping the element also stops it buffering.
+  const conn = (navigator as unknown as { connection?: { saveData?: boolean } }).connection;
+  if (conn?.saveData) {
+    document.getElementById('water-video')?.remove();
   }
 </script>

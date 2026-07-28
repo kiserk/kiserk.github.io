@@ -1,6 +1,6 @@
 # Karl Kiser — Personal Website
 
-A personal website and job-search landing site for Karl Kiser, hosted free on GitHub Pages. It pairs a minimal, design-forward landing page with a data-driven ambient ocean background, full CV/Publications/Patents/Projects content, and an interactive live surf conditions page. A companion GitHub Action emails a daily Rockaway Beach surf report.
+A personal website and job-search landing site for Karl Kiser, hosted free on GitHub Pages. It pairs a minimal, design-forward landing page with an ambient looping water background, full CV/Publications/Patents/Projects content, and an interactive live surf conditions page. A companion GitHub Action emails a daily Rockaway Beach surf report.
 
 **Live site:** https://karlkiser.com (custom domain, GitHub Pages — deploys from `main`)
 
@@ -25,7 +25,7 @@ This file exists to give **context continuity between chats / sessions**. If you
 | SEO | JSON-LD + `@astrojs/sitemap` + robots.txt | Person/WebSite/ScholarlyArticle/patent schema; AI crawlers allowed |
 | Analytics | GoatCounter | Free, cookieless; custom click events via `data-goatcounter-click` |
 | Deploy CI | GitHub Actions | `.github/workflows/deploy.yml` |
-| Background render | HTML5 Canvas 2D | Custom engine, no WebGL/libraries |
+| Background | Looping `<video>` + still frame | No canvas, no data, no timers |
 | Email | [Resend](https://resend.com) free tier | Surf report only; needs `RESEND_API_KEY` secret |
 | Data APIs | Open-Meteo (Marine + Weather), NOAA CO-OPS Tides | All free, no API key required |
 | Surf face height | Surfline (free forecast JSON, snapshotted) | Via Playwright; see "Surfline snapshots" below |
@@ -73,9 +73,10 @@ personal_website/
 │   ├── layouts/
 │   │   └── BaseLayout.astro     # HTML shell + full SEO meta, JSON-LD, GoatCounter, global CSS
 │   ├── components/
-│   │   ├── Header.astro         # nav (CV, Publications, Patents, Projects, Swell) + mobile menu
+│   │   ├── Header.astro         # nav (Projects, CV, Publications, Patents, Swell, Contact) + mycelium glyph + mobile menu
 │   │   ├── Footer.astro         # minimal footer (ambient conditions link + Privacy)
-│   │   └── OceanBackground.astro# canvas island; wires data → palette → renderer (static frame if reduced-motion)
+│   │   ├── OceanBackground.astro# looping water clip + still-frame fallback + scrim
+│   │   └── MyceliumEasterEgg.astro # stumble-upon growth sim (dwell to seed, hold to enter)
 │   ├── pages/
 │   │   ├── index.astro          # landing: name, tagline, open-to, contact + profile links
 │   │   ├── cv.astro             # professional summary, experience, skills, education
@@ -87,9 +88,8 @@ personal_website/
 │   │   ├── privacy.astro        # analytics privacy note
 │   │   └── 404.astro            # static 404 (noindex)
 │   ├── scripts/
-│   │   ├── ocean-data.ts        # fetch+cache marine/weather/tide → OceanData
-│   │   ├── ocean-palette.ts     # OceanData → OceanVisuals (colors, motion)
-│   │   ├── ocean-renderer.ts    # Canvas 2D engine, animation loop
+│   │   ├── mycelium-growth.ts   # species/morphology presets for the easter egg
+│   │   ├── mycelium-renderer.ts # Neighbour-Sensing growth sim (Canvas 2D)
 │   │   ├── surf-spots.ts        # 16 surf spot defs + offshore-wind logic (+ surflineSpotId)
 │   │   └── surf-page.ts         # /swell client island: fetch + render (Surfline-preferred)
 │   └── styles/
@@ -113,26 +113,32 @@ personal_website/
 
 ---
 
-## The ambient ocean background
+## The ambient water background
 
-The signature visual element. A subtle, full-viewport Canvas background whose colors and motion **symbolically reflect live ocean conditions at Rockaway Beach, NY** — wave height, swell period, wind (especially offshore), tide, time of day, and cloud cover. Intent: expressive and subtle, *not* an overt data display.
+The signature visual element: one looping, desaturated water clip
+(`public/water/IMG_5047_twilight_mono.*`) behind every page, under a fixed
+top-and-bottom gradient scrim that keeps text legible.
 
-Data flows through three modules, orchestrated by `OceanBackground.astro`:
+`OceanBackground.astro` is deliberately dumb — no canvas, no live data, no
+timers. The still frame (`.jpg`) is a CSS `background-image` on the wrapper, and
+an opaque `#0a0d12` sits behind *that*, so every failure mode degrades to the
+same image with nothing to flash through:
 
-```mermaid
-flowchart LR
-    A["ocean-data.ts\nfetch + cache APIs"] -->|OceanData| B["ocean-palette.ts\nmap to visuals"]
-    B -->|OceanVisuals| C["ocean-renderer.ts\nCanvas 2D draw loop"]
-    D["OceanBackground.astro\nclient island"] --> A
-    D --> B
-    D --> C
-```
+| Condition | Result |
+| --- | --- |
+| Autoplay blocked (iOS low-power) | `poster` frame shows |
+| Codec unsupported / decode hiccup | wrapper's background image shows |
+| `prefers-reduced-motion: reduce` | video hidden via CSS, still frame shows |
+| `navigator.connection.saveData` | `<video>` removed, still frame shows |
 
-1. **`ocean-data.ts`** — `getOceanData()` fetches Open-Meteo Marine, Open-Meteo Weather, and NOAA tides (Sandy Hook station `8531680`) in parallel, interpolates the current tide and detects offshore wind, and caches to `localStorage` (~30 min). Falls back to sane defaults if a source fails. **Timezone note:** the "current hour" lookup is normalized to `America/New_York` so non-Eastern visitors still index the right hourly bucket.
-2. **`ocean-palette.ts`** — `computeVisuals(data)` interpolates an HSL palette between time-of-day anchors, then maps wave height/period/wind/tide/cloud cover onto motion parameters (amplitude, speed, complexity, smoothness, horizon position). Also picks a contrast-safe `textColor` / `textShadow`.
-3. **`ocean-renderer.ts`** — `OceanRenderer` class draws a 5-layer composition (sky, water, undulating horizon, horizon blend, depth shimmer) with `requestAnimationFrame`, smoothly lerps between visual states, handles retina scaling and mobile perf, and exposes `start()` / `updateVisuals()` / `resize()` / `destroy()`.
+Text over it uses the static `--text-color` / `--text-shadow` tokens from
+`global.css`.
 
-`OceanBackground.astro` sets `--text-color` / `--text-shadow` CSS vars so page text stays legible over whatever the background is doing. It refreshes data every 30 min and **cleans up** its interval + resize listener on `unload`.
+> **History:** this used to be a Canvas engine whose palette and motion tracked
+> live Rockaway swell/tide/wind data (`ocean-data.ts`, `ocean-palette.ts`,
+> `ocean-renderer.ts`). It was removed in favour of the clip — the live surf data
+> now lives only on `/swell` and in the daily email, which is where it reads as
+> information rather than decoration.
 
 ---
 
@@ -201,7 +207,7 @@ Both the email footer and the `/swell` footnote state which source is in use. Do
 - **Tailwind v4** uses the Vite plugin + `@import "tailwindcss"` in `global.css` and a `@theme { ... }` block for tokens — not a `tailwind.config.js`.
 - **Text legibility over the canvas** relies on the `--text-color` / `--text-shadow` vars set by `OceanBackground.astro`. New pages placed over the background should use `var(--text-color, ...)`.
 - **Don't commit `Career/` or `scraper_reference/`.** The former is gitignored; the latter is not — watch out.
-- **Surf data paths:** `src/scripts/ocean-data.ts` (browser, ambient background) and `scripts/surf-report.mjs` (Node, email) both read live Open-Meteo/NOAA. A third path — `scripts/surfline-snapshot.mjs` (Playwright, CI/local) — writes static Surfline JSON that both `surf-page.ts` and `surf-report.mjs` *prefer* when fresh. Keep the snapshot's normalized schema in sync with the consumers if you change it.
+- **Surf data paths:** `scripts/surf-report.mjs` (Node, email) reads live Open-Meteo/NOAA. A second path — `scripts/surfline-snapshot.mjs` (Playwright, CI/local) — writes static Surfline JSON that both `surf-page.ts` and `surf-report.mjs` *prefer* when fresh. Keep the snapshot's normalized schema in sync with the consumers if you change it.
 - **No comments that just narrate code** — keep them for intent/trade-offs only (existing house style).
 
 ---
