@@ -1,9 +1,19 @@
 ---
-// Site-wide, ignorable easter egg. Dwell the cursor and it morphs into a
-// mycelium tip; press-and-hold and the page dissolves into a borderless growth
-// sim (src/scripts/mycelium-renderer.ts). ESC or the subtle ✕ (top-right, the
-// touch exit) dissolves back. Decorative only
-// (aria-hidden), so it has no effect on content, SEO, or crawlers.
+// Site-wide mycelium easter egg — meant to be stumbled into, never advertised.
+//
+// Rest the cursor and it morphs into a hyphal tip while a small colony blooms
+// where it sits. Press and hold and the page dissolves into the full growth sim
+// (src/scripts/mycelium-renderer.ts). ESC or the ✕ returns.
+//
+// Three invariants keep a decorative toy from breaking a working site:
+//   1. The bloom is bounded (radius + tip cap) and continuously erased, so it
+//      settles into a small living cluster instead of creeping over the page.
+//   2. An uncommitted bloom recedes on its own after SEED_LIFE_MS, leaving no
+//      trace — a visitor who parks the cursor and reads is never left with
+//      artefacts on the background.
+//   3. Nothing is click-catching except the deliberate full-screen mode. Idle
+//      and blooming are `pointer-events: none`, so a link is always reachable.
+// Decorative (aria-hidden while idle), so it has no effect on content or SEO.
 ---
 
 <div id="myc-cursor" aria-hidden="true">
@@ -23,12 +33,12 @@
 <div id="myc-overlay" aria-hidden="true" data-state="idle">
   <canvas id="myc-canvas"></canvas>
   <canvas id="myc-fx"></canvas>
-  <button id="myc-exit" type="button" aria-label="Exit">
+  <button id="myc-exit" type="button" aria-label="Leave the mycelium">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
       <path d="M6 6 L18 18 M18 6 L6 18" />
     </svg>
   </button>
-  <span id="myc-hint">esc / tap ✕ to return</span>
+  <span id="myc-hint">click to feed · arrows to steer · <b>esc to return</b></span>
 </div>
 
 <style>
@@ -58,12 +68,12 @@
     inset: 0;
     z-index: 60;
     opacity: 0;
+    /* Idle and blooming are inert: a link is always reachable. Only the
+       deliberate full-screen mode takes pointer events. */
     pointer-events: none;
-    transition: opacity 0.6s ease;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0s linear 0.6s;
   }
-  /* Semi-transparent dark veil: the dwell "seed" grows over the live page
-     (transparent), then a translucent scrim dissolves in when the game goes
-     active — darkening the page/ocean for contrast while keeping it visible. */
   #myc-overlay::before {
     content: '';
     position: absolute;
@@ -72,18 +82,27 @@
     opacity: 0;
     transition: opacity 0.8s ease;
   }
-  #myc-overlay[data-state='seed'] {
+
+  /* Bloom: the colony is visible over the live page, nothing is captured.
+     Also the state used while a colony dissolves back out. */
+  #myc-overlay[data-state='bloom'] {
     opacity: 1;
+    visibility: visible;
     pointer-events: none;
+    transition: opacity 0.6s ease, visibility 0s;
   }
-  #myc-overlay[data-state='active'] {
+
+  #myc-overlay[data-state='game'] {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     cursor: none;
+    transition: opacity 0.6s ease, visibility 0s;
   }
-  #myc-overlay[data-state='active']::before {
+  #myc-overlay[data-state='game']::before {
     opacity: 1;
   }
+
   #myc-canvas,
   #myc-fx {
     position: absolute;
@@ -92,25 +111,38 @@
     height: 100%;
     display: block;
   }
+
+  /* Freeze the page behind the sim so returning puts you back where you were. */
+  :global(body.myc-active) {
+    overflow: hidden;
+  }
+
+  /* Entering can happen by accident, so the way out is stated plainly and
+     immediately — no fade-in delay, no whisper-grey. */
   #myc-hint {
     position: fixed;
     bottom: 1.25rem;
     left: 50%;
     transform: translateX(-50%);
     font-family: ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.625rem;
-    letter-spacing: 0.25em;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(220, 230, 226, 0.4);
+    white-space: nowrap;
+    color: rgba(226, 236, 232, 0.72);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 1s ease 0.6s;
+    transition: opacity 0.35s ease;
   }
-  #myc-overlay[data-state='active'] #myc-hint {
+  #myc-hint b {
+    font-weight: 400;
+    color: rgba(150, 226, 198, 0.95);
+  }
+  #myc-overlay[data-state='game'] #myc-hint {
     opacity: 1;
   }
 
-  /* Subtle, always-tappable exit (essential on touch where there's no ESC). */
   #myc-exit {
     position: fixed;
     top: max(0.9rem, env(safe-area-inset-top));
@@ -121,31 +153,31 @@
     height: 40px;
     padding: 0;
     border-radius: 999px;
-    border: 1px solid rgba(220, 230, 226, 0.22);
-    background: rgba(8, 12, 18, 0.32);
-    color: rgba(220, 230, 226, 0.55);
+    border: 1px solid rgba(220, 230, 226, 0.32);
+    background: rgba(8, 12, 18, 0.42);
+    color: rgba(226, 236, 232, 0.8);
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.6s ease 0.3s, color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    transition: opacity 0.35s ease, color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
   }
-  #myc-overlay[data-state='active'] #myc-exit {
-    opacity: 0.55;
+  #myc-overlay[data-state='game'] #myc-exit {
+    opacity: 0.85;
     pointer-events: auto;
   }
   #myc-exit:hover,
   #myc-exit:focus-visible {
     opacity: 1;
-    color: rgba(232, 240, 236, 0.95);
-    border-color: rgba(220, 230, 226, 0.5);
-    background: rgba(8, 12, 18, 0.5);
+    color: rgba(240, 248, 244, 1);
+    border-color: rgba(220, 230, 226, 0.6);
+    background: rgba(8, 12, 18, 0.6);
   }
 
   @media (prefers-reduced-motion: reduce) {
     #myc-cursor { display: none; }
-    #myc-overlay { transition: none; }
+    #myc-overlay,
     #myc-hint { transition: none; }
     #myc-exit { transition: opacity 0.2s ease; }
   }
@@ -154,16 +186,27 @@
 <script>
   import { MyceliumRenderer } from '../scripts/mycelium-renderer';
 
-  const DWELL_MS = 4000;       // mouse-still time before the cursor morphs + seed starts
-  const HOLD_MS = 260;         // shorter press-hold to commit into the full game
-  const MOVE_TOL = 6;          // drag beyond this cancels a pending hold
-  const SEED_ABANDON = 14;     // moving this far from the seed point abandons the teaser
-  const SEED_INIT_SPEED = 0.28;// growth speed for the initial seed burst
-  const SEED_SLOW_SPEED = 0.045;// "really slow" creep once the seed has established
-  const SEED_SLOW_AFTER = 2800;// ms of initial growth before slowing the creep
-  const GAME_SPEED = 0.26;     // growth speed once the game is active
+  const DWELL_MS = 4000;        // cursor stillness before a colony seeds
+  const SEED_LIFE_MS = 20000;   // an uncommitted bloom recedes after this
+  const SEED_RADIUS = 195;      // px — keeps the bloom a cluster, not a takeover
+  const SEED_TIPS = 44;
+  const SEED_FADE = 0.0006;     // erase rate; balances growth into a steady bloom
+  const SEED_INIT_SPEED = 0.3;
+  const SEED_SLOW_SPEED = 0.09;
+  const SEED_SLOW_AFTER = 2800;
+  const SEED_ABANDON = 16;      // px of cursor travel that abandons a bloom
 
-  type Mode = 'idle' | 'seed' | 'active';
+  // A deliberate hold. Long enough that ordinary clicking — including a slow
+  // trackpad click — can never fall into the sim, short enough that curiosity
+  // finds it. This being 260ms is what used to eat clicks on real links.
+  const HOLD_MS = 850;
+  const MOVE_TOL = 6;
+
+  const GAME_SPEED = 0.26;
+  const GAME_FADE = 0.0004;     // very slow decay, so long sessions can't white out
+  const DISSOLVE_MS = 1500;
+
+  type Mode = 'idle' | 'bloom' | 'game';
 
   function init() {
     const cursorEl = document.getElementById('myc-cursor');
@@ -174,13 +217,18 @@
     if (!cursorEl || !overlay || !canvas || !fxCanvas) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
 
     let renderer: MyceliumRenderer | null = null;
     let mode: Mode = 'idle';
+    let lastFocused: HTMLElement | null = null;
 
     let dwellTimer: number | undefined;
     let holdTimer: number | undefined;
     let seedSlowTimer: number | undefined;
+    let seedLifeTimer: number | undefined;
+    let dissolveTimer: number | undefined;
+
     let downPoint: { x: number; y: number } | null = null;
     let seedOrigin: { x: number; y: number } | null = null;
     const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -190,56 +238,84 @@
       !!t.closest('a, button, input, textarea, select, label, summary, [role="button"], [contenteditable]');
 
     const hasSelection = () => (window.getSelection()?.toString().length ?? 0) > 0;
-    const dwelling = () => document.body.classList.contains('myc-dwell');
 
-    function showDwellCursor() {
+    function clearGrowthTimers() {
+      window.clearTimeout(seedSlowTimer);
+      window.clearTimeout(seedLifeTimer);
+    }
+
+    /**
+     * Tear down the colony and blank the canvas. Deliberately says nothing
+     * about the overlay's visibility — callers own that, so starting a new
+     * colony can't have its own state clobbered by the teardown of the old one.
+     */
+    function disposeRenderer() {
+      window.clearTimeout(dissolveTimer);
+      dissolveTimer = undefined;
+      renderer?.destroy();
+      renderer = null;
+    }
+
+    /** Let the colony erase itself, then tear down. Leaves no trace behind. */
+    function softStop() {
+      clearGrowthTimers();
+      const finish = () => {
+        disposeRenderer();
+        // Only hide if nothing new started while this one was dissolving.
+        if (mode === 'idle') overlay!.dataset.state = 'idle';
+      };
+      if (!renderer) {
+        finish();
+        return;
+      }
+      renderer.dissolve();
+      window.clearTimeout(dissolveTimer);
+      dissolveTimer = window.setTimeout(finish, DISSOLVE_MS);
+    }
+
+    // --- bloom ------------------------------------------------------------
+    function startBloom() {
+      if (mode !== 'idle') return;
+      disposeRenderer(); // a dissolving colony must not share the canvas with a new one
+
+      mode = 'bloom';
+      seedOrigin = { x: pointer.x, y: pointer.y };
+      overlay!.dataset.state = 'bloom';
+
       cursorEl!.style.left = `${pointer.x}px`;
       cursorEl!.style.top = `${pointer.y}px`;
       document.body.classList.add('myc-dwell');
-    }
-    function hideDwellCursor() {
-      document.body.classList.remove('myc-dwell');
-    }
 
-    function ensureRenderer(x: number, y: number) {
-      if (!renderer) {
-        renderer = new MyceliumRenderer(canvas!, fxCanvas!, { x, y });
-        renderer.setReducedMotion(prefersReduced);
-        renderer.start();
-      }
-      return renderer;
-    }
+      renderer = new MyceliumRenderer(canvas!, fxCanvas!, { x: pointer.x, y: pointer.y });
+      renderer.setMaxRadius(SEED_RADIUS);
+      renderer.setMaxTips(SEED_TIPS);
+      renderer.setFade(SEED_FADE);
+      renderer.setSpeed(SEED_INIT_SPEED);
+      renderer.start();
 
-    // Dwell fired: morph the cursor and quietly start the colony at this point.
-    function onDwell() {
-      if (mode !== 'idle' || prefersReduced) return;
-      showDwellCursor();
-      seedOrigin = { x: pointer.x, y: pointer.y };
-      mode = 'seed';
-      overlay!.dataset.state = 'seed';
-      const r = ensureRenderer(pointer.x, pointer.y);
-      r.setSpeed(SEED_INIT_SPEED);
-      window.clearTimeout(seedSlowTimer);
       seedSlowTimer = window.setTimeout(() => {
-        if (mode === 'seed') renderer?.setSpeed(SEED_SLOW_SPEED);
+        if (mode === 'bloom') renderer?.setSpeed(SEED_SLOW_SPEED);
       }, SEED_SLOW_AFTER);
+
+      // The invariant that matters: an ignored bloom always goes away.
+      seedLifeTimer = window.setTimeout(() => {
+        if (mode === 'bloom') endBloom();
+      }, SEED_LIFE_MS);
+    }
+
+    function endBloom() {
+      if (mode !== 'bloom') return;
+      mode = 'idle';
+      seedOrigin = null;
+      document.body.classList.remove('myc-dwell');
+      softStop();
     }
 
     function armDwell(target: EventTarget | null) {
       window.clearTimeout(dwellTimer);
-      if (mode !== 'idle' || prefersReduced) return;
+      if (mode !== 'idle') return;
       if (isInteractive(target) || hasSelection()) return;
-      dwellTimer = window.setTimeout(onDwell, DWELL_MS);
-    }
-
-    function abandonSeed() {
-      window.clearTimeout(seedSlowTimer);
-      renderer?.destroy();
-      renderer = null;
-      seedOrigin = null;
-      mode = 'idle';
-      overlay!.dataset.state = 'idle';
-      hideDwellCursor();
+      dwellTimer = window.setTimeout(startBloom, DWELL_MS);
     }
 
     function cancelHold() {
@@ -247,37 +323,50 @@
       downPoint = null;
     }
 
-    // Commit to the full immersive game. If a seed is already growing, the same
-    // renderer simply continues — the dark backdrop dissolves in around it.
-    function commit(x: number, y: number) {
-      if (mode === 'active') return;
+    // --- full sim ---------------------------------------------------------
+    function enterGame(x: number, y: number) {
+      if (mode === 'game') return;
       window.clearTimeout(dwellTimer);
-      window.clearTimeout(seedSlowTimer);
+      clearGrowthTimers();
       cancelHold();
-      hideDwellCursor();
       window.getSelection()?.removeAllRanges();
+      document.body.classList.remove('myc-dwell');
 
-      mode = 'active';
-      overlay!.dataset.state = 'active';
+      const carriedOver = mode === 'bloom' && renderer;
+      mode = 'game';
+      overlay!.dataset.state = 'game';
+      overlay!.removeAttribute('aria-hidden');
       document.body.classList.add('myc-active');
+      lastFocused = document.activeElement as HTMLElement | null;
 
-      const r = ensureRenderer(x, y);
-      r.setSpeed(GAME_SPEED);
-      r.setBias(pointer.x, pointer.y);
+      if (!carriedOver) {
+        disposeRenderer();
+        renderer = new MyceliumRenderer(canvas!, fxCanvas!, { x, y });
+        renderer.start();
+      }
+      // The bloom you grew becomes the colony you play with — it just stops
+      // being confined and starts foraging toward the cursor.
+      renderer!.setMaxRadius(Infinity);
+      renderer!.setMaxTips(70);
+      renderer!.setFade(GAME_FADE);
+      renderer!.setSpeed(GAME_SPEED);
+      renderer!.setBias(x, y);
+
+      exitBtn?.focus();
     }
 
-    function exit() {
-      if (mode === 'idle') return;
-      window.clearTimeout(dwellTimer);
-      window.clearTimeout(seedSlowTimer);
-      cancelHold();
-      renderer?.destroy();
-      renderer = null;
-      seedOrigin = null;
+    function exitGame() {
+      if (mode !== 'game') return;
       mode = 'idle';
-      overlay!.dataset.state = 'idle';
+      seedOrigin = null;
+      // Veil lifts at once; the colony erases itself on the way out.
+      overlay!.dataset.state = 'bloom';
+      overlay!.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('myc-active');
-      hideDwellCursor();
+      softStop();
+
+      lastFocused?.focus?.();
+      lastFocused = null;
     }
 
     // --- pointer ----------------------------------------------------------
@@ -287,7 +376,7 @@
         pointer.x = e.clientX;
         pointer.y = e.clientY;
 
-        if (mode === 'active') {
+        if (mode === 'game') {
           renderer?.setBias(e.clientX, e.clientY);
           return;
         }
@@ -296,16 +385,15 @@
           cancelHold();
         }
 
-        if (mode === 'seed') {
-          // Small jitter keeps the seed creeping; real movement abandons it.
+        if (mode === 'bloom') {
           if (seedOrigin && Math.hypot(e.clientX - seedOrigin.x, e.clientY - seedOrigin.y) > SEED_ABANDON) {
-            abandonSeed();
+            endBloom();
             armDwell(e.target);
           }
           return;
         }
 
-        if (dwelling()) {
+        if (document.body.classList.contains('myc-dwell')) {
           cursorEl!.style.left = `${pointer.x}px`;
           cursorEl!.style.top = `${pointer.y}px`;
         }
@@ -315,16 +403,15 @@
     );
 
     window.addEventListener('pointerdown', (e) => {
-      if (mode === 'active') {
-        // In-game: click to drop a nutrient the colony will forage toward.
-        if (e.button === 0) renderer?.dropNutrient(e.clientX, e.clientY);
+      if (mode === 'game') {
+        if (e.button === 0 && e.target !== exitBtn) renderer?.dropNutrient(e.clientX, e.clientY);
         return;
       }
       if (e.button !== 0) return;
       if (isInteractive(e.target) || hasSelection()) return;
       downPoint = { x: e.clientX, y: e.clientY };
       holdTimer = window.setTimeout(() => {
-        if (downPoint) commit(downPoint.x, downPoint.y);
+        if (downPoint) enterGame(downPoint.x, downPoint.y);
       }, HOLD_MS);
     });
 
@@ -333,17 +420,18 @@
     window.addEventListener('blur', () => {
       cancelHold();
       window.clearTimeout(dwellTimer);
-      if (mode === 'seed') abandonSeed();
+      if (mode === 'bloom') endBloom();
     });
 
     // --- keyboard ---------------------------------------------------------
     window.addEventListener('keydown', (e) => {
       if (mode === 'idle') return;
       if (e.key === 'Escape') {
-        exit();
+        if (mode === 'game') exitGame();
+        else endBloom();
         return;
       }
-      if (mode !== 'active') return;
+      if (mode !== 'game') return;
       const nudges: Record<string, [number, number]> = {
         ArrowUp: [0, -1],
         ArrowDown: [0, 1],
@@ -357,26 +445,42 @@
       }
     });
 
-    window.addEventListener('resize', () => {
-      if (mode !== 'idle') renderer?.resize();
+    // Typing anywhere cancels a pending bloom — you're working, not idling.
+    window.addEventListener('keydown', () => {
+      if (mode === 'idle') window.clearTimeout(dwellTimer);
     });
-    window.addEventListener('pagehide', exit);
 
-    // Tap-to-exit (the only way out on touch devices, where there's no ESC).
-    // Stop the pointerdown so it doesn't also drop a nutrient on the way out.
     exitBtn?.addEventListener('pointerdown', (e) => e.stopPropagation());
     exitBtn?.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      exit();
+      exitGame();
     });
 
-    // --- debug handle for the preview page --------------------------------
+    window.addEventListener('resize', () => {
+      if (mode !== 'idle') renderer?.resize();
+    });
+
+    // Nothing should grow in a tab nobody is looking at.
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) return;
+      window.clearTimeout(dwellTimer);
+      cancelHold();
+      if (mode === 'bloom') endBloom();
+    });
+
+    window.addEventListener('pagehide', () => {
+      if (mode === 'game') exitGame();
+      else if (mode === 'bloom') endBloom();
+      disposeRenderer();
+    });
+
+    // Handle used by the offline tuning page (src/pages/mycelium-preview.astro).
     (window as any).__myc = {
       start: (x?: number, y?: number) =>
-        commit(x ?? window.innerWidth / 2, y ?? window.innerHeight / 2),
-      stop: exit,
-      isActive: () => mode === 'active',
+        enterGame(x ?? window.innerWidth / 2, y ?? window.innerHeight / 2),
+      stop: exitGame,
+      isActive: () => mode === 'game',
       getMode: () => mode,
       getRenderer: () => renderer,
     };

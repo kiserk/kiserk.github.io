@@ -125,10 +125,23 @@ export class MyceliumRenderer {
   // Pace.
   private speed = 0.26;
   private stepsPerFrame = 1;
-  private fade = 0;
   private nutrientTimer = 0;
   private nutrientInterval = 2400;
   private maxNutrients = 5;
+
+  // Ink decay. `fade` is an *erase* rate (alpha removed per frame), not a paint
+  // over the top — painting would build an opaque slab over the page behind.
+  // Useful rates are far below what an 8-bit alpha channel can represent in a
+  // single composite, so the rate accrues as debt and is spent once it will
+  // actually register.
+  private fade = 0;
+  private fadeDebt = 0;
+
+  // Growth bounds. `growing` gates the whole advance/branch/respawn cycle so a
+  // colony can be told to stop and dissolve; `maxRadius` keeps a colony a bloom
+  // rather than letting it take the viewport.
+  private growing = true;
+  private maxRadius = Infinity;
 
   private reducedMotion = false;
   private lastFrameTime = 0;
@@ -233,6 +246,7 @@ export class MyceliumRenderer {
 
   destroy(): void {
     this.stop();
+    this.ctx.clearRect(0, 0, this.logicalWidth, this.logicalHeight);
     this.fxCtx.clearRect(0, 0, this.logicalWidth, this.logicalHeight);
     this.tips = [];
     this.nutrients = [];
@@ -277,6 +291,21 @@ export class MyceliumRenderer {
   setStepsPerFrame(v: number): void { this.stepsPerFrame = Math.max(1, Math.round(v)); }
   setFade(v: number): void { this.fade = Math.max(0, Math.min(0.2, v)); }
 
+  /** Confine the colony to a radius around its origin. `Infinity` = unbounded. */
+  setMaxRadius(v: number): void { this.maxRadius = Math.max(0, v); }
+
+  /**
+   * Stop growing and erase what's drawn. The colony vanishes over roughly a
+   * second, leaving the page exactly as it was — this is what makes an
+   * abandoned colony safe to leave running.
+   */
+  dissolve(): void {
+    this.growing = false;
+    this.nutrients = [];
+    this.pulses = [];
+    this.fade = 0.05;
+  }
+
   forceSpecies(name: string): void {
     const s = speciesByName(name);
     if (s) {
@@ -294,6 +323,8 @@ export class MyceliumRenderer {
     this.pulses = [];
     this.drift = { x: 0, y: 0 };
     this.vigor = 0;
+    this.growing = true;
+    this.fadeDebt = 0;
     this.species = SPECIES[0];
     this.overrides = {};
     this.buildGrid();
@@ -484,6 +515,17 @@ export class MyceliumRenderer {
       return;
     }
 
+    // Bounded colony: tips senesce at the edge of their allotted radius, so the
+    // margin advances to the boundary and then holds there.
+    if (this.maxRadius !== Infinity) {
+      const rx = nx - this.origin.x;
+      const ry = ny - this.origin.y;
+      if (rx * rx + ry * ry > this.maxRadius * this.maxRadius) {
+        tip.alive = false;
+        return;
+      }
+    }
+
     this.ctx.strokeStyle = this.strokeColor();
     this.ctx.lineWidth = lineWidth;
     this.ctx.beginPath();
@@ -626,9 +668,27 @@ export class MyceliumRenderer {
   private tick(dt: number): void {
     if (this.mouseFeedCooldown > 0) this.mouseFeedCooldown -= dt;
 
+    // Erase, never overpaint: `destination-out` takes alpha away, so old hyphae
+    // dissolve back to a transparent canvas instead of accreting a slab of
+    // colour over the page. Debt is spent only once it's large enough for the
+    // alpha channel to round it to a real change.
     if (this.fade > 0) {
-      this.ctx.fillStyle = `rgba(5, 8, 13, ${this.fade})`;
-      this.ctx.fillRect(0, 0, this.logicalWidth, this.logicalHeight);
+      this.fadeDebt += this.fade;
+      if (this.fadeDebt >= 0.012) {
+        this.ctx.save();
+        this.ctx.globalCompositeOperation = 'destination-out';
+        this.ctx.fillStyle = `rgba(0, 0, 0, ${Math.min(this.fadeDebt, 1)})`;
+        this.ctx.fillRect(0, 0, this.logicalWidth, this.logicalHeight);
+        this.ctx.restore();
+        this.fadeDebt = 0;
+      }
+    }
+
+    if (!this.growing) {
+      this.tips = [];
+      this.updateNutrients(dt);
+      this.drawNutrients();
+      return;
     }
 
     const step = this.p('step');
