@@ -113,7 +113,10 @@ function $(id: string): HTMLElement {
 }
 
 function buildWindyUrl(lat: number, lon: number): string {
-  return `https://embed.windy.com/embed.html?type=map&location=coordinates&metricWind=mph&metricTemp=%C2%B0F&zoom=10&overlay=wind&product=ecmwf&level=surface&lat=${lat}&lon=${lon}&marker=true&calendar=now&message=true&pressure=false`;
+  // `marker=true` places the pin from detailLat/detailLon, not lat/lon. Without
+  // them Windy builds a LatLng from undefined and throws "Invalid LatLng object:
+  // (NaN, NaN)" inside its own Leaflet during init, so pass them explicitly.
+  return `https://embed.windy.com/embed.html?type=map&location=coordinates&metricWind=mph&metricTemp=%C2%B0F&zoom=10&overlay=wind&product=ecmwf&level=surface&lat=${lat}&lon=${lon}&detailLat=${lat}&detailLon=${lon}&marker=true&calendar=now&message=true&pressure=false`;
 }
 
 function populateSelector(): void {
