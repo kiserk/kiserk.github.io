@@ -37,3 +37,12 @@ scraper_reference/
 # large local-only media: raw iPhone clips and preview/example renders
 water_images/
 .preview-shots/
+
+# Alternate background clips kept locally for future recuts. Only
+# IMG_5047_twilight_mono.* is used by the site and committed; the rest are ~49MB
+# that would live in git history forever.
+public/water/IMG_5043.*
+public/water/IMG_5044.*
+public/water/IMG_5047.*
+public/water/IMG_5047_slow.*
+public/water/IMG_5065.*

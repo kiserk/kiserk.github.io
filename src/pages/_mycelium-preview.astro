@@ -1,0 +1,252 @@
+---
+// Offline tuning bench for the mycelium easter egg — sliders bound to the
+// renderer via the window.__myc handle. The leading underscore keeps Astro from
+// routing it, so it is versioned but never published. To use it locally, drop
+// the underscore, run `npm run dev`, then rename it back before committing.
+import MyceliumEasterEgg from '../components/MyceliumEasterEgg.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Mycelium easter egg — preview</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #05080d; color: #dfe7e3; }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        line-height: 1.7;
+      }
+      .page { max-width: 640px; margin: 0 auto; padding: 18vh 24px 40vh; }
+      h1 { font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; font-size: 1.8rem; }
+      p { color: rgba(223, 231, 227, 0.78); }
+      a { color: #8fd0c0; }
+      .row { display: flex; gap: 10px; margin-top: 1rem; }
+      .sample-btn {
+        font: inherit; cursor: pointer; color: #dfe7e3;
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 7px; padding: 7px 12px;
+      }
+
+      .panel {
+        position: fixed; top: 14px; right: 14px; z-index: 90;
+        width: 248px; padding: 14px;
+        background: rgba(8, 12, 20, 0.82); backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.12); border-radius: 12px;
+        font-size: 12px;
+      }
+      .panel h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.6; margin: 0 0 10px; }
+      .panel .ctrl { margin-bottom: 9px; }
+      .panel label { display: flex; justify-content: space-between; opacity: 0.8; margin-bottom: 2px; }
+      .panel input[type='range'] { width: 100%; }
+      .btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+      .panel button {
+        font: inherit; cursor: pointer; color: #dfe7e3;
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 7px; padding: 5px 9px;
+      }
+      .panel button:hover { background: rgba(255,255,255,0.14); }
+      .panel button.active { background: rgba(120, 200, 180, 0.3); border-color: rgba(150, 220, 200, 0.7); }
+      .readout { font-variant-numeric: tabular-nums; opacity: 0.85; line-height: 1.6; margin-top: 8px; }
+      .readout span { color: #8fd0c0; }
+      .note { margin-top: 10px; font-size: 11px; opacity: 0.5; line-height: 1.5; }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h1>Mycelium preview</h1>
+      <p>
+        This is throwaway scaffolding for building the easter egg offline. Hold the mouse
+        still for a beat and the cursor should morph into a hyphal tip. Then press and hold
+        on empty space to dissolve into the growth sim. Press <strong>Esc</strong> to come back.
+      </p>
+      <p>
+        This paragraph exists so we can confirm the trigger never hijacks normal reading,
+        text selection, or clicks. Try selecting this sentence by dragging across it, and try
+        the controls below &mdash; neither should ever launch the game.
+      </p>
+      <div class="row">
+        <a href="https://example.com" target="_blank" rel="noopener">A sample link</a>
+        <button class="sample-btn">A sample button</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Mycelium tuning</h2>
+      <div class="btns">
+        <button id="btn-start">Start (center)</button>
+        <button id="btn-exit">Exit</button>
+        <button id="btn-reset">Reset</button>
+      </div>
+
+      <div class="ctrl">
+        <h2>Force species</h2>
+        <div class="btns" id="species">
+          <button data-species="airy" class="active">airy</button>
+          <button data-species="dense">dense</button>
+          <button data-species="fan">fan</button>
+        </div>
+      </div>
+
+      <div class="ctrl">
+        <label>growth speed <span id="v-speed">0.26</span></label>
+        <input type="range" id="r-speed" min="0.04" max="1" step="0.02" value="0.26" />
+      </div>
+      <div class="ctrl">
+        <label>step <span id="v-step">1.0</span></label>
+        <input type="range" id="r-step" min="0.4" max="3" step="0.1" value="1.0" />
+      </div>
+      <div class="ctrl">
+        <label>autotropism (avoid) <span id="v-auto">1.1</span></label>
+        <input type="range" id="r-auto" min="0" max="3" step="0.05" value="1.1" />
+      </div>
+      <div class="ctrl">
+        <label>chemotropism (food) <span id="v-chemo">0.6</span></label>
+        <input type="range" id="r-chemo" min="0" max="2" step="0.05" value="0.6" />
+      </div>
+      <div class="ctrl">
+        <label>mouse pull <span id="v-oxy">0.34</span></label>
+        <input type="range" id="r-oxy" min="0" max="1" step="0.02" value="0.34" />
+      </div>
+      <div class="ctrl">
+        <label>max turn (persistence) <span id="v-turn">0.09</span></label>
+        <input type="range" id="r-turn" min="0.02" max="0.4" step="0.01" value="0.09" />
+      </div>
+      <div class="ctrl">
+        <label>branch prob <span id="v-branch">0.02</span></label>
+        <input type="range" id="r-branch" min="0" max="0.1" step="0.002" value="0.02" />
+      </div>
+      <div class="ctrl">
+        <label>angle jitter <span id="v-jitter">0.06</span></label>
+        <input type="range" id="r-jitter" min="0" max="0.4" step="0.01" value="0.06" />
+      </div>
+      <div class="ctrl">
+        <label>line width <span id="v-lw">0.7</span></label>
+        <input type="range" id="r-lw" min="0.3" max="2.5" step="0.1" value="0.7" />
+      </div>
+      <div class="ctrl">
+        <label>max tips <span id="v-max">70</span></label>
+        <input type="range" id="r-max" min="20" max="300" step="10" value="70" />
+      </div>
+      <div class="ctrl">
+        <label>steps / frame <span id="v-spf">1</span></label>
+        <input type="range" id="r-spf" min="1" max="6" step="1" value="1" />
+      </div>
+      <div class="ctrl">
+        <label>trail fade <span id="v-fade">0</span></label>
+        <input type="range" id="r-fade" min="0" max="0.1" step="0.005" value="0" />
+      </div>
+
+      <div class="readout" id="readout">not running</div>
+      <div class="note">In-game: click to drop a nutrient (they also appear on their own). Sliders apply live; species/overrides reset on a nutrient exhaustion cycle.</div>
+    </div>
+
+    <MyceliumEasterEgg />
+
+    <script>
+      type Myc = {
+        start: (x?: number, y?: number) => void;
+        stop: () => void;
+        isActive: () => boolean;
+        getRenderer: () => any;
+      };
+
+      function waitForMyc(): Promise<Myc> {
+        return new Promise((resolve) => {
+          const tick = () => {
+            const m = (window as any).__myc as Myc | undefined;
+            if (m) resolve(m);
+            else requestAnimationFrame(tick);
+          };
+          tick();
+        });
+      }
+
+      waitForMyc().then((myc) => {
+        const $ = (id: string) => document.getElementById(id)!;
+
+        // Remembered settings, applied on start and on each change.
+        const settings = {
+          speed: 0.26, step: 1.0, autotropism: 1.1, chemotropism: 0.6, oxygenPull: 0.34,
+          maxTurn: 0.09, branchProb: 0.02, angleJitter: 0.06,
+          lineWidth: 0.7, maxTips: 70, stepsPerFrame: 1, fade: 0,
+        };
+
+        function applyAll() {
+          const r = myc.getRenderer();
+          if (!r) return;
+          r.setSpeed(settings.speed);
+          r.setStep(settings.step);
+          r.setAutotropism(settings.autotropism);
+          r.setChemotropism(settings.chemotropism);
+          r.setOxygenPull(settings.oxygenPull);
+          r.setMaxTurn(settings.maxTurn);
+          r.setBranchProb(settings.branchProb);
+          r.setAngleJitter(settings.angleJitter);
+          r.setLineWidth(settings.lineWidth);
+          r.setMaxTips(settings.maxTips);
+          r.setStepsPerFrame(settings.stepsPerFrame);
+          r.setFade(settings.fade);
+        }
+
+        function bind(rangeId: string, labelId: string, key: keyof typeof settings, fixed: number) {
+          const input = $(rangeId) as HTMLInputElement;
+          const label = $(labelId);
+          input.addEventListener('input', () => {
+            const val = parseFloat(input.value);
+            (settings as any)[key] = val;
+            label.textContent = val.toFixed(fixed);
+            const r = myc.getRenderer();
+            if (r) {
+              const setter = 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+              (r as any)[setter](val);
+            }
+          });
+        }
+
+        bind('r-speed', 'v-speed', 'speed', 2);
+        bind('r-step', 'v-step', 'step', 1);
+        bind('r-auto', 'v-auto', 'autotropism', 2);
+        bind('r-chemo', 'v-chemo', 'chemotropism', 2);
+        bind('r-oxy', 'v-oxy', 'oxygenPull', 2);
+        bind('r-turn', 'v-turn', 'maxTurn', 2);
+        bind('r-branch', 'v-branch', 'branchProb', 3);
+        bind('r-jitter', 'v-jitter', 'angleJitter', 2);
+        bind('r-lw', 'v-lw', 'lineWidth', 1);
+        bind('r-max', 'v-max', 'maxTips', 0);
+        bind('r-spf', 'v-spf', 'stepsPerFrame', 0);
+        bind('r-fade', 'v-fade', 'fade', 3);
+
+        $('btn-start').addEventListener('click', () => {
+          myc.start();
+          requestAnimationFrame(applyAll);
+        });
+        $('btn-exit').addEventListener('click', () => myc.stop());
+        $('btn-reset').addEventListener('click', () => myc.getRenderer()?.reset());
+
+        const speciesEl = $('species');
+        speciesEl.querySelectorAll('button').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            speciesEl.querySelectorAll('button').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            myc.getRenderer()?.forceSpecies((btn as HTMLElement).dataset.species);
+          });
+        });
+
+        const readout = $('readout');
+        setInterval(() => {
+          const r = myc.getRenderer();
+          if (r && myc.isActive()) {
+            const s = r.getStats();
+            readout.innerHTML = `tips: <span>${s.tips}</span> · nutrients: <span>${s.nutrients}</span> · species: <span>${s.species}</span> · vigor: <span>${s.vigor}</span>`;
+          } else {
+            readout.textContent = 'not running';
+          }
+        }, 250);
+      });
+    </script>
+  </body>
+</html>

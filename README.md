@@ -85,6 +85,7 @@ personal_website/
 │   │   ├── projects.astro       # project cards
 │   │   ├── swell.astro          # interactive surf conditions page
 │   │   ├── _golden-hour.astro   # SHELVED live sunset/sunrise beach cam (underscore = not routed)
+│   │   ├── _mycelium-preview.astro # offline tuning bench for the easter egg (not routed)
 │   │   ├── privacy.astro        # analytics privacy note
 │   │   └── 404.astro            # static 404 (noindex)
 │   ├── scripts/
