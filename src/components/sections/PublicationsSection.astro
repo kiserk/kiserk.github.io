@@ -1,21 +1,15 @@
 ---
 import { journalArticles, conferenceAbstracts, formatAuthors } from '../../data/publications';
-import AbstractCard from '../AbstractCard.astro';
-
-// Lead with the abstracts Karl is first author on; the co-authored ones are
-// real credentials but they bury the lede, so they go behind a disclosure.
-const leadAbstracts = conferenceAbstracts.filter((p) => p.firstAuthor);
-const coAuthoredAbstracts = conferenceAbstracts.filter((p) => !p.firstAuthor);
 ---
 
 <section id="publications" class="reveal relative z-10 px-5 md:px-6 py-16 md:py-24 scroll-mt-24" style={`color: var(--ink)`}>
   <div class="max-w-[720px] mx-auto">
-    <h1 class="sticky-title font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.1em] uppercase mb-12">
+    <h1 class="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-light tracking-[0.1em] uppercase mb-16">
       Publications
     </h1>
 
     <section class="mb-14">
-      <h2 class="sticky-subtitle font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase mb-6" style="color: var(--ink-muted);">
+      <h2 class="font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase mb-8" style="color: var(--ink-muted);">
         Journal Articles
       </h2>
 
@@ -83,74 +77,31 @@ const coAuthoredAbstracts = conferenceAbstracts.filter((p) => !p.firstAuthor);
     </section>
 
     <section>
-      <h2 class="sticky-subtitle font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase mb-6" style="color: var(--ink-muted);">
+      <h2 class="font-[family-name:var(--font-heading)] text-sm tracking-[0.2em] uppercase mb-8" style="color: var(--ink-muted);">
         Conference Abstracts
         <span class="normal-case tracking-normal ml-1.5" style="color: var(--ink-faint);">— ISMRM</span>
       </h2>
 
       <div class="space-y-5">
-        {leadAbstracts.map((pub) => <AbstractCard pub={pub} />)}
+        {conferenceAbstracts.map((pub) => (
+          <article class="rounded-xl p-6">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="font-[family-name:var(--font-body)] text-[0.95rem] md:text-base leading-snug font-medium">
+                {pub.title}
+              </h3>
+              {pub.firstAuthor && (
+                <span class="shrink-0 text-[0.65rem] tracking-[0.15em] uppercase border border-white/25 rounded px-2 py-0.5 mt-0.5" style="color: var(--ink-muted);">
+                  1st Author
+                </span>
+              )}
+            </div>
+            <p class="text-[0.875rem] mt-3 leading-relaxed" style="color: var(--ink-muted);" set:html={formatAuthors(pub.authors)} />
+            <div class="text-[0.85rem] mt-3" style="color: var(--ink-faint);">
+              <span>{pub.year}</span>
+            </div>
+          </article>
+        ))}
       </div>
-
-      {coAuthoredAbstracts.length > 0 && (
-        <details class="more-abstracts mt-5">
-          <summary
-            class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase cursor-pointer transition-colors duration-300"
-            style="color: var(--ink-muted); border-color: currentColor;"
-            data-goatcounter-click="abstracts-expand"
-          >
-            <span class="when-closed">{coAuthoredAbstracts.length} co-authored abstracts</span>
-            <span class="when-open">Show fewer</span>
-            <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </summary>
-
-          <div class="space-y-5 mt-5">
-            {coAuthoredAbstracts.map((pub) => <AbstractCard pub={pub} />)}
-          </div>
-        </details>
-      )}
     </section>
   </div>
 </section>
-
-<style>
-  /* Disclosure for the co-authored abstracts. <details> so it works with no JS
-     and stays keyboard- and screen-reader-native. */
-  .more-abstracts summary {
-    list-style: none;
-  }
-
-  /* Safari still paints the default triangle without this. */
-  .more-abstracts summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .more-abstracts summary:hover {
-    color: var(--ink) !important;
-  }
-
-  .more-abstracts .when-open,
-  .more-abstracts[open] .when-closed {
-    display: none;
-  }
-
-  .more-abstracts[open] .when-open {
-    display: inline;
-  }
-
-  .more-abstracts .chevron {
-    transition: transform 0.3s ease;
-  }
-
-  .more-abstracts[open] .chevron {
-    transform: rotate(180deg);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .more-abstracts .chevron {
-      transition: none;
-    }
-  }
-</style>

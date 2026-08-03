@@ -2,11 +2,8 @@
 import '../styles/global.css';
 import { SITE, PROFILE_LINKS, type SeoProps } from '../config/site';
 import MyceliumEasterEgg from '../components/MyceliumEasterEgg.astro';
-import AskWidget from '../components/AskWidget.astro';
-import { CHAT_ENABLED } from '../config/chat';
 
-/** `showAsk` opts a page out of the chat widget — personal pages don't need it. */
-type Props = SeoProps & { showAsk?: boolean };
+type Props = SeoProps;
 
 const {
   title = SITE.name,
@@ -15,7 +12,6 @@ const {
   ogImage = SITE.ogImage,
   jsonLd = [],
   noindex = false,
-  showAsk = true,
 } = Astro.props;
 
 const pagePath = path ?? Astro.url.pathname;
@@ -104,10 +100,6 @@ const schemas = [personSchema, websiteSchema, ...jsonLd];
     <slot />
 
     <MyceliumEasterEgg />
-
-    {/* Gate here, not just inside AskWidget: a rendered-but-empty component
-        still ships its bundled script and styles to every page. */}
-    {showAsk && CHAT_ENABLED && <AskWidget />}
 
     <script>
       // Scroll-reveal sections as they enter the viewport. Guarded so content

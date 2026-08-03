@@ -79,16 +79,6 @@ export const SITE = {
    *    notice instead of submitting.
    */
   web3formsKey: '4d71d36e-fcf5-49c4-849c-ec3945bdcf5f',
-  /**
-   * Endpoint for the "Ask about my experience" chat widget (see /worker).
-   * This is a plain public URL, not a secret — the Anthropic key lives in the
-   * Cloudflare Worker and never reaches the browser.
-   *
-   * Leave '' and the widget does not render at all — that is the kill switch.
-   * For local testing, put PUBLIC_CHAT_ENDPOINT=http://localhost:8787/chat in
-   * a gitignored .env instead of editing this line.
-   */
-  chatEndpoint: '',
 } as const;
 
 /** Profile URLs that are actually set, for `sameAs` and link lists. */
