@@ -4,8 +4,8 @@ const M_TO_FT = 3.281;
 const KMH_TO_MPH = 1 / 1.609;
 const COMPASS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 // Onshore is one step lighter than its green counterpart: red-400 (#f87171)
-// measured 3.76:1 on the softened .surface-soft wash, under AA. red-300 clears
-// it at 5.5:1. Offshore's green already measures 5.97:1 and is left alone.
+// measured 3.76:1 once the panels were softened into .text-wash, under AA.
+// red-300 clears it. Offshore's green measures ~6:1 and is left alone.
 const WIND_COLORS: Record<string, string> = { Offshore: '#4ade80', Onshore: '#fca5a5', Cross: 'inherit' };
 
 function metersToFeet(m: number | null): number {

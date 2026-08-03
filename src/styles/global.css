@@ -41,32 +41,16 @@
   --surface-border: rgba(255, 255, 255, 0.12);
   --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
 
-  /* Fill and feather for .surface-soft.
-
-     A short feather on a strong fill just reads as a blurred rectangle -- the
-     eye still finds the box. The hero vignette avoids that by being large and
-     shapeless, so this matches it: a much lighter fill over a much longer
-     ramp, which leaves no locatable edge at all. The feather deliberately
-     reaches inside the panel padding; measured lowest contrast across the
-     panels is still 5.9:1, so there is room for it. */
-  --surface-soft-fill: rgba(9, 15, 26, 0.46);
-  --surface-feather: 5.5rem;
-  /* Two axes intersected, so all four edges and the corners fade evenly. */
-  --surface-soft-fade:
-    linear-gradient(
-      to bottom,
-      transparent 0,
-      #000 var(--surface-feather),
-      #000 calc(100% - var(--surface-feather)),
-      transparent 100%
-    ),
-    linear-gradient(
-      to right,
-      transparent 0,
-      #000 var(--surface-feather),
-      #000 calc(100% - var(--surface-feather)),
-      transparent 100%
-    );
+  /* Vertical feather for .text-wash, so it meets the hero above and the footer
+     below at zero. Shorter than .scrim-focus's 8rem because <main> has less
+     clear space at its ends than a full-height section does. */
+  --text-wash-fade: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 5rem,
+    #000 calc(100% - 5rem),
+    transparent 100%
+  );
 
   /* text sitting directly on the water background (hero/header/footer).
      Two layers: a tight one to define the glyph edge against moving water (a
@@ -127,39 +111,42 @@ body {
     box-shadow: var(--surface-shadow);
   }
 
-  /* A soft wash behind panel copy, in place of .surface's crisp glass card --
-     the same visual language as the hero's .scrim-focus vignette: large,
-     shapeless, no locatable edge.
+  /* One continuous pool of shade behind the page's text column -- the same
+     language as the hero's .scrim-focus, just centred on the copy instead of
+     anchored left. Applied once to <main>, not to individual panels, which is
+     the whole point: per-panel washes give the eye a box to find, and a box
+     with a soft edge just reads as a blurred rectangle no matter how long the
+     fade is. With no shapes there is nothing to locate, and no seams between
+     sections either.
 
-     The background/blur live on a pseudo-element rather than the panel itself:
-     a mask applies to an element's children too, so masking the panel directly
-     would fade the copy along with it. `z-index: -1` puts the layer behind the
-     panel's own in-flow content -- the same trick .scrim-focus uses, and it
-     relies on the ancestor section already carrying `relative z-10`.
+     The horizontal profile is constant down the page, so one element covers
+     content of any height. The ramp runs from the viewport edge in to the
+     content column (max-w-[720px], so 24rem either side of centre holds full
+     strength across the copy) and fades out over whatever margin is left --
+     wider viewport, softer ramp. Below ~768px the calc() stops collapse and
+     the wash goes flat, which is what full-width mobile copy wants anyway.
 
-     No border here: the mask is zero exactly along the perimeter, which is
-     where a border would sit, so it would be invisible anyway. Losing the
-     crisp outline is the point -- and with no visible edge, `border-radius`
-     is decorative only, inherited so the layer still clips correctly if a
-     panel ever gets `overflow: hidden`. */
-  .surface-soft {
+     `z-index: -1` puts it behind main's own content; every <main> on the site
+     already carries `relative z-10` to establish the stacking context. */
+  .text-wash {
     position: relative;
   }
 
-  .surface-soft::before {
+  .text-wash::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    border-radius: inherit;
     pointer-events: none;
-    background: var(--surface-soft-fill);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
-    -webkit-mask-image: var(--surface-soft-fade);
-    mask-image: var(--surface-soft-fade);
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
+    background: linear-gradient(
+      to right,
+      rgba(4, 8, 14, 0) 0,
+      rgba(4, 8, 14, 0.5) calc(50% - 24rem),
+      rgba(4, 8, 14, 0.5) calc(50% + 24rem),
+      rgba(4, 8, 14, 0) 100%
+    );
+    -webkit-mask-image: var(--text-wash-fade);
+    mask-image: var(--text-wash-fade);
   }
 
   /* A soft pool of shade for copy that sits directly on the water with no glass
