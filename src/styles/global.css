@@ -41,10 +41,16 @@
   --surface-border: rgba(255, 255, 255, 0.12);
   --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
 
-  /* Edge feather for .surface-soft. 1.25rem sits inside the smallest padding
-     of any panel that uses it (p-6 = 1.5rem on the publication cards), so the
-     panel is at full strength everywhere text actually sits. */
-  --surface-feather: 1.25rem;
+  /* Fill and feather for .surface-soft.
+
+     A short feather on a strong fill just reads as a blurred rectangle -- the
+     eye still finds the box. The hero vignette avoids that by being large and
+     shapeless, so this matches it: a much lighter fill over a much longer
+     ramp, which leaves no locatable edge at all. The feather deliberately
+     reaches inside the panel padding; measured lowest contrast across the
+     panels is still 5.9:1, so there is room for it. */
+  --surface-soft-fill: rgba(9, 15, 26, 0.46);
+  --surface-feather: 5.5rem;
   /* Two axes intersected, so all four edges and the corners fade evenly. */
   --surface-soft-fade:
     linear-gradient(
@@ -121,8 +127,9 @@ body {
     box-shadow: var(--surface-shadow);
   }
 
-  /* Same glass as .surface, but the edge dissolves into the water instead of
-     terminating in a crisp 1px border.
+  /* A soft wash behind panel copy, in place of .surface's crisp glass card --
+     the same visual language as the hero's .scrim-focus vignette: large,
+     shapeless, no locatable edge.
 
      The background/blur live on a pseudo-element rather than the panel itself:
      a mask applies to an element's children too, so masking the panel directly
@@ -132,7 +139,9 @@ body {
 
      No border here: the mask is zero exactly along the perimeter, which is
      where a border would sit, so it would be invisible anyway. Losing the
-     crisp outline is the point. */
+     crisp outline is the point -- and with no visible edge, `border-radius`
+     is decorative only, inherited so the layer still clips correctly if a
+     panel ever gets `overflow: hidden`. */
   .surface-soft {
     position: relative;
   }
@@ -144,7 +153,7 @@ body {
     z-index: -1;
     border-radius: inherit;
     pointer-events: none;
-    background: var(--surface);
+    background: var(--surface-soft-fill);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     -webkit-mask-image: var(--surface-soft-fade);
