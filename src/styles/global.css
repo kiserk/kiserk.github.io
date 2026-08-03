@@ -35,9 +35,11 @@
   --surface-border: rgba(255, 255, 255, 0.12);
   --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
 
-  /* text sitting directly on the water background (hero/header/footer) */
+  /* text sitting directly on the water background (hero/header/footer).
+     Two layers: a tight one to define the glyph edge against moving water (a
+     14px blur alone is too diffuse for 11px type), and the wide soft lift. */
   --text-color: rgba(246, 244, 240, 0.96);
-  --text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+  --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 14px rgba(0, 0, 0, 0.55);
 }
 
 html {
@@ -76,6 +78,41 @@ body {
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--surface-border);
     box-shadow: var(--surface-shadow);
+  }
+
+  /* A soft pool of shade for copy that sits directly on the water with no glass
+     card behind it. The site-wide scrim is viewport-fixed, so its dark ends only
+     ever cover the top and bottom of the viewport -- the centred content of a
+     full-height section lands in the flat middle band, over the brightest foam.
+     Falls off to nothing well before the right edge, so the water stays open. */
+  .scrim-focus::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* .scrim-focus sections already carry `relative z-10`, which establishes a
+       stacking context -- so this sits behind their content without dropping
+       behind the page background. */
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      120% 90% at 6% 50%,
+      rgba(4, 8, 14, 0.58) 0%,
+      rgba(4, 8, 14, 0.4) 52%,
+      rgba(4, 8, 14, 0) 84%
+    );
+  }
+
+  /* Narrow screens: the copy runs nearly full-width, so re-centre the pool and
+     widen the falloff rather than hugging the left edge. */
+  @media (max-width: 767px) {
+    .scrim-focus::before {
+      background: radial-gradient(
+        150% 90% at 40% 50%,
+        rgba(4, 8, 14, 0.58) 0%,
+        rgba(4, 8, 14, 0.42) 55%,
+        rgba(4, 8, 14, 0) 88%
+      );
+    }
   }
 }
 
