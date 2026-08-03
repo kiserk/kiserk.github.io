@@ -24,11 +24,15 @@
 :root {
   /* content text -- always light (cards are dark glass) */
   --ink: rgba(246, 244, 240, 0.96);
-  --ink-muted: rgba(236, 240, 246, 0.9);
-  /* Three distinct steps (0.96 / 0.90 / 0.78). The faint tier is the floor: it
-     must hold AA at 11px over a bright midday ocean, so don't take it below
-     ~0.66 -- that was the old value and it measured 4.7:1 at the worst pixel. */
-  --ink-faint: rgba(228, 236, 245, 0.78);
+  /* All three tiers share --ink's warm near-white. They used to be blue-tinted
+     (236,240,246 / 228,236,245), which read as cool grey next to the warm
+     headline -- the hue mismatch, not just the level, was what made them look
+     grey rather than white. Hierarchy now comes from alpha alone. */
+  --ink-muted: rgba(250, 249, 247, 0.92);
+  /* The faint tier is the floor: it must hold AA at 11px over a bright midday
+     ocean. It measured 4.7:1 at the worst pixel back when it was 0.66, so
+     there is room here, but don't take it below that. */
+  --ink-faint: rgba(248, 247, 245, 0.82);
 
   /* tuned-translucent glass surface -- dark enough to hold AA contrast even
      when the ocean behind it renders bright (midday/dawn) */
@@ -36,6 +40,27 @@
   --surface-inset: rgba(255, 255, 255, 0.05);
   --surface-border: rgba(255, 255, 255, 0.12);
   --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+
+  /* Edge feather for .surface-soft. 1.25rem sits inside the smallest padding
+     of any panel that uses it (p-6 = 1.5rem on the publication cards), so the
+     panel is at full strength everywhere text actually sits. */
+  --surface-feather: 1.25rem;
+  /* Two axes intersected, so all four edges and the corners fade evenly. */
+  --surface-soft-fade:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 var(--surface-feather),
+      #000 calc(100% - var(--surface-feather)),
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--surface-feather),
+      #000 calc(100% - var(--surface-feather)),
+      transparent 100%
+    );
 
   /* text sitting directly on the water background (hero/header/footer).
      Two layers: a tight one to define the glyph edge against moving water (a
@@ -84,12 +109,48 @@ body {
 }
 
 @layer components {
+  /* Prefixed backdrop-filter must come FIRST here. With the standard property
+     first, Lightning CSS drops it during minification and only the -webkit-
+     form survives -- which Firefox does not support, so the glass lost its
+     blur there. Prefixed-then-standard keeps both in the built CSS. */
   .surface {
     background: var(--surface);
-    backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     border: 1px solid var(--surface-border);
     box-shadow: var(--surface-shadow);
+  }
+
+  /* Same glass as .surface, but the edge dissolves into the water instead of
+     terminating in a crisp 1px border.
+
+     The background/blur live on a pseudo-element rather than the panel itself:
+     a mask applies to an element's children too, so masking the panel directly
+     would fade the copy along with it. `z-index: -1` puts the layer behind the
+     panel's own in-flow content -- the same trick .scrim-focus uses, and it
+     relies on the ancestor section already carrying `relative z-10`.
+
+     No border here: the mask is zero exactly along the perimeter, which is
+     where a border would sit, so it would be invisible anyway. Losing the
+     crisp outline is the point. */
+  .surface-soft {
+    position: relative;
+  }
+
+  .surface-soft::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    -webkit-mask-image: var(--surface-soft-fade);
+    mask-image: var(--surface-soft-fade);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
   }
 
   /* A soft pool of shade for copy that sits directly on the water with no glass

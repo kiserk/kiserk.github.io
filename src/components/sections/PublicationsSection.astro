@@ -15,7 +15,7 @@ import { journalArticles, conferenceAbstracts, formatAuthors } from '../../data/
 
       <div class="space-y-6">
         {journalArticles.map((pub) => (
-          <article class="surface rounded-xl p-6">
+          <article class="surface-soft rounded-xl p-6">
             <div class="flex items-start gap-4">
               {pub.thumbnail && (
                 <div class="shrink-0 w-24 md:w-28 rounded-lg overflow-hidden border border-white/10 bg-black/30">
@@ -84,7 +84,7 @@ import { journalArticles, conferenceAbstracts, formatAuthors } from '../../data/
 
       <div class="space-y-5">
         {conferenceAbstracts.map((pub) => (
-          <article class="surface rounded-xl p-6">
+          <article class="surface-soft rounded-xl p-6">
             <div class="flex items-start justify-between gap-3">
               <h3 class="font-[family-name:var(--font-body)] text-[0.95rem] md:text-base leading-snug font-medium">
                 {pub.title}
