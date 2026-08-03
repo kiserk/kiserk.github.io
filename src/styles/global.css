@@ -24,9 +24,11 @@
 :root {
   /* content text -- always light (cards are dark glass) */
   --ink: rgba(246, 244, 240, 0.96);
-  --ink-muted: rgba(236, 240, 246, 0.82);
-  /* faint tier kept readable (>= ~0.66 alpha) so it never drops below AA over a bright midday ocean */
-  --ink-faint: rgba(228, 236, 245, 0.66);
+  --ink-muted: rgba(236, 240, 246, 0.9);
+  /* Three distinct steps (0.96 / 0.90 / 0.78). The faint tier is the floor: it
+     must hold AA at 11px over a bright midday ocean, so don't take it below
+     ~0.66 -- that was the old value and it measured 4.7:1 at the worst pixel. */
+  --ink-faint: rgba(228, 236, 245, 0.78);
 
   /* tuned-translucent glass surface -- dark enough to hold AA contrast even
      when the ocean behind it renders bright (midday/dawn) */
