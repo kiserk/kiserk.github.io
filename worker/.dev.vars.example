@@ -1,0 +1,13 @@
+# Copy to .dev.vars (gitignored) for local development.
+#
+# Beta defaults: MOCK=1 means canned replies and no Anthropic call at all —
+# the whole widget, transcript persistence, rate limiting and D1 logging can be
+# exercised for free. Flip MOCK to 0 and paste a key once the UI feels right.
+
+MOCK=1
+DEV=1
+ANTHROPIC_API_KEY=
+IP_SALT=local-dev-salt
+
+# Uncomment to test the rate-limit path without sending 20 messages.
+# PER_IP_LIMIT=2

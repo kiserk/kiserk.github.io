@@ -1,0 +1,26 @@
+name = "karl-chat"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Non-secret config. Secrets (ANTHROPIC_API_KEY, IP_SALT) are set with
+# `wrangler secret put NAME` for production and in .dev.vars for local dev.
+# .dev.vars also overrides anything here, which is how beta runs MOCK=1.
+[vars]
+DEV = "0"
+MOCK = "0"
+ALLOWED_ORIGIN = "https://karlkiser.com"
+# Cost ceiling. GLOBAL_LIMIT x ~$0.005/turn is the most a single day can cost.
+PER_IP_LIMIT = "20"
+GLOBAL_LIMIT = "150"
+# Max user turns in one conversation before the widget asks for a fresh start.
+MAX_TURNS = "12"
+
+# Conversation log + rate-limit counters.
+#   npx wrangler d1 create chat-logs
+# then paste the printed database_id below. Local `wrangler dev` works with the
+# placeholder — it keys the local SQLite file off database_name, not the id.
+[[d1_databases]]
+binding = "DB"
+database_name = "chat-logs"
+database_id = "local-placeholder-replace-before-deploy"

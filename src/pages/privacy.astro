@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OceanBackground from '../components/OceanBackground.astro';
 import Header from '../components/Header.astro';
+// The chat disclosure appears exactly when the chat does, so the page can
+// never describe a feature that isn't running — or omit one that is.
+import { CHAT_ENABLED } from '../config/chat';
 ---
 
 <BaseLayout
@@ -30,10 +33,20 @@ import Header from '../components/Header.astro';
             and which country and referring site they came from.
           </p>
           <p>
-            No cookies are set, no personal data is collected, and visitors are not
-            tracked across other websites. Counts are aggregate and anonymous, so
-            there is nothing here that identifies you as an individual.
+            No cookies are set, the analytics collect no personal data, and visitors
+            are not tracked across other websites. Those counts are aggregate and
+            anonymous, so there is nothing in them that identifies you as an
+            individual.
           </p>
+          {CHAT_ENABLED && (
+            <p>
+              The chat sends your messages to Anthropic’s Claude API to generate a
+              reply. I save the conversation — plus your country and browser type,
+              never your IP address — so I can see what people ask. Nothing is sold
+              or shared, conversations are deleted after 90 days, and you shouldn’t
+              type anything sensitive.
+            </p>
+          )}
           <p>
             No data is sold or shared. Questions are welcome at
             <a

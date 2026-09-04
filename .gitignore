@@ -18,6 +18,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# chat worker: local secrets and wrangler state (deps covered by node_modules/)
+worker/.dev.vars
+worker/.wrangler/
+
 # private career docs
 Career/
 # private job-search research (never publish)

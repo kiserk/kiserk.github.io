@@ -41,6 +41,23 @@
   --surface-border: rgba(255, 255, 255, 0.12);
   --surface-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
 
+  /* Sticky headings.
+
+     The fixed brand block runs to y=75 and the header bar to y=60, and at
+     <=1024px the content column slides under the brand -- so the offset has to
+     clear them vertically at every width. 5.5rem = 88px does. */
+  --sticky-top: 5.5rem;
+  --sticky-title-h: 3.25rem;
+  /* Masked on the same column as .text-wash so the cover reads as part of the
+     page's wash rather than a bar across the viewport. */
+  --sticky-head-mask: linear-gradient(
+    to right,
+    transparent 0,
+    #000 calc(50% - 26rem),
+    #000 calc(50% + 26rem),
+    transparent 100%
+  );
+
   /* Vertical feather for .text-wash, so it meets the hero above and the footer
      below at zero. Shorter than .scrim-focus's 8rem because <main> has less
      clear space at its ends than a full-height section does. */
@@ -130,6 +147,51 @@ body {
      already carries `relative z-10` to establish the stacking context. */
   .text-wash {
     position: relative;
+  }
+
+  /* Pinned headings.
+     Only the section title carries a cover, and it dissolves over ~7rem rather
+     than ending in a short ramp -- a short one reads as a hard line with a
+     sharp fade, which is exactly what a page built out of long fades should
+     not have. The subsection label pins on top of that same cover and adds no
+     second band, so there is only ever one edge to soften. */
+  .sticky-title,
+  .sticky-subtitle {
+    position: sticky;
+    z-index: 20;
+  }
+
+  .sticky-title {
+    top: var(--sticky-top);
+    padding-block: 0.6rem 1.4rem;
+  }
+
+  .sticky-subtitle {
+    top: calc(var(--sticky-top) + var(--sticky-title-h));
+    z-index: 21;
+    padding-block: 0.5rem 1.1rem;
+  }
+
+  .sticky-title::before {
+    content: '';
+    position: absolute;
+    /* Reaches the top of the viewport so copy is covered behind the nav too,
+       and runs well past the heading so the dissolve has room. */
+    top: calc(-1 * var(--sticky-top));
+    height: 15rem;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgb(4, 8, 14) 0%,
+      rgb(4, 8, 14) 55%,
+      rgba(4, 8, 14, 0) 100%
+    );
+    -webkit-mask-image: var(--sticky-head-mask);
+    mask-image: var(--sticky-head-mask);
   }
 
   .text-wash::before {

@@ -210,6 +210,15 @@ Both the email footer and the `/swell` footnote state which source is in use. Do
 - **Don't commit `Career/` or `scraper_reference/`.** The former is gitignored; the latter is not — watch out.
 - **Surf data paths:** `scripts/surf-report.mjs` (Node, email) reads live Open-Meteo/NOAA. A second path — `scripts/surfline-snapshot.mjs` (Playwright, CI/local) — writes static Surfline JSON that both `surf-page.ts` and `surf-report.mjs` *prefer* when fresh. Keep the snapshot's normalized schema in sync with the consumers if you change it.
 - **No comments that just narrate code** — keep them for intent/trade-offs only (existing house style).
+- **Chat corpus is a third copy of the CV.** `worker/src/corpus.ts` hand-authors the CV narrative and the patent for the bot; update it alongside `CvSection.astro` and `cv/Karl-Kiser-CV.md`. Publications and `SITE.openTo` are imported from the real data modules and don't need syncing.
+
+---
+
+## "Ask about my experience" chat
+
+A floating chat widget (`src/components/AskWidget.astro`, mounted from `BaseLayout`) lets visitors ask about Karl's background instead of reading every page. Because the site is static, the model call and the conversation log live in a separate Cloudflare Worker under `worker/` — see [`worker/README.md`](worker/README.md) for running it locally in free mock mode, deploying, reading logs, and the cost caps.
+
+**One switch controls everything:** `SITE.chatEndpoint` in `src/config/site.ts`. Empty (the default) and the widget, its JavaScript, and the chat paragraph on `/privacy` are all absent from the build. Set `PUBLIC_CHAT_ENDPOINT` in a gitignored `.env` to point at a local worker without committing anything.
 
 ---
 

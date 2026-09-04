@@ -1,0 +1,23 @@
+{
+  "name": "karl-chat-worker",
+  "private": true,
+  "type": "module",
+  "description": "Chat endpoint for the 'Ask about my experience' widget on karlkiser.com. Deployed separately from the site (which is static on GitHub Pages).",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "db:local": "wrangler d1 execute chat-logs --local --file=./schema.sql",
+    "db:remote": "wrangler d1 execute chat-logs --remote --file=./schema.sql",
+    "logs": "wrangler d1 execute chat-logs --remote --command \"SELECT cid, datetime(MIN(created_at)/1000,'unixepoch') AS started, COUNT(*) AS turns, country FROM turns GROUP BY cid ORDER BY MIN(created_at) DESC LIMIT 20\"",
+    "logs:local": "wrangler d1 execute chat-logs --local --command \"SELECT turn_index, status, user_text, reply_text FROM turns ORDER BY id DESC LIMIT 20\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260730.1",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.0.0"
+  }
+}
