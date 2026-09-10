@@ -211,7 +211,7 @@ function renderConditions(spot: SurfSpot, data: FetchedData): void {
     const windStr =
       c.windSpeed != null
         ? `${degreesToCompass(c.windDirection)} ${Math.round(c.windSpeed)} mph${
-            wt ? ` — <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>` : ''
+            wt ? ` · <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>` : ''
           }`
         : '—';
     const swellStr = c.swell
@@ -265,7 +265,7 @@ function renderConditions(spot: SurfSpot, data: FetchedData): void {
     [
       condRow('Surf', `<strong style="font-size:18px;">${heightLo}–${heightHi} ft</strong> <span style="color:var(--ink-muted);font-size:15px;margin-left:4px;">${swellCompass} swell @ ${Math.round(period)}s</span>`),
       condRow('Wind', wt
-        ? `${windCompass} ${Math.round(windSpeed!)} mph — <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>`
+        ? `${windCompass} ${Math.round(windSpeed!)} mph · <span style="color:${wtColor};font-weight:600;">${wt}${wtCheck}</span>`
         : '—'),
       condRow('Tide', formatTodayTides(data)),
       condRow('Conditions', `<em style="color:var(--ink-muted);">${verdict.summary}</em>`),

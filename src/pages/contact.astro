@@ -18,7 +18,7 @@ const contactSchema = {
 ---
 
 <BaseLayout
-  title="Contact — Karl Kiser"
+  title="Contact · Karl Kiser"
   description="Send Karl Kiser a message. Leave your contact details and a note and it goes straight to his inbox."
   path="/contact"
   jsonLd={[contactSchema]}
@@ -107,7 +107,7 @@ const contactSchema = {
             >
               {!configured && (
                 <span style="color: var(--ink-faint);">
-                  The form isn't connected yet — set <code>web3formsKey</code> in
+                  The form isn't connected yet. Set <code>web3formsKey</code> in
                   <code>src/config/site.ts</code>. Meanwhile, email me directly.
                 </span>
               )}
@@ -201,7 +201,7 @@ const contactSchema = {
         const json = await res.json().catch(() => ({}));
         if (res.ok && json.success) {
           form.reset();
-          setStatus('Thanks — your message is on its way. I’ll get back to you soon.', 'ok');
+          setStatus('Thanks. Your message is on its way and I’ll get back to you soon.', 'ok');
           submitLabel.textContent = 'Sent ✓';
         } else {
           setStatus(
@@ -212,7 +212,7 @@ const contactSchema = {
           submit.disabled = false;
         }
       } catch {
-        setStatus('Network error — please try again, or email me directly.', 'err');
+        setStatus('Network error. Please try again, or email me directly.', 'err');
         submitLabel.textContent = original;
         submit.disabled = false;
       }

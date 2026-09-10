@@ -12,12 +12,12 @@ export const SITE = {
   jobTitle: 'Biomaterials & Bioprocess Engineer',
   /** One-line value proposition shown on the homepage and used as default description. */
   tagline:
-    'I build controlled biological systems — turning experimental biology into reliable, manufacturable processes across biomaterials, cultivation, custom sensing, and closed-loop control.',
+    'I build controlled biological systems, taking experimental biology to production scale through media design, custom sensing, and closed-loop control.',
   /** Longer bio for meta descriptions, sr-only text, and structured data. */
   bio:
-    'I turn experimental biology into manufacturable processes. Co-inventor on aerial-mycelium cultivation IP and first author on peer-reviewed research, I design and build custom sensors and closed-loop control, develop cultivation processes, and transfer them to partner facilities in the U.S., Canada, and the Netherlands — taking direct control of partner lines during start-up and bringing material to commercial spec. Earlier, first-author quantitative-MRI research. Based in New York.',
+    'Co-inventor on aerial-mycelium cultivation IP and first author on three peer-reviewed papers. I design and build custom sensors and closed-loop control, develop cultivation processes, and transfer them to partner facilities in the U.S., Canada, and the Netherlands. During start-up I take direct control of partner lines and bring material to commercial spec. Earlier, first-author quantitative-MRI research. Based in New York.',
   /** Status signal for recruiters / agents. Set to '' to hide. */
-  openTo: 'Open to R&D and process-engineering roles building controlled biological systems — biomaterials, cultivation, sensing, and scale-up.',
+  openTo: 'Open to R&D and process-engineering roles building controlled biological systems: biomaterials, cultivation, sensing, and scale-up.',
   email: 'karl.j.kiser@gmail.com',
   location: {
     locality: 'New York',

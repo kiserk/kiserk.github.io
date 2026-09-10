@@ -515,7 +515,7 @@ const suggestions = [
       const userTurns = messages.filter((m) => m.role === 'user').length;
       if (userTurns >= MAX_USER_TURNS) {
         showTransient(
-          'That’s a long conversation — hit “New” to start fresh, or email karl.j.kiser@gmail.com.',
+          'That’s a long conversation. Hit “New” to start fresh, or email karl.j.kiser@gmail.com.',
           true
         );
         return;
@@ -552,7 +552,7 @@ const suggestions = [
         // the only thing telling you no model was involved. Don't remove it.
         if (data.mock && badge) {
           badge.textContent = 'mock';
-          badge.title = 'Canned answers — no model is being called (MOCK=1)';
+          badge.title = 'Canned answers, no model is being called (MOCK=1)';
         }
 
         if (data.reply) {
@@ -571,7 +571,7 @@ const suggestions = [
           showTransient('Something went wrong answering that. Please try again.', true);
         }
       } catch {
-        showTransient('Network error — please try again, or use the contact page.', true);
+        showTransient('Network error. Please try again, or use the contact page.', true);
       } finally {
         setPending(false);
         input.focus();
