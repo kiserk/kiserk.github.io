@@ -15,7 +15,7 @@ export const SITE = {
     'I build controlled biological systems, taking experimental biology to production scale through media design, custom sensing, and closed-loop control.',
   /** Longer bio for meta descriptions, sr-only text, and structured data. */
   bio:
-    'Co-inventor on aerial-mycelium cultivation IP and first author on three peer-reviewed papers. I design and build custom sensors and closed-loop control, develop cultivation processes, and transfer them to partner facilities in the U.S., Canada, and the Netherlands. During start-up I take direct control of partner lines and bring material to commercial spec. Earlier, first-author quantitative-MRI research. Based in New York.',
+    'Co-inventor on aerial mycelium cultivation IP and first author on three peer-reviewed papers. I design and build custom sensors and closed-loop control, develop cultivation processes, and transfer them to partner facilities in the U.S., Canada, and the Netherlands. During start-up I take direct control of partner lines and bring material to commercial spec. Earlier, first-author quantitative MRI research. Based in New York.',
   /** Status signal for recruiters / agents. Set to '' to hide. */
   openTo: 'Open to R&D and process-engineering roles building controlled biological systems: biomaterials, cultivation, sensing, and scale-up.',
   email: 'karl.j.kiser@gmail.com',

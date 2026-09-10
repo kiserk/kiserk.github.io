@@ -53,8 +53,10 @@
   --sticky-head-mask: linear-gradient(
     to right,
     transparent 0,
-    #000 calc(50% - 26rem),
-    #000 calc(50% + 26rem),
+    rgba(0, 0, 0, 0.5) calc(50% - 34rem),
+    #000 calc(50% - 22rem),
+    #000 calc(50% + 22rem),
+    rgba(0, 0, 0, 0.5) calc(50% + 34rem),
     transparent 100%
   );
 
@@ -175,10 +177,14 @@ body {
   .sticky-title::before {
     content: '';
     position: absolute;
-    /* Reaches the top of the viewport so copy is covered behind the nav too,
-       and runs well past the heading so the dissolve has room. */
+    /* A soft pool centred on the heading rather than an opaque slab. It used to
+       start at full strength, which put a hard horizontal edge across the water
+       wherever the heading had not yet stuck to the top. Both ends now reach
+       zero, so there is no edge to see in either state; the top ramps up faster
+       than the bottom falls off, because when the heading IS stuck that end sits
+       under the nav, which carries no background of its own. */
     top: calc(-1 * var(--sticky-top));
-    height: 15rem;
+    height: 12rem;
     left: 50%;
     width: 100vw;
     transform: translateX(-50%);
@@ -186,12 +192,53 @@ body {
     pointer-events: none;
     background: linear-gradient(
       to bottom,
-      rgb(4, 8, 14) 0%,
-      rgb(4, 8, 14) 55%,
+      rgba(4, 8, 14, 0) 0%,
+      rgba(4, 8, 14, 0.2) 9%,
+      rgba(4, 8, 14, 0.45) 20%,
+      rgba(4, 8, 14, 0.82) 32%,
+      rgba(4, 8, 14, 0.95) 45%,
+      rgba(4, 8, 14, 0.97) 58%,
+      rgba(4, 8, 14, 0.94) 70%,
+      rgba(4, 8, 14, 0.78) 80%,
+      rgba(4, 8, 14, 0.38) 88%,
+      rgba(4, 8, 14, 0.16) 95%,
       rgba(4, 8, 14, 0) 100%
     );
     -webkit-mask-image: var(--sticky-head-mask);
     mask-image: var(--sticky-head-mask);
+  }
+
+  /* The header is `fixed` and carries no background of its own, so copy
+     scrolling underneath it used to be hidden by .sticky-title::before growing
+     into a 15rem opaque slab -- which is what put a hard line across the water.
+     Give the nav its own scrim instead. Because it is anchored to the viewport
+     top, its upper edge is never on screen, so it can be strong without ever
+     reading as an edge. */
+  header::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8rem;
+    z-index: -1;
+    pointer-events: none;
+    /* Near-opaque across the nav band itself (the header is 56px = ~44% of this
+       height), then a long fall to nothing. Copy scrolling underneath has to be
+       hidden, not merely dimmed: at 0.8 the light body type still ghosts
+       through. */
+    background: linear-gradient(
+      to bottom,
+      rgb(4, 8, 14) 0%,
+      rgb(4, 8, 14) 46%,
+      rgba(4, 8, 14, 0.9) 58%,
+      rgba(4, 8, 14, 0.72) 68%,
+      rgba(4, 8, 14, 0.5) 78%,
+      rgba(4, 8, 14, 0.29) 86%,
+      rgba(4, 8, 14, 0.13) 93%,
+      rgba(4, 8, 14, 0.04) 97%,
+      rgba(4, 8, 14, 0) 100%
+    );
   }
 
   .text-wash::before {
