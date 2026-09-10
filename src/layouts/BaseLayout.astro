@@ -129,6 +129,31 @@ const schemas = [personSchema, websiteSchema, ...jsonLd];
         );
         revealEls.forEach((el) => observer.observe(el));
       }
+
+      // Pinned headings fade once they are actually stuck, which is exactly when
+      // their section's copy starts passing underneath. They carry no backing of
+      // their own, so without this the heading and the body text collide.
+      const pinned = Array.from(document.querySelectorAll<HTMLElement>('.sticky-title, .sticky-subtitle'));
+      if (pinned.length) {
+        let queued = false;
+        const sync = () => {
+          queued = false;
+          for (const el of pinned) {
+            // A sticky element sits at its `top` offset only while stuck; before
+            // and after that it moves with the page.
+            const stickyTop = parseFloat(getComputedStyle(el).top) || 0;
+            el.classList.toggle('is-pinned', el.getBoundingClientRect().top <= stickyTop + 1);
+          }
+        };
+        const onScroll = () => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(sync);
+        };
+        addEventListener('scroll', onScroll, { passive: true });
+        addEventListener('resize', onScroll);
+        sync();
+      }
     </script>
   </body>
 </html>
