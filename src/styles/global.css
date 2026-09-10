@@ -159,8 +159,9 @@ body {
     padding-block: 0.5rem 1.1rem;
   }
 
-  /* Pinned headings fade to a watermark once stuck (see BaseLayout), so the
-     section label stays on screen without fighting the copy scrolling under it. */
+  /* Pinned headings fade out entirely once stuck (see BaseLayout). The label is
+     there while you arrive at a section and gone while you read it, so nothing
+     is ever layered over the copy. */
   .sticky-title,
   .sticky-subtitle {
     transition: opacity 260ms ease;
@@ -168,7 +169,10 @@ body {
 
   .sticky-title.is-pinned,
   .sticky-subtitle.is-pinned {
-    opacity: 0.26;
+    opacity: 0;
+    /* Gone means gone: a faded heading still sits over the copy and still takes
+       clicks off it. */
+    pointer-events: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
