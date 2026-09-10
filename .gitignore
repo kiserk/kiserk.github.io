@@ -42,11 +42,7 @@ scraper_reference/
 water_images/
 .preview-shots/
 
-# Alternate background clips kept locally for future recuts. Only
-# IMG_5047_twilight_mono.* is used by the site and committed; the rest are ~49MB
-# that would live in git history forever.
-public/water/IMG_5043.*
-public/water/IMG_5044.*
-public/water/IMG_5047.*
-public/water/IMG_5047_slow.*
-public/water/IMG_5065.*
+# Only IMG_5047_twilight_mono.* is used by the site. The .MOV masters in
+# water_images/ (also ignored) are what any future recut comes from.
+public/water/IMG_50*
+!public/water/IMG_5047_twilight_mono.*

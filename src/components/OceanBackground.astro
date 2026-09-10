@@ -16,12 +16,15 @@ const CLIP = '/water/IMG_5047_twilight_mono';
     muted
     loop
     playsinline
-    preload="auto"
+    preload="metadata"
     poster={`${CLIP}.jpg`}
     tabindex="-1"
   >
+    {/* H.264 only, on purpose. It decodes on everything, and the VP9 webm that
+        used to sit here was larger than the mp4 and listed second, so nothing
+        ever fetched it. A browser that cannot play this gets the poster, which
+        is a still of this same clip. */}
     <source src={`${CLIP}.mp4`} type="video/mp4" />
-    <source src={`${CLIP}.webm`} type="video/webm" />
   </video>
 </div>
 
@@ -74,7 +77,17 @@ const CLIP = '/water/IMG_5047_twilight_mono';
   // Visitors on a metered/limited connection get the still frame instead of a
   // multi-megabyte clip. Dropping the element also stops it buffering.
   const conn = (navigator as unknown as { connection?: { saveData?: boolean } }).connection;
+  const video = document.getElementById('water-video') as HTMLVideoElement | null;
   if (conn?.saveData) {
-    document.getElementById('water-video')?.remove();
+    video?.remove();
+  } else if (video) {
+    // Older machines and browsers that cannot fetch or decode the clip fall back
+    // to the still frame: the poster and the .water-bg background image are the
+    // same frame, so dropping the element changes nothing visible.
+    const toStill = () => video.remove();
+    video.addEventListener('error', toStill);
+    video.addEventListener('stalled', toStill);
+    // A <source> that fails errors on the <source>, not the <video>.
+    video.querySelector('source')?.addEventListener('error', toStill);
   }
 </script>

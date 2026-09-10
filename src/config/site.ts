@@ -25,7 +25,7 @@ export const SITE = {
     country: 'US',
   },
   /** og:image lives in /public. 1200x630 recommended. */
-  ogImage: '/og-image.png',
+  ogImage: '/og-image.jpg',
   /**
    * Keywords agents match on. Keep specific and honest.
    */
