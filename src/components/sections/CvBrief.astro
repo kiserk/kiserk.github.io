@@ -1,0 +1,68 @@
+---
+// Homepage CV block. The full record lives at /cv and in the PDF; this is just
+// the shape of the career so a visitor does not have to leave the page to see
+// where the work happened. Projects above carry the substance.
+const roles = [
+  {
+    title: 'Senior Scientist, Research Engineer',
+    org: 'Ecovative Design, Green Island, NY',
+    dates: '2022–2026',
+  },
+  {
+    title: 'Research Associate',
+    org: 'Department of Radiology, NYU Langone Health & Weill Cornell Medical College',
+    dates: '2019–2022',
+  },
+  {
+    title: 'B.A. Biophysics',
+    org: 'Pitzer College, Claremont, CA',
+    dates: '2016',
+  },
+];
+---
+
+<section id="cv" class="reveal relative z-10 px-5 md:px-6 py-16 md:py-24 scroll-mt-24" style={`color: var(--ink)`}>
+  <div class="max-w-[720px] mx-auto">
+    <div class="rounded-2xl px-7 py-10 md:px-12 md:py-14">
+      <h1 class="sticky-title font-[family-name:var(--font-heading)] text-[1.75rem] md:text-[2.25rem] font-light tracking-[0.15em] uppercase">
+        CV
+      </h1>
+      <div class="w-8 h-px mb-4 opacity-50" style="background: currentColor;"></div>
+      <p class="text-sm tracking-[0.25em] uppercase mb-10" style="color: var(--ink-faint);">
+        Where the work happened
+      </p>
+
+      <ol class="space-y-7">
+        {roles.map((role) => (
+          <li>
+            <h2 class="font-[family-name:var(--font-heading)] text-base md:text-lg font-medium tracking-wide">
+              {role.title}
+            </h2>
+            <p class="text-[0.95rem] mt-0.5" style="color: var(--ink-muted);">{role.org}</p>
+            <p class="text-[0.8rem] mt-1 tracking-wider" style="color: var(--ink-faint);">{role.dates}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a
+          href="/Karl-Kiser-CV.pdf"
+          download
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase transition-colors duration-300"
+          style="color: inherit; text-decoration: none; border-color: currentColor;"
+          data-goatcounter-click="cv-brief-download"
+        >
+          Download CV
+        </a>
+        <a
+          href="/cv"
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase transition-colors duration-300"
+          style="color: inherit; text-decoration: none; border-color: currentColor; opacity: 0.75;"
+          data-goatcounter-click="cv-brief-full"
+        >
+          Full CV
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

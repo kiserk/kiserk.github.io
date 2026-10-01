@@ -4,8 +4,9 @@ const projects = [
     title: 'Aerial Mycelium Process Development',
     institution: 'Ecovative Design',
     dates: '2023–2026',
+    lead: 'Aerial mycelium grows readily in a lab and unpredictably at production scale.',
     description:
-      'I developed the aerial mycelium cultivation process end to end, from media design through pre-colonization and the aerial growth phase, and built the instrumentation behind it: custom sensors and microcontrollers feeding real-time data acquisition, with closed-loop feedback holding environmental setpoints (temperature, CO₂, airflow, mist rate). Contributed to a platform with observability over 25 real-time conditions and decisions informed by AI models, improving the reliability and repeatability of the controlled process. The work led to co-inventorship on a patent covering the growth media compositions and environmental conditions.',
+      "I developed the cultivation process end to end: the growth media across both phases, the pre-colonization and aerial growth stages, and the environmental parameters that drive morphology and yield, meaning CO₂ concentration and ramp rate, airflow velocity, temperature, and mist deposition rate, composition and duty cycle. I built the instrumentation underneath it as well, with custom sensors and microcontrollers feeding real-time data acquisition and closed-loop feedback holding the setpoints. I also contributed to a platform tracking more than 25 real-time conditions, where models read that data and recommended setpoints for an operator to accept or override; the control loops then held whatever setpoint was chosen. The process became repeatable enough to run at manufacturing scale and to file on. The media design and environmental control are what the patent covers.",
     tags: [
       'Mycelium Cultivation',
       'Process Development',
@@ -20,8 +21,9 @@ const projects = [
     title: 'Partner Technology Transfer & Field Process Engineering',
     institution: 'Ecovative Design',
     dates: '2023–2026',
+    lead: 'A process only its authors can run is not yet a process. Moving one onto someone else\'s floor, staff and equipment is where most of them break.',
     description:
-      'I scaled the aerial mycelium process to outside partners, transferring it to domestic and international growers and standing up production at their facilities (Ontario, Canada; Kennett Square, PA; Ammerzoden, Netherlands). Ran full technology transfer covering process recipes, environmental control programs, and sensing/control systems, plus operations training and hands-on troubleshooting, often taking direct control of partner lines during start-up. Built data pipelines that fed data from partner facilities into internal systems and models, so results from their lines informed our own process work. I facilitated a Pennsylvania site\'s conversion from Agaricus mushroom production to full mycelium production within a year, on site through the switch, ran root-cause analysis on a novel contamination event, trained operators in their primary language, and wrote the documentation the sites kept using after each engagement.',
+      "I transferred the aerial mycelium process to partner facilities in Ontario, in Kennett Square, Pennsylvania, and in Ammerzoden in the Netherlands, and stood up production at each. That covered the recipes, the environmental control programs and the sensing and control systems, plus operations training and hands-on troubleshooting, and often taking direct control of partner lines through start-up. I trained operators in their own language and wrote the documentation the sites kept using after each engagement. I facilitated one Pennsylvania site\'s conversion from Agaricus mushroom production to full mycelium production inside a year, on site through the switch, and ran the root-cause analysis on a novel contamination event, tracing it to operator practice, inputs and environmental conditions. Data pipelines fed results from partner lines back into our own models, so what happened on their floor informed the next experiment on ours.",
     tags: [
       'Technology Transfer',
       'Field Process Engineering',
@@ -35,8 +37,9 @@ const projects = [
     title: 'Quantitative MRI for Tumor Treatment Response',
     institution: 'Weill Cornell Medical College / NYU',
     dates: '2020–2023',
+    lead: 'Telling whether a tumor is responding to treatment usually means taking a biopsy.',
     description:
-      'I built and validated novel MRI methods to measure cellular water exchange and treatment response in glioma models without a biopsy. As first author in Scientific Reports, I showed that a two-flip-angle DCE-MRI approach can quantify intracellular water lifetime (τᵢ), yielding a metabolic biomarker that correlates negatively with FDG-PET uptake. The method bridges imaging physics, computational modeling, and translational cancer biology.',
+      "I built and validated MRI methods to measure cellular water exchange, and with it treatment response, in glioma models without one. As first author in Scientific Reports, I showed that a two-flip-angle DCE-MRI approach can quantify intracellular water lifetime (τᵢ), and that the measure correlates negatively with FDG-PET uptake. The method bridges imaging physics, computational modeling, and translational cancer biology.",
     tags: [
       'DCE-MRI',
       'Pharmacokinetic Modeling',
@@ -49,8 +52,9 @@ const projects = [
     title: 'Image Texture Analysis & Reproducibility in Preclinical MRI',
     institution: 'Weill Cornell Medical College',
     dates: '2021–2023',
+    lead: 'Radiomics features are only as trustworthy as the images under them, and reproducibility is a known problem in the field.',
     description:
-      'I quantified how image resolution affects the reliability of texture features derived from pharmacokinetic parameter maps. Reproducibility is a known problem for radiomics. As first author in Tomography, I demonstrated that 3D isotropic resolution is critical for reproducible radiomics analysis, informing how preclinical imaging protocols are standardized and making quantitative biomarkers more robust across studies.',
+      "I quantified how image resolution affects the reliability of texture features derived from pharmacokinetic parameter maps. As first author in Tomography, I demonstrated that 3D isotropic resolution is critical for reproducible radiomics analysis at 7T, which informs how preclinical imaging protocols are standardized and makes quantitative biomarkers more robust across studies.",
     tags: [
       'Radiomics',
       'Image Analysis',
@@ -64,8 +68,9 @@ const projects = [
     title: 'Active Contrast Encoding (ACE) MRI Development',
     institution: 'NYU / Weill Cornell',
     dates: '2020–2022',
+    lead: 'Characterizing a tumor microenvironment means separating contrast-agent kinetics from tissue relaxation, which conventional DCE-MRI does inefficiently.',
     description:
-      'I helped develop and validate ACE-MRI, a method for simultaneous estimation of contrast-agent kinetics and tissue relaxation parameters, enabling more efficient characterization of the tumor microenvironment than conventional DCE-MRI. I presented this work at multiple ISMRM annual meetings, and it was published in a collaborative journal article.',
+      "I helped develop and validate ACE-MRI, which estimates both at once. I presented this work at multiple ISMRM annual meetings, and it was published in a collaborative journal article.",
     tags: [
       'ACE-MRI',
       'Method Development',
@@ -110,7 +115,11 @@ const projects = [
               {project.dates}
             </p>
 
-            <p class="text-[0.95rem] md:text-base leading-relaxed mt-4" style="color: var(--ink-muted);">
+            <p class="text-[1rem] md:text-[1.1rem] leading-snug mt-5 font-light" style="color: var(--ink);">
+              {project.lead}
+            </p>
+
+            <p class="text-[0.95rem] md:text-base leading-relaxed mt-3" style="color: var(--ink-muted);">
               {project.description}
             </p>
 
