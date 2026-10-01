@@ -9,11 +9,20 @@ import ProjectsSection from '../components/sections/ProjectsSection.astro';
 import { articleSchemas } from '../data/publications';
 import { SITE } from '../config/site';
 
-const proofPoints = [
-  'Co-inventor, aerial mycelium cultivation IP',
-  'First-author peer-reviewed research',
-  'Custom sensors + closed-loop control',
-  'Process transfer across the U.S., Canada & the Netherlands',
+const capabilities = [
+  'Process Development',
+  'Instrumentation',
+  'Closed-Loop Control',
+  'Scale-Up',
+  'Technology Transfer',
+];
+
+const results = [
+  'Co-inventor on aerial mycelium cultivation IP',
+  'Built cultivation and control systems monitoring 25+ real-time conditions',
+  'Transferred production technology to facilities in the U.S., Canada, and the Netherlands',
+  'Facilitated conversion of a Pennsylvania mushroom facility to full mycelium production',
+  'First author on three peer-reviewed quantitative MRI papers',
 ];
 ---
 
@@ -112,33 +121,48 @@ const proofPoints = [
   {/* Value proposition — first panel you scroll to (intentionally not in the nav) */}
   <section
     id="intro"
-    class="scrim-focus relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-10 py-32 md:py-36"
+    class="scrim-focus relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-10 pt-28 pb-16 md:py-36"
     style={`color: var(--text-color, rgba(246, 244, 240, 0.96)); text-shadow: var(--text-shadow, 0 1px 14px rgba(0,0,0,0.55));`}
   >
     <div class="max-w-2xl">
       <h2 class="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-light leading-[1.15] tracking-tight">
-        I build controlled biological systems.
+        I turn biological processes into controllable, scalable
+        manufacturing systems.
       </h2>
 
-      <p class="mt-6 max-w-xl text-base md:text-lg font-light leading-relaxed text-[color:var(--ink-muted)]">
-        Turning experimental biology into reliable, manufacturable processes across biomaterials,
-        cultivation, custom sensing, and closed-loop control.
+      <p class="mt-5 md:mt-6 max-w-xl text-base md:text-lg font-light leading-relaxed text-[color:var(--ink-muted)]">
+        I'm a biomaterials and bioprocess engineer. I develop cultivation processes, build the
+        sensors and control systems that make them measurable, and transfer them from the lab
+        into production.
       </p>
 
-      <ul class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.7rem] tracking-[0.15em] uppercase text-[color:var(--ink-faint)]">
-        {proofPoints.map((point, i) => (
+      <ul class="mt-6 md:mt-8 flex flex-wrap items-center gap-x-2 md:gap-x-3 gap-y-2 text-[0.7rem] tracking-[0.08em] md:tracking-[0.15em] uppercase text-[color:var(--ink-faint)]">
+        {capabilities.map((point, i) => (
           <li class="flex items-center gap-3">
-            {i > 0 && <span aria-hidden="true" class="opacity-50">·</span>}
             <span>{point}</span>
+            {i < capabilities.length - 1 && <span aria-hidden="true" class="opacity-50">·</span>}
           </li>
         ))}
       </ul>
 
-      <p class="mt-7 text-[0.7rem] tracking-[0.15em] uppercase text-[color:var(--ink-faint)]">
+      <div class="mt-6 md:mt-9">
+        <p class="text-[0.7rem] tracking-[0.2em] uppercase text-[color:var(--ink-faint)]">
+          Selected results
+        </p>
+        <ul class="mt-3 space-y-1.5 text-sm md:text-[0.95rem] font-light leading-snug text-[color:var(--ink-muted)]">
+          {results.map((item) => (
+            <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[0.62em] before:w-1 before:h-1 before:rounded-full before:bg-current before:opacity-40">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <p class="mt-6 md:mt-7 text-[0.7rem] tracking-[0.15em] uppercase text-[color:var(--ink-faint)]">
         {SITE.openTo}
       </p>
 
-      <div class="mt-9 flex flex-wrap items-center gap-3">
+      <div class="mt-7 md:mt-9 flex flex-wrap items-center gap-3">
         <a
           href="#projects"
           class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.7rem] tracking-[0.15em] uppercase transition-colors duration-300"
