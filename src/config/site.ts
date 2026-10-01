@@ -12,7 +12,7 @@ export const SITE = {
   jobTitle: 'Biomaterials & Bioprocess Engineer',
   /** One-line value proposition shown on the homepage and used as default description. */
   tagline:
-    'I turn biological processes into controllable, scalable manufacturing systems: cultivation process development, instrumentation, closed-loop control, and technology transfer.',
+    'I build controlled biological systems, taking experimental biology to production scale through media design, custom sensing, and closed-loop control.',
   /** Longer bio for meta descriptions, sr-only text, and structured data. */
   bio:
     'Co-inventor on aerial mycelium cultivation IP and first author on three peer-reviewed papers. I design and build custom sensors and closed-loop control, develop cultivation processes, and transfer them to partner facilities in the U.S., Canada, and the Netherlands. During start-up I take direct control of partner lines and bring material to commercial spec. Earlier, first-author quantitative MRI research. Based in New York.',
